@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "7484079d540066676a0508618b8f1c70c9a4a12763fd24be7f1258bd46e0f0a7",
+  "manuscript_sha256": "b6f49d463a242343e1e8a659fe7261d884f65071414dd440de132076090bcfcf",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 19,
-    "publication_evidence_closed": 22,
+    "strict_kernel_closed": 20,
+    "publication_evidence_closed": 23,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -23,8 +23,8 @@
       "standard_theory": 3,
       "tractability_normalization": 1
     },
-    "obligations_total": 71,
-    "obligations_passed": 65,
+    "obligations_total": 70,
+    "obligations_passed": 66,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
@@ -32,20 +32,20 @@
       "lean_exact": 20,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 2
+      "unresolved_semantics": 1
     },
     "passed_by_type": {
       "computational_certificate": 1,
       "external_references": 11,
       "lean_conditional": 4,
-      "lean_exact": 18,
+      "lean_exact": 19,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 2,
-      "lean_exact": 2,
-      "unresolved_semantics": 2
+      "lean_exact": 1,
+      "unresolved_semantics": 1
     },
     "mathematical_routes": {
       "model_internal_exact": 20,
@@ -57,7 +57,7 @@
       "real_strategy_evidence_required": 23
     },
     "semantic_gaps_by_resolution_class": {
-      "hybrid_model_and_strategy_evidence": 2
+      "hybrid_model_and_strategy_evidence": 1
     }
   },
   "model_assumptions": [
@@ -773,42 +773,34 @@
     },
     {
       "label": "prop:sentimental",
-      "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "5e9e7dcb5ed96a603df208ac5c74299802b8d0fbb007af8a1b3f3d5471476f44",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
-        "greedy_static_reward_policy",
-        "sentimental_weight_alpha"
+        "sentimental_weight_alpha",
+        "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
-        "greedy_static_reward_policy",
-        "sentimental_weight_alpha"
+        "sentimental_weight_alpha",
+        "topology_blind_gaussian_signals"
       ],
-      "semantic_resolution_classes": [
-        "hybrid_model_and_strategy_evidence"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
           "id": "sentimental_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=sentimental_weight_alpha,greedy_static_reward_policy"
+          "detail": "theory-admissible assumption ids=sentimental_weight_alpha,topology_blind_gaussian_signals"
         },
         {
-          "id": "policy_derived_alpha_threshold",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The alpha threshold must be rebuilt from the IDP policy rather than a hand-coded welfare carrier."
-        },
-        {
-          "id": "exact_sentimental_immunity",
+          "id": "exact_policy_derived_sentimental_threshold",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

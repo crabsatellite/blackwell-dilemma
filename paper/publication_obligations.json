@@ -114,11 +114,10 @@
     },
     {
       "label": "prop:sentimental",
-      "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd",
+      "statement_sha256": "5e9e7dcb5ed96a603df208ac5c74299802b8d0fbb007af8a1b3f3d5471476f44",
       "obligations": [
-        {"id": "sentimental_model", "type": "model_assumptions", "ids": ["sentimental_weight_alpha", "greedy_static_reward_policy"]},
-        {"id": "policy_derived_alpha_threshold", "type": "unresolved_semantics", "resolution_class": "hybrid_model_and_strategy_evidence", "reason": "The alpha threshold must be rebuilt from the IDP policy rather than a hand-coded welfare carrier."},
-        {"id": "exact_sentimental_immunity", "type": "lean_exact"}
+        {"id": "sentimental_model", "type": "model_assumptions", "ids": ["sentimental_weight_alpha", "topology_blind_gaussian_signals"]},
+        {"id": "exact_policy_derived_sentimental_threshold", "type": "lean_exact"}
       ]
     },
     {

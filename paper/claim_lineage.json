@@ -269,12 +269,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Sentimental Immunity",
       "baseline_statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:sentimental"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve sentimental immunity when the known sentimental margin favors the dynamically superior route, derive the alpha threshold directly from the weighted policy score, and remove the unsupported universal-neighborhood claim.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:sentimental",
+          "id": "exact_policy_derived_sentimental_threshold"
+        }
+      ]
     },
     {
       "baseline_label": "prop:principal-optimum",

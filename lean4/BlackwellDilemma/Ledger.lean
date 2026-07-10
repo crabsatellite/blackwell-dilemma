@@ -31,6 +31,7 @@ import BlackwellDilemma.UnifiedTrapPrevalence
 import BlackwellDilemma.UnifiedCognitiveThreshold
 import BlackwellDilemma.UnifiedThresholdAlpha
 import BlackwellDilemma.UnifiedSupermodularCognition
+import BlackwellDilemma.UnifiedSentimentalImmunity
 
 namespace BlackwellDilemma.Ledger
 
@@ -312,8 +313,10 @@ def claimSentimental : PaperClaim :=
     kind := .proposition
     sourceLine := 635
     route := .semanticRepair
-    blocker := "Current alpha threshold is defined over a hand-coded welfare carrier; rebuild it from the IDP policy."
-    evidence := .unformalized }
+    blocker := "Closed for the explicit two-route alpha-weighted policy: a negative instrumental gap and positive known sentimental gap yield an interior policy-score threshold, monotone welfare below it, the deterministic sentimental endpoint, and antitone welfare above it. No universal claim remains when the sentimental gap has the opposite sign."
+    evidence := .proved
+      BlackwellDilemma.SentimentalImmunity.SentimentalImmunityClaim
+      BlackwellDilemma.SentimentalImmunity.sentimentalImmunityClaim_proved }
 
 def claimPrincipalOptimum : PaperClaim :=
   { label := "prop:principal-optimum"

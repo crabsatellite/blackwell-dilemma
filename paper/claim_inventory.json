@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "7484079d540066676a0508618b8f1c70c9a4a12763fd24be7f1258bd46e0f0a7",
+  "manuscript_sha256": "b6f49d463a242343e1e8a659fe7261d884f65071414dd440de132076090bcfcf",
   "claims": [
     {
       "line": 262,
@@ -92,7 +92,7 @@
       "kind": "proposition",
       "label": "prop:sentimental",
       "title": "Sentimental Immunity",
-      "statement_sha256": "3d8bfb6bcd237e10c9e53db501a960867b30bfd855a0e8ebf97649e9ef722fdd"
+      "statement_sha256": "5e9e7dcb5ed96a603df208ac5c74299802b8d0fbb007af8a1b3f3d5471476f44"
     },
     {
       "line": 662,

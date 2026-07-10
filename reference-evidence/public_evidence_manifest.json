@@ -269,6 +269,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedSupermodularCognition.lean"
     },
     {
+      "id": "unified_sentimental_immunity_kernel",
+      "kind": "machine_gate",
+      "role": "Alpha-weighted instrumental and known sentimental route comparison with a policy-derived interior threshold, deterministic sentimental endpoint, and exact welfare directions on both sides.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedSentimentalImmunity.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -1436,6 +1443,72 @@
       ]
     },
     {
+      "id": "sentimental_immunity_semantic_repair_gate",
+      "category": "kernel_checked_policy_derived_sentimental_threshold_and_welfare_regimes",
+      "source_cards": [
+        "unified_sentimental_immunity_kernel",
+        "unified_supermodular_cognition_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "sentimental_immunity_module",
+          "path": "lean4/BlackwellDilemma/UnifiedSentimentalImmunity.lean",
+          "contains": [
+            "def policyScore",
+            "def policyAlphaStar",
+            "theorem policyAlphaStar_mem_openUnit",
+            "theorem policyScore_at_alphaStar",
+            "def policyWelfare",
+            "theorem policyWelfare_mono_below_alphaStar",
+            "theorem policyWelfare_antitone_above_alphaStar",
+            "theorem sentimentalImmunityClaim_proved"
+          ]
+        },
+        {
+          "id": "sentimental_immunity_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.SentimentalImmunity.SentimentalImmunityClaim",
+            "BlackwellDilemma.SentimentalImmunity.sentimentalImmunityClaim_proved"
+          ]
+        },
+        {
+          "id": "sentimental_immunity_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.SentimentalImmunity.policyAlphaStar_mem_openUnit",
+            "#print axioms BlackwellDilemma.SentimentalImmunity.policyScore_at_alphaStar",
+            "#print axioms BlackwellDilemma.SentimentalImmunity.policyWelfare_mono_below_alphaStar",
+            "#print axioms BlackwellDilemma.SentimentalImmunity.policyWelfare_antitone_above_alphaStar",
+            "#print axioms BlackwellDilemma.SentimentalImmunity.sentimentalImmunityClaim_proved"
+          ]
+        },
+        {
+          "id": "sentimental_immunity_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"label\": \"prop:sentimental\"",
+            "\"id\": \"exact_policy_derived_sentimental_threshold\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "sentimental_immunity_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1515,8 +1588,8 @@
             "claim_lineage_preserved_claims=26",
             "claim_lineage_relation_counterexample_delimited=5",
             "claim_lineage_relation_split_core_and_frontier=6",
-            "claim_lineage_relation_strengthened_assumptions=11",
-            "claim_lineage_relation_unchanged=4",
+            "claim_lineage_relation_strengthened_assumptions=12",
+            "claim_lineage_relation_unchanged=3",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -1565,8 +1638,8 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=19",
-            "publication_publication_evidence_closed=22",
+            "publication_strict_kernel_closed=20",
+            "publication_publication_evidence_closed=23",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1581,14 +1654,14 @@
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_obligations_total=71",
-            "publication_obligations_passed=65",
+            "publication_obligations_total=70",
+            "publication_obligations_passed=66",
             "publication_gap_lean_conditional=2",
-            "publication_gap_lean_exact=2",
-            "publication_gap_unresolved_semantics=2",
+            "publication_gap_lean_exact=1",
+            "publication_gap_unresolved_semantics=1",
             "publication_mathematical_route_model_internal_exact=20",
             "publication_mathematical_route_reference_conditional=6",
-            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=2",
+            "publication_semantic_resolution_hybrid_model_and_strategy_evidence=1",
             "publication_model_route_real_strategy_evidence_required=23"
           ]
         }
@@ -2119,11 +2192,11 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=19",
+            "paper_claims_closed=20",
             "paper_claims_partial=0",
             "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=4",
+            "paper_claims_unformalized=3",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",
