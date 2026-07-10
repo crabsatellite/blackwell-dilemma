@@ -32,6 +32,7 @@ EXPECTED_IDS = (
     "tong1990",
     "david_nagaraja2003",
     "pisztora1996",
+    "peres_sousi_steif2020",
     "topkis1978",
     "molloy_reed1995",
     "cohen2000",

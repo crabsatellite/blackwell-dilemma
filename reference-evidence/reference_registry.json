@@ -136,6 +136,25 @@
       ]
     },
     {
+      "id": "peres_sousi_steif2020",
+      "doi": "10.1007/s00440-019-00927-z",
+      "title": "Mixing time for random walk on supercritical dynamical percolation",
+      "authors": ["Yuval Peres", "Perla Sousi", "Jeffrey E. Steif"],
+      "year": 2019,
+      "publisher": "Springer Science and Business Media LLC",
+      "container_title": "Probability Theory and Related Fields",
+      "record_type": "journal-article",
+      "evidence_class": "theorem",
+      "canonical_url": "https://doi.org/10.1007/s00440-019-00927-z",
+      "evidence_locator": "Section 3, Lemma 3.1, specialized to the full vertex set of the finite discrete torus.",
+      "supports": [
+        "For every fixed supercritical open-edge probability on the finite discrete torus, the giant-component density concentrates around the infinite-lattice percolation probability theta(p)."
+      ],
+      "limitations": [
+        "The source supplies the finite-torus percolation profile, not the paper's order-statistic welfare translation or population-average conclusion."
+      ]
+    },
+    {
       "id": "topkis1978",
       "doi": "10.1287/opre.26.2.305",
       "title": "Minimizing a Submodular Function on a Lattice",

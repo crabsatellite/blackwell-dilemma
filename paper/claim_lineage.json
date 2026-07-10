@@ -179,12 +179,16 @@
       "publication_labels": [
         "thm:phase"
       ],
-      "research_target": "Preserve the phase-transition claim while delimiting the finite-torus and all-supercritical-p scope that is not supplied by a single matching source theorem.",
+      "research_target": "Preserve the square-lattice connectivity transition and its conditional giant-component welfare consequence, while excluding the false population-average vanishing interpretation by the machine-derived p^4 local-isolation lower bound.",
       "machine_witnesses": [
         {
           "type": "publication_obligation",
           "claim_label": "thm:phase",
-          "id": "conditional_phase_to_welfare_derivation"
+          "id": "reference_conditioned_phase_translation"
+        },
+        {
+          "type": "evidence_check",
+          "id": "lattice_phase_kernel_surface"
         }
       ]
     },

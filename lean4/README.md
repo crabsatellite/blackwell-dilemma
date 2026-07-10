@@ -11,13 +11,13 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 paper_claims_total=26
 paper_claims_closed=15
 paper_claims_partial=2
-paper_claims_conditional=2
+paper_claims_conditional=3
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=7
+paper_claims_unformalized=6
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=17
-publication_obligations_passed=59/73
+publication_evidence_closed=18
+publication_obligations_passed=61/73
 model_assumptions_admissible=19/19
 research_claims_preserved=26/26
 claim_lineage_relations=counterexample_delimited:5,split_core_and_frontier:5,strengthened_assumptions:9,unchanged:7
@@ -26,7 +26,7 @@ model_assumption_provenance=benchmark_definition:2,paper_definition:6,paper_redu
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=3/26
 mathematical_routes=model_internal_exact:19,reference_conditional:7
-semantic_gap_routes=existing_theory_scope:1,hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
+semantic_gap_routes=hybrid_model_and_strategy_evidence:3,paper_model_encoding:1
 ```
 
 | Label | Kind | State | Route | Title |
@@ -38,7 +38,7 @@ semantic_gap_routes=existing_theory_scope:1,hybrid_model_and_strategy_evidence:3
 | `lem:wrongness` | lemma | closed | semantic-repair | Wrongness of the Greedy Policy Under Topology-Blind Signals |
 | `lem:conditional-reduction` | lemma | closed | mixed | Conditional Reduction Under State Augmentation |
 | `thm:dilemma` | theorem | closed | semantic-repair | Welfare Non-Monotonicity Under Endogenous Feasibility |
-| `thm:phase` | theorem | unformalized | external-library | Phase Transition at $p_c$ |
+| `thm:phase` | theorem | conditional | mixed | Connectivity Phase and Conditional Welfare Regimes at $p_c$ |
 | `prop:trap-prevalence` | proposition | partial | local | Generic Trap Prevalence |
 | `thm:cognitive-threshold` | theorem | partial | semantic-repair | Characterization of the Blackwell Regime |
 | `prop:threshold-alpha` | proposition | unformalized | local | Cognitive Threshold Increases with Instrumental Rationality |

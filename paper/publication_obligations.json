@@ -69,13 +69,13 @@
     },
     {
       "label": "thm:phase",
-      "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1",
+      "statement_sha256": "455057f0c0774cf3c3648c78c093bebfd173517972f2a710fe617509e9517e50",
       "obligations": [
-        {"id": "repaired_giant_component_probability", "type": "statement_hash"},
-        {"id": "square_lattice_percolation_premises", "type": "external_references", "ids": ["kesten1980", "aizenman_barsky1987", "grimmett1999", "pisztora1996"]},
-        {"id": "lattice_model", "type": "model_assumptions", "ids": ["independent_bond_blocking", "iid_uniform_rewards"]},
-        {"id": "finite_torus_scope_match", "type": "unresolved_semantics", "resolution_class": "existing_theory_scope", "reason": "The all-supercritical-p finite-torus giant-component statement is not yet matched to one source theorem with the same topology and range."},
-        {"id": "conditional_phase_to_welfare_derivation", "type": "lean_conditional"}
+        {"id": "calibrated_connectivity_phase_statement", "type": "statement_hash"},
+        {"id": "square_lattice_percolation_profiles", "type": "external_references", "ids": ["kesten1980", "peres_sousi_steif2020", "aizenman_barsky1987", "grimmett1999"]},
+        {"id": "dependent_oracle_and_order_statistic_results", "type": "external_references", "ids": ["blackwell1953", "tong1990", "david_nagaraja2003"]},
+        {"id": "lattice_and_signal_models", "type": "model_assumptions", "ids": ["independent_bond_blocking", "iid_uniform_rewards", "independent_gaussian_reward_noise", "subcritical_uniform_reachable_moment"]},
+        {"id": "reference_conditioned_phase_translation", "type": "lean_conditional"}
       ]
     },
     {

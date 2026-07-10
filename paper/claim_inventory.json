@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "d67c04707b2096a25b83d7603fb93fac7a3a2c869020835be8147d782a7ff352",
+  "manuscript_sha256": "09ddd877ee935f1a11d57b8dfbaee92628c1bcd1823e6a1faf8006ed80f47b7d",
   "claims": [
     {
       "line": 262,
@@ -56,8 +56,8 @@
       "line": 439,
       "kind": "theorem",
       "label": "thm:phase",
-      "title": "Phase Transition at $p_c$",
-      "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1"
+      "title": "Connectivity Phase and Conditional Welfare Regimes at $p_c$",
+      "statement_sha256": "455057f0c0774cf3c3648c78c093bebfd173517972f2a710fe617509e9517e50"
     },
     {
       "line": 493,

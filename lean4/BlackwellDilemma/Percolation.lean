@@ -56,22 +56,14 @@
     constant), the `c = 1` instance gives `bondMeasureTotal_eq_one`.
   * `percExpectation_add`, `percExpectation_smul` — linearity of `E_{G_p}`.
 
-  ## Relation to the opaque `expectedTopoLoss` carrier
+  ## Current use
 
-  The opaque carrier `expectedTopoLoss : ℕ → ℝ → ℝ` of `Wrongness.lean`
-  abstracts `E_{G_p}[r^* - max_{v ∈ R(v_0)} r(v)]` on `Z²_L` with `L² = n`.
-  Fully concretising it would require re-indexing the global `Vertex` /
-  `blockingProb` axioms by `n` (a cross-module re-architecture).  This
-  module builds the **measure-theoretic foundation** that such a
-  concretisation needs: once `expectedTopoLoss n p` is identified with
-  `percExpectation (1 - p) (topoLoss kernel)` for the `Z²_L` edge set, the
-  paper's envelope bounds `expectedTopoLoss n p ≤ 1/(n+1)` and
-  `expectedTopoLoss n p ≤ 1` follow from
-  `percExpectation_le_of_pointwise_le` applied to the corresponding
-  pointwise reward-gap bounds — exactly the paper's "bound per realisation,
-  then take expectation" proof structure.  See `Wrongness.lean`
-  `topoLossKernel` / `expectedTopoLoss_le_one_atom` for the first such
-  concretisation built on this foundation.
+  The finite Bernoulli expectation is a reusable foundation for model
+  calculations over edge configurations. Manuscript-facing topological loss
+  now uses the explicit finite cluster-size law in `UnifiedTopoCluster.lean`;
+  reference-conditioned lattice translation is isolated in
+  `UnifiedPhase.lean` rather than represented by an opaque expected-loss
+  carrier.
 
   No bare `Prop` fields; no `def := True` tricks; no free-RHS existentials;
   no `sorry`.

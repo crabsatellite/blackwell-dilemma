@@ -48,6 +48,15 @@
       "bibliographic_note": "H. A. David and H. N. Nagaraja, Order Statistics, third edition, Wiley, 2003, Section 2.1."
     },
     {
+      "id": "peres_sousi_steif2020",
+      "kind": "external_reference",
+      "role": "Exact finite-discrete-torus giant-density source for every fixed supercritical open-edge probability.",
+      "status": "source_backed_finite_torus_profile",
+      "registry_id": "peres_sousi_steif2020",
+      "source_url": "https://doi.org/10.1007/s00440-019-00927-z",
+      "bibliographic_note": "Yuval Peres, Perla Sousi, and Jeffrey E. Steif, published online 2019 and in Probability Theory and Related Fields 176 (2020), Section 3, Lemma 3.1."
+    },
+    {
       "id": "harris_kesten_pc_half",
       "kind": "external_formula",
       "role": "Critical probability p_c(Z2 bond percolation)=1/2 used as the percolation threshold reference.",
@@ -214,6 +223,13 @@
       "role": "Exact conditional topological-loss ratio, fixed-fraction cluster envelope and limit, and unconditional constant-order bound under persistent singleton mass.",
       "status": "repo_build_gate",
       "local_file": "lean4/BlackwellDilemma/UnifiedTopoCluster.lean"
+    },
+    {
+      "id": "unified_phase_kernel",
+      "kind": "machine_gate",
+      "role": "Reference-conditioned finite-torus profile interface with exact giant-conditional loss limit, p^4 local-isolation lower bound, linked cluster first moment, and Gaussian oracle decay.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedPhase.lean"
     },
     {
       "id": "five_state_approximation_audit",
@@ -1045,6 +1061,80 @@
       ]
     },
     {
+      "id": "lattice_phase_semantic_repair_gate",
+      "category": "reference_conditioned_kernel_translation_with_population_counterbound",
+      "source_cards": [
+        "blackwell1953",
+        "aizenman_barsky1987",
+        "grimmett1999",
+        "tong1990",
+        "david_nagaraja2003",
+        "peres_sousi_steif2020",
+        "harris_kesten_pc_half",
+        "unified_information_decay_kernel",
+        "unified_topo_cluster_kernel",
+        "unified_phase_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "lattice_phase_module",
+          "path": "lean4/BlackwellDilemma/UnifiedPhase.lean",
+          "contains": [
+            "theorem allBlockedFour_weight",
+            "structure GiantRegimeProfile",
+            "structure FragmentedRegimeProfile",
+            "theorem giantRegimeConclusion_proved",
+            "theorem fragmentedRegimeConclusion_proved",
+            "structure SquareLatticeReferenceData",
+            "theorem latticePhaseClaim_from_references"
+          ]
+        },
+        {
+          "id": "lattice_phase_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.LatticePhase.SquareLatticePercolationPremise",
+            "BlackwellDilemma.LatticePhase.LatticePhaseClaim",
+            "BlackwellDilemma.LatticePhase.latticePhaseClaim_from_references"
+          ]
+        },
+        {
+          "id": "lattice_phase_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.LatticePhase.allBlockedFour_weight",
+            "#print axioms BlackwellDilemma.LatticePhase.giantRegimeConclusion_proved",
+            "#print axioms BlackwellDilemma.LatticePhase.fragmentedRegimeConclusion_proved",
+            "#print axioms BlackwellDilemma.LatticePhase.latticePhaseClaim_from_references"
+          ]
+        },
+        {
+          "id": "lattice_phase_obligations",
+          "path": "paper/publication_obligations.json",
+          "contains": [
+            "\"id\": \"square_lattice_percolation_profiles\"",
+            "\"peres_sousi_steif2020\"",
+            "\"id\": \"reference_conditioned_phase_translation\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "lattice_phase_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -1175,7 +1265,7 @@
             "publication_ledger_stale=0",
             "publication_claims_total=26",
             "publication_strict_kernel_closed=15",
-            "publication_publication_evidence_closed=17",
+            "publication_publication_evidence_closed=18",
             "publication_model_assumptions_total=19",
             "publication_model_assumptions_admissible=19",
             "publication_model_assumptions_theory_admissible=19",
@@ -1191,13 +1281,12 @@
             "publication_model_assumption_provenance_standard_theory=3",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=73",
-            "publication_obligations_passed=59",
-            "publication_gap_lean_conditional=4",
+            "publication_obligations_passed=61",
+            "publication_gap_lean_conditional=3",
             "publication_gap_lean_exact=5",
-            "publication_gap_unresolved_semantics=5",
+            "publication_gap_unresolved_semantics=4",
             "publication_mathematical_route_model_internal_exact=19",
             "publication_mathematical_route_reference_conditional=7",
-            "publication_semantic_resolution_existing_theory_scope=1",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=3",
             "publication_semantic_resolution_paper_model_encoding=1"
           ]
@@ -1306,9 +1395,9 @@
           "type": "python_script",
           "path": "tools/verify_reference_registry.py",
           "stdout_contains": [
-            "reference_records_total=19",
+            "reference_records_total=20",
             "reference_evidence_class_empirical_study=0",
-            "reference_evidence_class_theorem=11",
+            "reference_evidence_class_theorem=12",
             "reference_manual_status_fields=0",
             "reference_metadata_offline_failures=0"
           ]
@@ -1731,9 +1820,9 @@
             "paper_claims_total=26",
             "paper_claims_closed=15",
             "paper_claims_partial=2",
-            "paper_claims_conditional=2",
+            "paper_claims_conditional=3",
             "paper_claims_refuted_encoding=0",
-            "paper_claims_unformalized=7",
+            "paper_claims_unformalized=6",
             "paper_claim_labels=thm:decomp,prop:info-decay,prop:topo-cluster,prop:physical,lem:wrongness,lem:conditional-reduction,thm:dilemma,thm:phase,prop:trap-prevalence,thm:cognitive-threshold,prop:threshold-alpha,prop:supermodular,prop:sentimental,prop:principal-optimum,prop:canonical,prop:interior-optimum,prop:two-regime-five-state,prop:threshold-five-state,prop:p-monotonicity-five-state,thm:bayesian-immunity,prop:complementarity,prop:bayesian-naive-five-state,thm:general-tree,prop:error-compounding,cor:er-phase,cor:power-law",
             "paper_claim_manual_status_assignments=0",
             "paper_claim_legacy_semantic_targets=0",

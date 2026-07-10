@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "d67c04707b2096a25b83d7603fb93fac7a3a2c869020835be8147d782a7ff352",
+  "manuscript_sha256": "09ddd877ee935f1a11d57b8dfbaee92628c1bcd1823e6a1faf8006ed80f47b7d",
   "summary": {
     "claims_total": 26,
     "strict_kernel_closed": 15,
-    "publication_evidence_closed": 17,
+    "publication_evidence_closed": 18,
     "empirical_publication_closed": 3,
     "claims_model_evidence_closed": 3,
     "model_assumptions_total": 19,
@@ -24,28 +24,28 @@
       "tractability_normalization": 1
     },
     "obligations_total": 73,
-    "obligations_passed": 59,
+    "obligations_passed": 61,
     "obligations_by_type": {
       "computational_certificate": 1,
-      "external_references": 10,
+      "external_references": 11,
       "lean_conditional": 7,
       "lean_exact": 19,
       "model_assumptions": 25,
       "statement_hash": 6,
-      "unresolved_semantics": 5
+      "unresolved_semantics": 4
     },
     "passed_by_type": {
       "computational_certificate": 1,
-      "external_references": 10,
-      "lean_conditional": 3,
+      "external_references": 11,
+      "lean_conditional": 4,
       "lean_exact": 14,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 4,
+      "lean_conditional": 3,
       "lean_exact": 5,
-      "unresolved_semantics": 5
+      "unresolved_semantics": 4
     },
     "mathematical_routes": {
       "model_internal_exact": 19,
@@ -57,7 +57,6 @@
       "real_strategy_evidence_required": 23
     },
     "semantic_gaps_by_resolution_class": {
-      "existing_theory_scope": 1,
       "hybrid_model_and_strategy_evidence": 3,
       "paper_model_encoding": 1
     }
@@ -576,53 +575,53 @@
     },
     {
       "label": "thm:phase",
-      "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1",
-      "lean_state": "unformalized",
+      "statement_sha256": "455057f0c0774cf3c3648c78c093bebfd173517972f2a710fe617509e9517e50",
+      "lean_state": "conditional",
       "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "reference_conditional",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "iid_uniform_rewards",
-        "independent_bond_blocking"
+        "independent_bond_blocking",
+        "independent_gaussian_reward_noise",
+        "subcritical_uniform_reachable_moment"
       ],
       "empirical_model_gaps": [
         "independent_bond_blocking"
       ],
-      "semantic_resolution_classes": [
-        "existing_theory_scope"
-      ],
+      "semantic_resolution_classes": [],
       "obligations": [
         {
-          "id": "repaired_giant_component_probability",
+          "id": "calibrated_connectivity_phase_statement",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1"
+          "detail": "statement_sha256=455057f0c0774cf3c3648c78c093bebfd173517972f2a710fe617509e9517e50"
         },
         {
-          "id": "square_lattice_percolation_premises",
+          "id": "square_lattice_percolation_profiles",
           "type": "external_references",
           "passed": true,
-          "detail": "pinned reference ids=kesten1980,aizenman_barsky1987,grimmett1999,pisztora1996"
+          "detail": "pinned reference ids=kesten1980,peres_sousi_steif2020,aizenman_barsky1987,grimmett1999"
         },
         {
-          "id": "lattice_model",
+          "id": "dependent_oracle_and_order_statistic_results",
+          "type": "external_references",
+          "passed": true,
+          "detail": "pinned reference ids=blackwell1953,tong1990,david_nagaraja2003"
+        },
+        {
+          "id": "lattice_and_signal_models",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=independent_bond_blocking,iid_uniform_rewards"
+          "detail": "theory-admissible assumption ids=independent_bond_blocking,iid_uniform_rewards,independent_gaussian_reward_noise,subcritical_uniform_reachable_moment"
         },
         {
-          "id": "finite_torus_scope_match",
-          "type": "unresolved_semantics",
-          "passed": false,
-          "detail": "The all-supercritical-p finite-torus giant-component statement is not yet matched to one source theorem with the same topology and range."
-        },
-        {
-          "id": "conditional_phase_to_welfare_derivation",
+          "id": "reference_conditioned_phase_translation",
           "type": "lean_conditional",
-          "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "passed": true,
+          "detail": "Lean state is conditional; publication closure requires a kernel-checked conditional or exact claim"
         }
       ]
     },

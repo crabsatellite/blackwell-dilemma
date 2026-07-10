@@ -26,6 +26,7 @@ import BlackwellDilemma.UnifiedGreedyReversal
 import BlackwellDilemma.UnifiedConditionalReduction
 import BlackwellDilemma.UnifiedInformationDecay
 import BlackwellDilemma.UnifiedTopoCluster
+import BlackwellDilemma.UnifiedPhase
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -252,12 +253,15 @@ def claimDilemma : PaperClaim :=
 
 def claimPhase : PaperClaim :=
   { label := "thm:phase"
-    title := "Phase Transition at p_c"
+    title := "Connectivity Phase Transition and Conditional Welfare Regimes at p_c"
     kind := .theorem
     sourceLine := 439
-    route := .externalLibrary
-    blocker := "Requires genuine finite-torus supercritical and subcritical percolation theorems, not witness functions."
-    evidence := .unformalized }
+    route := .mixed
+    blocker := "Conditional on reference-gated square-lattice giant-component and subcritical-moment profiles, the giant-conditional vanishing bound, persistent-isolation unconditional constant-order bound, and oracle information-decay comparison are kernel derived from one linked cluster law."
+    evidence := .conditionalProof
+      BlackwellDilemma.LatticePhase.SquareLatticePercolationPremise
+      BlackwellDilemma.LatticePhase.LatticePhaseClaim
+      BlackwellDilemma.LatticePhase.latticePhaseClaim_from_references }
 
 def claimTrapPrevalence : PaperClaim :=
   { label := "prop:trap-prevalence"

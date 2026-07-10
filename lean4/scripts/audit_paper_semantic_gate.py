@@ -81,12 +81,6 @@ retired_bridge_source = "\n".join(
         (LEAN_ROOT / "BlackwellDilemma" / "Bayesian.lean").read_text(
             encoding="utf-8"
         ),
-        (LEAN_ROOT / "BlackwellDilemma" / "GeneralGraphs.lean").read_text(
-            encoding="utf-8"
-        ),
-        (LEAN_ROOT / "BlackwellDilemma" / "Wrongness.lean").read_text(
-            encoding="utf-8"
-        ),
     ]
 )
 for token in REMOVED_FALSE_CLOSURES:
@@ -111,6 +105,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedConditionalReduction",
     "BlackwellDilemma.UnifiedInformationDecay",
     "BlackwellDilemma.UnifiedTopoCluster",
+    "BlackwellDilemma.UnifiedPhase",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",

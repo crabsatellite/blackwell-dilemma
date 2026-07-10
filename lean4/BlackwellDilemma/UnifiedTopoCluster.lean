@@ -122,6 +122,10 @@ def oneIndex (n : Nat) (hn : 1 <= n) : Fin (n + 1) :=
 noncomputable def expectedLoss {n : Nat} (law : ClusterSizeLaw n) : Real :=
   Finset.univ.sum (fun j => law.prob j * conditionalLoss n j)
 
+/-- First moment of the reachable-set-size law. -/
+noncomputable def expectedCard {n : Nat} (law : ClusterSizeLaw n) : Real :=
+  Finset.univ.sum (fun j => law.prob j * (j : Real))
+
 theorem expectedLoss_nonneg {n : Nat} (law : ClusterSizeLaw n) :
     0 <= law.expectedLoss := by
   unfold expectedLoss
