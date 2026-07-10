@@ -48,9 +48,8 @@ combinatorics, statistical mechanics, and bond-percolation theory.
 
 ## Mathlib upstream target
 
-This file is the foundational deliverable of the Mathlib contribution
-plan documented in `lean4/MATHLIB_CONTRIBUTION_ROADMAP.md` for the
-BlackwellDilemma paper's lattice infrastructure (see paper Theorem
+This file is a foundational candidate for a Mathlib contribution supporting
+the BlackwellDilemma paper's lattice infrastructure (see paper Theorem
 `thm:phase` line 411 ff. and Theorem `thm:cognitive-threshold` Part 6
 line 498). The intended Mathlib home is
 `Mathlib/Combinatorics/SimpleGraph/IntegerLattice.lean`. The file is

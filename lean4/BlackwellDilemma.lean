@@ -48,13 +48,10 @@
                                   Thm 6.1 general-tree,
                                   Prop error-compounding, Ex cyclic-trap
 
-    Ledger.lean                 status of every paper claim formalised
-                                  here (CLOSED / PARTIAL / AXIOM-CITED)
-    PaperSemanticGate.lean      build-checked paper-semantic closure gate
-    AxiomAudit.lean             #print axioms for every theorem;
-                                  expected output: only kernel axioms
-                                  for CLOSED items, paper-citation axioms
-                                  for PARTIAL / AXIOM-CITED items.
+    Ledger.lean                 proof-derived ledger for all 29 labelled
+                                  manuscript claims
+    PaperSemanticGate.lean      build-checked proof-witness closure gate
+    AxiomAudit.lean             #print axioms for proof-bearing ledger terms
 -/
 
 import BlackwellDilemma.Basic

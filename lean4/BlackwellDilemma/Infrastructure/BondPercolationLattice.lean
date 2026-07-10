@@ -10,8 +10,7 @@ import Mathlib.Combinatorics.SimpleGraph.Subgraph
 /-!
 # Bond percolation on the integer lattice (measure-theoretic stub)
 
-This file is the **measure-theoretic stub** of the Mathlib contribution
-roadmap (`MATHLIB_CONTRIBUTION_ROADMAP.md`). It assembles the
+This file is a **measure-theoretic stub** for a possible Mathlib contribution. It assembles the
 `integerLatticeGraph` and the Cat 1 finite Bernoulli-product weight
 infrastructure into a unified namespace where the bond-percolation
 constructions used in the BlackwellDilemma paper Theorem `thm:phase`
@@ -34,8 +33,7 @@ that Mathlib does not yet host.
 
 ## Why this is a stub
 
-The complete measure-theoretic development from
-`MATHLIB_CONTRIBUTION_ROADMAP.md` requires:
+The complete measure-theoretic development requires:
 1. Measure-theoretic product Bernoulli on `(BondConfigOnGraph G)` —
    blocked by Mathlib's lack of an `MeasureTheory.Measure.pi`-friendly
    formulation for `Sym2 V` index sets when `V` is infinite (the lattice

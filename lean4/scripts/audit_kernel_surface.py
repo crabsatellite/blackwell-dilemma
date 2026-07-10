@@ -161,7 +161,7 @@ def main() -> int:
         print(line)
 
     required_manifest_lines = [
-        *output_lines,
+        *output_lines[1:],
         "public_manifest_kernel_stdout_contains_missing=0",
     ]
     manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(

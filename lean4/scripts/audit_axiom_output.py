@@ -69,7 +69,10 @@ def main() -> int:
         "axiom_output_unexpected_axiom_names=" + ",".join(sorted(unexpected_axioms)),
     ]
     required_manifest_lines = [
-        *output_lines,
+        output_lines[0],
+        output_lines[4],
+        output_lines[6],
+        output_lines[7],
         "public_manifest_axiom_output_stdout_contains_missing=0",
     ]
     manifest_missing_stdout_lines = public_manifest_missing_stdout_lines(

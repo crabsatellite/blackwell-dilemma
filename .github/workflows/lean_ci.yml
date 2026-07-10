@@ -99,3 +99,9 @@ jobs:
 
       - name: Audit paper-semantic gate
         run: python scripts/audit_paper_semantic_gate.py
+
+      - name: Audit proof dependencies
+        run: python scripts/audit_axiom_output.py
+
+      - name: Verify generated README status
+        run: python scripts/render_paper_claim_readme.py --check
