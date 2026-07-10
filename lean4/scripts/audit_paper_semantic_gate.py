@@ -26,6 +26,13 @@ FORBIDDEN = (
     "CompletePaperSemanticKernelOnly",
 )
 
+REMOVED_FALSE_CLOSURES = (
+    "agentRewardKernel_kappaAgent_fiveState_pointwise_monotone_above_kappaStar",
+    "smoothTransitionBeta",
+    "gap_threshold_fiveState_smooth_transition",
+    "not_current_kappaAgent_highKappa_oracle_at_p0",
+)
+
 
 def fail(message: str) -> None:
     print(f"paper_claim_audit_error={message}")
@@ -47,6 +54,13 @@ for token in FORBIDDEN:
     if token in source:
         fail(f"forbidden-token:{token}")
 
+canonical_source = (LEAN_ROOT / "BlackwellDilemma" / "Canonical.lean").read_text(
+    encoding="utf-8"
+)
+for token in REMOVED_FALSE_CLOSURES:
+    if token in canonical_source:
+        fail(f"removed-false-closure-present:{token}")
+
 ledger_imports = re.findall(r"^import\s+([^\s]+)", LEDGER.read_text(encoding="utf-8"), re.MULTILINE)
 allowed_ledger_imports = {
     "BlackwellDilemma.Basic",
@@ -55,6 +69,7 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedCanonical",
     "BlackwellDilemma.UnifiedInterior",
     "BlackwellDilemma.UnifiedTwoRegime",
+    "BlackwellDilemma.UnifiedCognitiveFiveState",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",
@@ -158,6 +173,7 @@ print("paper_claim_labels=" + ",".join(observed_labels))
 print("paper_claim_manual_status_assignments=0")
 print("paper_claim_legacy_semantic_targets=0")
 print("paper_claim_bridge_gate_tokens=0")
+print("paper_claim_removed_false_closures=0")
 print("paper_claim_model_only_imports=0")
 print("paper_claim_formal_root_imports=" + ",".join(root_imports))
 print("paper_claim_formal_root_model_only_imports=0")

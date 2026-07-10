@@ -1,54 +1,54 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "3da2310d969bfedc4d19dc0badaefe5f3f2d8a1020976a72f731cdeab6780924",
+  "manuscript_sha256": "056c86e30daa3b06d0bdba4700f0a2229ba75067d5fbf73c7ca1ffcb77abd26a",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 5,
-    "publication_evidence_closed": 5,
+    "strict_kernel_closed": 6,
+    "publication_evidence_closed": 6,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
-    "model_assumptions_total": 12,
-    "model_assumptions_admissible": 12,
-    "model_assumptions_theory_admissible": 12,
+    "model_assumptions_total": 13,
+    "model_assumptions_admissible": 13,
+    "model_assumptions_theory_admissible": 13,
     "model_assumptions_theory_referenced": 8,
-    "model_assumptions_theory_reference_not_required": 4,
+    "model_assumptions_theory_reference_not_required": 5,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
     "model_assumptions_by_provenance": {
-      "benchmark_definition": 1,
+      "benchmark_definition": 2,
       "paper_definition": 2,
       "paper_reduced_form": 5,
       "published_model_adaptation": 1,
       "standard_theory": 2,
       "tractability_normalization": 1
     },
-    "obligations_total": 76,
+    "obligations_total": 75,
     "obligations_passed": 46,
     "obligations_by_type": {
       "computational_certificate": 1,
-      "external_references": 9,
-      "lean_conditional": 9,
-      "lean_exact": 17,
+      "external_references": 8,
+      "lean_conditional": 8,
+      "lean_exact": 18,
       "model_assumptions": 25,
       "statement_hash": 6,
       "unresolved_semantics": 9
     },
     "passed_by_type": {
       "computational_certificate": 1,
-      "external_references": 9,
-      "lean_exact": 5,
+      "external_references": 8,
+      "lean_exact": 6,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
-      "lean_conditional": 9,
+      "lean_conditional": 8,
       "lean_exact": 12,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
-      "model_internal_exact": 17,
-      "reference_conditional": 9
+      "model_internal_exact": 18,
+      "reference_conditional": 8
     },
     "model_routes": {
       "none": 1,
@@ -162,6 +162,18 @@
       "empirical_check_ids": []
     },
     {
+      "id": "five_state_reveal_erasure_experiment",
+      "kind": "behavioral_postulate",
+      "provenance": "benchmark_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
       "id": "sentimental_weight_alpha",
       "kind": "behavioral_postulate",
       "provenance": "paper_reduced_form",
@@ -235,7 +247,7 @@
   "claims": [
     {
       "label": "thm:decomp",
-      "statement_sha256": "52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303",
+      "statement_sha256": "ecd949d5675499aea61ce02411ebd78dc668eb7034a65e4f3a4ff0e2fe5a0847",
       "lean_state": "closed",
       "strict_kernel_closed": true,
       "publication_evidence_closed": true,
@@ -250,7 +262,7 @@
           "id": "repaired_uniqueness_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303"
+          "detail": "statement_sha256=ecd949d5675499aea61ce02411ebd78dc668eb7034a65e4f3a4ff0e2fe5a0847"
         },
         {
           "id": "exact_decomposition_bundle",
@@ -347,7 +359,7 @@
     },
     {
       "label": "prop:physical",
-      "statement_sha256": "409dd6a194d7a503aca5d9419ec3d8da8c4fa3d8ccbcef9caaddccb99f0bdcad",
+      "statement_sha256": "a92fbae6820e662ba64fe5ea34b303f4c2019463dc31295e2a106cad9ffe0be9",
       "lean_state": "closed",
       "strict_kernel_closed": true,
       "publication_evidence_closed": true,
@@ -505,7 +517,7 @@
     },
     {
       "label": "thm:phase",
-      "statement_sha256": "98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab",
+      "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1",
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -527,7 +539,7 @@
           "id": "repaired_giant_component_probability",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab"
+          "detail": "statement_sha256=08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1"
         },
         {
           "id": "square_lattice_percolation_premises",
@@ -557,7 +569,7 @@
     },
     {
       "label": "prop:trap-prevalence",
-      "statement_sha256": "17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406",
+      "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6",
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -579,7 +591,7 @@
           "id": "repaired_p_zero_and_local_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406"
+          "detail": "statement_sha256=6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6"
         },
         {
           "id": "local_trap_model",
@@ -838,7 +850,7 @@
     },
     {
       "label": "prop:interior-optimum",
-      "statement_sha256": "8eadbe47875fa98ca2c63f892f91bf3d8b9333ab9a16b13745f5c3b575cdfb22",
+      "statement_sha256": "195ba69bd955c2529a3c4c72499a3011af726019e587ddee760df0f787ad1684",
       "lean_state": "closed",
       "strict_kernel_closed": true,
       "publication_evidence_closed": true,
@@ -878,7 +890,7 @@
     },
     {
       "label": "prop:two-regime-five-state",
-      "statement_sha256": "a4779a9e17f169ad4615e242f9600ba4da2eb346da844b747c59ffc600d3dd9e",
+      "statement_sha256": "6c5a74fdd0e9181412cb5e179394afd64511a8bb943cc1b828238214eb65741b",
       "lean_state": "closed",
       "strict_kernel_closed": true,
       "publication_evidence_closed": true,
@@ -914,20 +926,21 @@
     },
     {
       "label": "prop:threshold-five-state",
-      "statement_sha256": "326f3d138327532879a44c785c13a67bb863238d5adf5880821da77789e4ef81",
-      "lean_state": "unformalized",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "549a8c35ec4b007955f7cd69caeeadfb6969404def6526a663ffec000badc781",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
-        "cognitive_interpolation_kappa",
+        "five_state_reveal_erasure_experiment",
+        "independent_bond_blocking",
         "terminal_neighbor_topology",
         "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
-        "cognitive_interpolation_kappa",
+        "independent_bond_blocking",
         "topology_blind_gaussian_signals"
       ],
       "semantic_resolution_classes": [],
@@ -936,59 +949,54 @@
           "id": "five_state_cognitive_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,cognitive_interpolation_kappa,topology_blind_gaussian_signals"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,topology_blind_gaussian_signals,five_state_reveal_erasure_experiment"
         },
         {
           "id": "exact_five_state_cognitive_agent",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is unformalized; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },
     {
       "label": "prop:p-monotonicity-five-state",
-      "statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c",
+      "statement_sha256": "1205caa9e04cb585b71efcca8c6590f6f6fff6f37751468905a23a1b9f946c15",
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
       "empirical_publication_closed": false,
-      "mathematical_route": "reference_conditional",
+      "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
-        "cognitive_interpolation_kappa",
+        "five_state_reveal_erasure_experiment",
         "independent_bond_blocking",
-        "terminal_neighbor_topology"
+        "terminal_neighbor_topology",
+        "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
-        "cognitive_interpolation_kappa",
-        "independent_bond_blocking"
+        "independent_bond_blocking",
+        "topology_blind_gaussian_signals"
       ],
       "semantic_resolution_classes": [],
       "obligations": [
         {
-          "id": "five_state_blocking_model",
+          "id": "five_state_reward_precision_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,cognitive_interpolation_kappa"
+          "detail": "theory-admissible assumption ids=terminal_neighbor_topology,independent_bond_blocking,topology_blind_gaussian_signals,five_state_reveal_erasure_experiment"
         },
         {
-          "id": "blackwell_within_branch_premise",
-          "type": "external_references",
-          "passed": true,
-          "detail": "pinned reference ids=blackwell1953"
-        },
-        {
-          "id": "repaired_probability_domain_and_kappa_boundary",
+          "id": "repaired_reward_precision_domain_and_endpoints",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c"
+          "detail": "statement_sha256=1205caa9e04cb585b71efcca8c6590f6f6fff6f37751468905a23a1b9f946c15"
         },
         {
-          "id": "conditional_p_monotonicity",
-          "type": "lean_conditional",
+          "id": "exact_reward_precision_monotonicity",
+          "type": "lean_exact",
           "passed": false,
-          "detail": "Lean state is unformalized; publication closure requires a kernel-checked conditional or exact claim"
+          "detail": "Lean state is unformalized; exact closure requires closed"
         }
       ]
     },
@@ -1032,7 +1040,7 @@
     },
     {
       "label": "prop:complementarity",
-      "statement_sha256": "47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70",
+      "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6",
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -1052,7 +1060,7 @@
           "id": "repaired_policy_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70"
+          "detail": "statement_sha256=1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6"
         },
         {
           "id": "mixture_model",
@@ -1147,7 +1155,7 @@
     },
     {
       "label": "prop:error-compounding",
-      "statement_sha256": "d6b42952d77b85323598f9e9197a0361f01f21cfed3a7bce960e3c5b96db9f42",
+      "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52",
       "lean_state": "partial",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -1220,7 +1228,7 @@
     },
     {
       "label": "cor:power-law",
-      "statement_sha256": "371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100",
+      "statement_sha256": "ab64a3a373ae8f530b0b3882152d15456af51e89a37ceda971f812d1caff1793",
       "lean_state": "unformalized",
       "strict_kernel_closed": false,
       "publication_evidence_closed": false,
@@ -1242,7 +1250,7 @@
           "id": "repaired_power_law_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100"
+          "detail": "statement_sha256=ab64a3a373ae8f530b0b3882152d15456af51e89a37ceda971f812d1caff1793"
         },
         {
           "id": "configuration_model_premises",

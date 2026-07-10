@@ -104,8 +104,11 @@ def main() -> None:
         fail(f"missing-manuscript:{manuscript}")
 
     manuscript_bytes = manuscript.read_bytes()
+    manuscript_text = manuscript_bytes.decode("utf-8")
+    if re.search(r"^(?:<<<<<<<|=======|>>>>>>>)", manuscript_text, re.MULTILINE):
+        fail("unresolved-merge-conflict-marker")
     actual_hash = hashlib.sha256(manuscript_bytes).hexdigest()
-    actual_claims = extract_claims(manuscript_bytes.decode("utf-8"))
+    actual_claims = extract_claims(manuscript_text)
 
     if args.write_inventory:
         previous = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))

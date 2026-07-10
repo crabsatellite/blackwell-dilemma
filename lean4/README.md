@@ -9,23 +9,23 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=5
+paper_claims_closed=6
 paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
-paper_claims_unformalized=17
+paper_claims_unformalized=16
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=5
-publication_obligations_passed=46/76
-model_assumptions_admissible=12/12
+publication_evidence_closed=6
+publication_obligations_passed=46/75
+model_assumptions_admissible=13/13
 research_claims_preserved=26/26
-claim_lineage_relations=split_core_and_frontier:4,unchanged:22
-model_assumptions_theory_referenced=8/12
-model_assumption_provenance=benchmark_definition:1,paper_definition:2,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
+claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:4,strengthened_assumptions:3,unchanged:15
+model_assumptions_theory_referenced=8/13
+model_assumption_provenance=benchmark_definition:2,paper_definition:2,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=1/26
-mathematical_routes=model_internal_exact:17,reference_conditional:9
+mathematical_routes=model_internal_exact:18,reference_conditional:8
 semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5,paper_model_encoding:2
 ```
 
@@ -48,8 +48,8 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:canonical` | proposition | closed | semantic-repair | Canonical Welfare |
 | `prop:interior-optimum` | proposition | closed | semantic-repair | Interior Optimum |
 | `prop:two-regime-five-state` | proposition | closed | semantic-repair | Two-Regime Structure of the 5-State Instance |
-| `prop:threshold-five-state` | proposition | unformalized | semantic-repair | Cognitive Sufficiency on the 5-State Instance |
-| `prop:p-monotonicity-five-state` | proposition | unformalized | local | $p$-Monotonicity on the 5-State Instance |
+| `prop:threshold-five-state` | proposition | closed | semantic-repair | Cognitive Sufficiency on the 5-State Instance |
+| `prop:p-monotonicity-five-state` | proposition | unformalized | semantic-repair | Reward-Precision Monotonicity for Structurally Aware Five-State Agents |
 | `thm:bayesian-immunity` | theorem | unformalized | external-library | Bayesian Immunity |
 | `prop:complementarity` | proposition | unformalized | mixed | Information-Knowledge Complementarity |
 | `prop:bayesian-naive-five-state` | proposition | unformalized | semantic-repair | Bayesian-Naive Threshold on the 5-State Instance |

@@ -125,24 +125,36 @@
       "baseline_kind": "theorem",
       "baseline_title": "Phase Transition at $p_c$",
       "baseline_statement_sha256": "98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab",
-      "relation": "unchanged",
+      "relation": "counterexample_delimited",
       "publication_labels": [
         "thm:phase"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the phase-transition claim while delimiting the finite-torus and all-supercritical-p scope that is not supplied by a single matching source theorem.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:phase",
+          "id": "conditional_phase_to_welfare_derivation"
+        }
+      ]
     },
     {
       "baseline_label": "prop:trap-prevalence",
       "baseline_kind": "proposition",
       "baseline_title": "Generic Trap Prevalence",
       "baseline_statement_sha256": "17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406",
-      "relation": "unchanged",
+      "relation": "counterexample_delimited",
       "publication_labels": [
         "prop:trap-prevalence"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve generic local trap prevalence after explicitly repairing the p=0 boundary and separating the local event theorem from the remaining dynamic-reversal transfer.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:trap-prevalence",
+          "id": "exact_local_event_to_dynamic_reversal"
+        }
+      ]
     },
     {
       "baseline_label": "thm:cognitive-threshold",
@@ -265,24 +277,44 @@
       "baseline_kind": "proposition",
       "baseline_title": "Cognitive Sufficiency on the 5-State Instance",
       "baseline_statement_sha256": "326f3d138327532879a44c785c13a67bb863238d5adf5880821da77789e4ef81",
-      "relation": "unchanged",
+      "relation": "counterexample_delimited",
       "publication_labels": [
         "prop:threshold-five-state"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the cognitive-sufficiency result through an explicit five-state Blackwell experiment, while machine-delimiting the false fixed-beta oracle endpoint and unconditional kappa-welfare monotonicity clauses.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:threshold-five-state",
+          "id": "exact_five_state_cognitive_agent"
+        },
+        {
+          "type": "evidence_check",
+          "id": "cognitive_five_state_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "prop:p-monotonicity-five-state",
       "baseline_kind": "proposition",
       "baseline_title": "$p$-Monotonicity on the 5-State Instance",
       "baseline_statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c",
-      "relation": "unchanged",
+      "relation": "counterexample_delimited",
       "publication_labels": [
         "prop:p-monotonicity-five-state"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Retain the reward-precision monotonicity result for every positive structurally aware depth and replace the incorrect fixed-beta high-cognition oracle endpoint with the exact iterated-limit statement.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:p-monotonicity-five-state",
+          "id": "exact_reward_precision_monotonicity"
+        },
+        {
+          "type": "evidence_check",
+          "id": "cognitive_five_state_kernel_surface"
+        }
+      ]
     },
     {
       "baseline_label": "thm:bayesian-immunity",
@@ -301,12 +333,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Information-Knowledge Complementarity",
       "baseline_statement_sha256": "47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:complementarity"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve information-knowledge complementarity on the explicit policy mixture while requiring the actual welfare carrier to satisfy the stated increasing-differences premise.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:complementarity",
+          "id": "exact_cross_partial_from_agent_welfare"
+        }
+      ]
     },
     {
       "baseline_label": "prop:bayesian-naive-five-state",
@@ -337,12 +375,18 @@
       "baseline_kind": "proposition",
       "baseline_title": "Error Compounding",
       "baseline_statement_sha256": "d6b42952d77b85323598f9e9197a0361f01f21cfed3a7bce960e3c5b96db9f42",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "prop:error-compounding"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve exponential error compounding and logarithmic cognitive-depth growth while making the estimator threshold constants explicit assumptions rather than an identified posterior result.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "prop:error-compounding",
+          "id": "exact_depth_probability_and_threshold_bundle"
+        }
+      ]
     },
     {
       "baseline_label": "cor:er-phase",
@@ -361,12 +405,18 @@
       "baseline_kind": "corollary",
       "baseline_title": "Application: Power-Law Networks",
       "baseline_statement_sha256": "371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100",
-      "relation": "unchanged",
+      "relation": "strengthened_assumptions",
       "publication_labels": [
         "cor:power-law"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Preserve the power-law application under the configuration-model, independent-blocking, moment, and giant-component-membership qualifications required by the cited threshold theorems.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "cor:power-law",
+          "id": "conditional_configuration_to_welfare_derivation"
+        }
+      ]
     }
   ],
   "new_claims": []

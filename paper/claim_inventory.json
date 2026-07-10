@@ -1,14 +1,14 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "3da2310d969bfedc4d19dc0badaefe5f3f2d8a1020976a72f731cdeab6780924",
+  "manuscript_sha256": "056c86e30daa3b06d0bdba4700f0a2229ba75067d5fbf73c7ca1ffcb77abd26a",
   "claims": [
     {
       "line": 262,
       "kind": "theorem",
       "label": "thm:decomp",
       "title": "Canonical Welfare Decomposition",
-      "statement_sha256": "52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303"
+      "statement_sha256": "ecd949d5675499aea61ce02411ebd78dc668eb7034a65e4f3a4ff0e2fe5a0847"
     },
     {
       "line": 309,
@@ -29,7 +29,7 @@
       "kind": "proposition",
       "label": "prop:physical",
       "title": "Physical Irreducibility",
-      "statement_sha256": "409dd6a194d7a503aca5d9419ec3d8da8c4fa3d8ccbcef9caaddccb99f0bdcad"
+      "statement_sha256": "a92fbae6820e662ba64fe5ea34b303f4c2019463dc31295e2a106cad9ffe0be9"
     },
     {
       "line": 382,
@@ -57,14 +57,14 @@
       "kind": "theorem",
       "label": "thm:phase",
       "title": "Phase Transition at $p_c$",
-      "statement_sha256": "98e721e060d6a5fefb535419bc270c62b9e229a1d3a5409aaefaec460e29f8ab"
+      "statement_sha256": "08b167b2daace2a13cf64f3874c567b52df39524b7e5291d36fe5176ecd2d8d1"
     },
     {
       "line": 500,
       "kind": "proposition",
       "label": "prop:trap-prevalence",
       "title": "Generic Trap Prevalence",
-      "statement_sha256": "17b1a0cf893080abda93cab0bcb79ca45d03acd2996fb674d3267e11c1fe3406"
+      "statement_sha256": "6af8bba2a5311f7eb7b4b71906fd3d00500c66eea5b0b1bedd37c80a1452d6b6"
     },
     {
       "line": 530,
@@ -113,77 +113,77 @@
       "kind": "proposition",
       "label": "prop:interior-optimum",
       "title": "Interior Optimum",
-      "statement_sha256": "8eadbe47875fa98ca2c63f892f91bf3d8b9333ab9a16b13745f5c3b575cdfb22"
+      "statement_sha256": "195ba69bd955c2529a3c4c72499a3011af726019e587ddee760df0f787ad1684"
     },
     {
       "line": 841,
       "kind": "proposition",
       "label": "prop:two-regime-five-state",
       "title": "Two-Regime Structure of the 5-State Instance",
-      "statement_sha256": "a4779a9e17f169ad4615e242f9600ba4da2eb346da844b747c59ffc600d3dd9e"
+      "statement_sha256": "6c5a74fdd0e9181412cb5e179394afd64511a8bb943cc1b828238214eb65741b"
     },
     {
       "line": 893,
       "kind": "proposition",
       "label": "prop:threshold-five-state",
       "title": "Cognitive Sufficiency on the 5-State Instance",
-      "statement_sha256": "326f3d138327532879a44c785c13a67bb863238d5adf5880821da77789e4ef81"
+      "statement_sha256": "549a8c35ec4b007955f7cd69caeeadfb6969404def6526a663ffec000badc781"
     },
     {
-      "line": 909,
+      "line": 953,
       "kind": "proposition",
       "label": "prop:p-monotonicity-five-state",
-      "title": "$p$-Monotonicity on the 5-State Instance",
-      "statement_sha256": "e6238f99f4a29b933b059508b0ac935e627f27aaac266b8be248258d60d9b13c"
+      "title": "Reward-Precision Monotonicity for Structurally Aware Five-State Agents",
+      "statement_sha256": "1205caa9e04cb585b71efcca8c6590f6f6fff6f37751468905a23a1b9f946c15"
     },
     {
-      "line": 944,
+      "line": 981,
       "kind": "theorem",
       "label": "thm:bayesian-immunity",
       "title": "Bayesian Immunity",
       "statement_sha256": "0c5b0a686f61bee3a1e79f501b498af4464ec25114125fc7bf1447feb72ff116"
     },
     {
-      "line": 953,
+      "line": 990,
       "kind": "proposition",
       "label": "prop:complementarity",
       "title": "Information-Knowledge Complementarity",
-      "statement_sha256": "47d42a4da7c21e09814724fd3f40f7a09e1072900b336472b98003930e0bfd70"
+      "statement_sha256": "1100dc0105e6911f5c690d4564098da378f1e6f6621ef5a760dde4000dfb68b6"
     },
     {
-      "line": 971,
+      "line": 1008,
       "kind": "proposition",
       "label": "prop:bayesian-naive-five-state",
       "title": "Bayesian-Naive Threshold on the 5-State Instance",
       "statement_sha256": "571ef0b9d878012bf3acb4468b9ad01d6e4b3e13718c00b356260e3b06285f43"
     },
     {
-      "line": 1010,
+      "line": 1047,
       "kind": "theorem",
       "label": "thm:general-tree",
       "title": "Non-Monotonicity on General Graphs",
       "statement_sha256": "c981dae4e38fce06f6f06cd41c8b09ac099f77475bcc264b36dbeed00702c0b8"
     },
     {
-      "line": 1059,
+      "line": 1096,
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
-      "statement_sha256": "d6b42952d77b85323598f9e9197a0361f01f21cfed3a7bce960e3c5b96db9f42"
+      "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52"
     },
     {
-      "line": 1096,
+      "line": 1133,
       "kind": "corollary",
       "label": "cor:er-phase",
       "title": "Phase Transition on Erdos--Renyi Graphs",
       "statement_sha256": "5a4508fac9ff20051cc3b945cdf2724e8676911a62eb11f6810ef555a4cfab2b"
     },
     {
-      "line": 1110,
+      "line": 1147,
       "kind": "corollary",
       "label": "cor:power-law",
       "title": "Application: Power-Law Networks",
-      "statement_sha256": "371f5176f2b64cc932d61dd8d55ee0982d6633f8c97aa32a89596e2d5189d100"
+      "statement_sha256": "ab64a3a373ae8f530b0b3882152d15456af51e89a37ceda971f812d1caff1793"
     }
   ]
 }

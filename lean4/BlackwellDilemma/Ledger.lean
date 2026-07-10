@@ -16,6 +16,7 @@ import BlackwellDilemma.UnifiedWelfare
 import BlackwellDilemma.UnifiedCanonical
 import BlackwellDilemma.UnifiedInterior
 import BlackwellDilemma.UnifiedTwoRegime
+import BlackwellDilemma.UnifiedCognitiveFiveState
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -372,23 +373,25 @@ def claimThresholdFiveState : PaperClaim :=
     kind := .proposition
     sourceLine := 893
     route := .semanticRepair
-    blocker := "Replace the one-edge routing witness with the stated five-state cognitive agent."
-    evidence := .unformalized }
+    blocker := "The reveal-or-erasure topology experiment, explicit five-state routing welfare, reward-precision monotonicity, prior and perfect-topology endpoints, finite-precision oracle gap, and zero restoring-depth infimum are kernel proved."
+    evidence := .proved
+      BlackwellDilemma.FiveStateCognition.CognitiveFiveStateClaim
+      BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved }
 
 def claimPMonotonicityFiveState : PaperClaim :=
   { label := "prop:p-monotonicity-five-state"
-    title := "p-Monotonicity on the 5-State Instance"
+    title := "Reward-Precision Monotonicity for Structurally Aware Five-State Agents"
     kind := .proposition
-    sourceLine := 909
-    route := .local
-    blocker := "State the correct p domain and prove monotonicity for the paper threshold, excluding junk-value extensions."
+    sourceLine := 953
+    route := .semanticRepair
+    blocker := "The statement now shares the exact reveal-or-erasure semantics; bind its monotonicity and endpoint sub-bundle as a separate paper claim."
     evidence := .unformalized }
 
 def claimBayesianImmunity : PaperClaim :=
   { label := "thm:bayesian-immunity"
     title := "Bayesian Immunity"
     kind := .theorem
-    sourceLine := 944
+    sourceLine := 981
     route := .externalLibrary
     blocker := "Requires a formal Blackwell comparison-of-experiments theorem and a genuine Bayesian IDP specialization."
     evidence := .unformalized }
@@ -397,7 +400,7 @@ def claimComplementarity : PaperClaim :=
   { label := "prop:complementarity"
     title := "Information-Knowledge Complementarity"
     kind := .proposition
-    sourceLine := 953
+    sourceLine := 990
     route := .mixed
     blocker := "The arithmetic mixture lemma is insufficient; derive the dominance premise from the paper agent model."
     evidence := .unformalized }
@@ -406,7 +409,7 @@ def claimBayesianNaiveFiveState : PaperClaim :=
   { label := "prop:bayesian-naive-five-state"
     title := "Bayesian-Naive Threshold on the 5-State Instance"
     kind := .proposition
-    sourceLine := 971
+    sourceLine := 1008
     route := .semanticRepair
     blocker := "Rebuild reversal and recovery from the stated Bayesian-naive routing rule."
     evidence := .unformalized }
@@ -415,7 +418,7 @@ def claimGeneralTree : PaperClaim :=
   { label := "thm:general-tree"
     title := "Non-Monotonicity on General Graphs"
     kind := .theorem
-    sourceLine := 1010
+    sourceLine := 1047
     route := .semanticRepair
     blocker := "Current wrapper uses a manufactured kernel witness; derive the reversal from V_g, reachability, and C2-prime."
     evidence := .unformalized }
@@ -424,7 +427,7 @@ def claimErrorCompounding : PaperClaim :=
   { label := "prop:error-compounding"
     title := "Error Compounding"
     kind := .proposition
-    sourceLine := 1059
+    sourceLine := 1096
     route := .local
     blocker := "The finite Bernoulli model proves Parts 1-4, the two generic depth-bound forms are ordered and cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
     evidence := .partialProof
@@ -435,7 +438,7 @@ def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
     title := "Phase Transition on Erdos-Renyi Graphs"
     kind := .corollary
-    sourceLine := 1096
+    sourceLine := 1133
     route := .externalLibrary
     blocker := "Requires formal random-graph component-size and survival-probability results."
     evidence := .unformalized }
@@ -444,7 +447,7 @@ def claimPowerLaw : PaperClaim :=
   { label := "cor:power-law"
     title := "Application: Power-Law Networks"
     kind := .corollary
-    sourceLine := 1110
+    sourceLine := 1147
     route := .externalLibrary
     blocker := "Requires a formal configuration-model percolation threshold theorem."
     evidence := .unformalized }

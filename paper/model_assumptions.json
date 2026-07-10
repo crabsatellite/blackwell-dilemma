@@ -139,6 +139,21 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "five_state_reveal_erasure_experiment",
+      "kind": "behavioral_postulate",
+      "statement": "On the five-state benchmark, a structurally aware agent observes the bridge state with probability 1 - 2^(-kappa) and otherwise observes an erasure; revealed and erased signals use the explicit routing rule in Proposition prop:threshold-five-state.",
+      "scope": "Only the finite five-state cognition and reward-precision propositions; it does not identify the Gaussian topology signal or the depth-d trap-tree model.",
+      "role": "Provides a fully specified Blackwell-ordered finite experiment whose routing and welfare are exactly machine checkable.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Recompute the finite theorem under alternative reveal functions or non-erasure signal alphabets; do not transfer the endpoint formulas without re-proving them."
+      },
+      "provenance": "benchmark_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "sentimental_weight_alpha",
       "kind": "behavioral_postulate",
       "statement": "A scalar alpha weights instrumental reward relative to an independent sentimental component.",

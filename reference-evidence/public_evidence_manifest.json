@@ -110,6 +110,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedTwoRegime.lean"
     },
     {
+      "id": "unified_five_state_cognition_kernel",
+      "kind": "machine_gate",
+      "role": "Explicit reveal-or-erasure topology experiment, finite five-state routing welfare, reward-precision monotonicity, endpoint limits, finite-precision oracle gap, and cognition counterexample.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedCognitiveFiveState.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -267,6 +274,69 @@
       ]
     },
     {
+      "id": "five_state_cognition_gate",
+      "category": "kernel_checked_finite_blackwell_experiment",
+      "source_cards": [
+        "unified_five_state_cognition_kernel",
+        "unified_two_regime_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "five_state_cognition_module",
+          "path": "lean4/BlackwellDilemma/UnifiedCognitiveFiveState.lean",
+          "contains": [
+            "def revealProbability",
+            "theorem exists_reveal_garbling",
+            "def cognitiveWelfare",
+            "theorem cognitiveWelfare_mono_in_beta",
+            "theorem cognitiveWelfare_tendsto_perfectTopology",
+            "theorem perfectTopologyFiniteReward_tendsto_oracle",
+            "theorem perfectTopologyFiniteReward_lt_oracle",
+            "theorem topologyRegime_cognition_can_lower_welfare",
+            "theorem restoringDepths_sInf_zero",
+            "theorem cognitiveFiveStateClaim_proved"
+          ]
+        },
+        {
+          "id": "five_state_cognition_claim_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.FiveStateCognition.CognitiveFiveStateClaim",
+            "BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved"
+          ]
+        },
+        {
+          "id": "five_state_cognition_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.FiveStateCognition.exists_reveal_garbling",
+            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveWelfare_mono_in_beta",
+            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveWelfare_tendsto_perfectTopology",
+            "#print axioms BlackwellDilemma.FiveStateCognition.perfectTopologyFiniteReward_tendsto_oracle",
+            "#print axioms BlackwellDilemma.FiveStateCognition.perfectTopologyFiniteReward_lt_oracle",
+            "#print axioms BlackwellDilemma.FiveStateCognition.topologyRegime_cognition_can_lower_welfare",
+            "#print axioms BlackwellDilemma.FiveStateCognition.restoringDepths_sInf_zero",
+            "#print axioms BlackwellDilemma.FiveStateCognition.cognitiveFiveStateClaim_proved"
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "cognitive_five_state_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -344,8 +414,10 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
+            "claim_lineage_relation_counterexample_delimited=4",
             "claim_lineage_relation_split_core_and_frontier=4",
-            "claim_lineage_relation_unchanged=22",
+            "claim_lineage_relation_strengthened_assumptions=3",
+            "claim_lineage_relation_unchanged=15",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -396,17 +468,17 @@
             "publication_claims_total=26",
             "publication_manual_status_fields=0",
             "publication_model_assumptions_theory_referenced=8",
-            "publication_model_assumptions_theory_reference_not_required=4",
+            "publication_model_assumptions_theory_reference_not_required=5",
             "publication_model_assumptions_empirical_required=9",
             "publication_model_assumptions_empirically_anchored=0",
-            "publication_model_assumption_provenance_benchmark_definition=1",
+            "publication_model_assumption_provenance_benchmark_definition=2",
             "publication_model_assumption_provenance_paper_definition=2",
             "publication_model_assumption_provenance_paper_reduced_form=5",
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=2",
             "publication_model_assumption_provenance_tractability_normalization=1",
-            "publication_mathematical_route_model_internal_exact=17",
-            "publication_mathematical_route_reference_conditional=9",
+            "publication_mathematical_route_model_internal_exact=18",
+            "publication_mathematical_route_reference_conditional=8",
             "publication_semantic_resolution_existing_theory_scope=2",
             "publication_semantic_resolution_hybrid_model_and_strategy_evidence=5",
             "publication_semantic_resolution_paper_model_encoding=2"
