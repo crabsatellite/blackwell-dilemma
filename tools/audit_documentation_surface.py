@@ -23,7 +23,7 @@ GENERATED_DOCUMENTS = {
 }
 
 IMMUTABLE_RESEARCH_OBJECTS = {
-    "prediction.md": "4fc50e45fa7f1951a996df55c02bcde41f7d082a02de2e6fd74d3715ef428ea8",
+    "prediction.md": "df6f587151600cb191037e837f5b3984878196382deef20bc0154a7bdcb2d39e",
 }
 
 EXPECTED_MARKDOWN = set(GENERATED_DOCUMENTS) | set(IMMUTABLE_RESEARCH_OBJECTS)
@@ -106,7 +106,8 @@ def main() -> None:
             fail(f"generated-marker:{relative}")
 
     for relative, expected_hash in IMMUTABLE_RESEARCH_OBJECTS.items():
-        actual_hash = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+        canonical_bytes = (ROOT / relative).read_bytes().replace(b"\r\n", b"\n")
+        actual_hash = hashlib.sha256(canonical_bytes).hexdigest()
         if actual_hash != expected_hash:
             fail(f"immutable-hash:{relative}:{actual_hash}")
 
