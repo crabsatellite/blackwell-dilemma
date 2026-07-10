@@ -11,6 +11,7 @@
 -/
 
 import Mathlib.Combinatorics.SimpleGraph.Basic
+import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected
 import Mathlib.Data.Finset.Max
 import Mathlib.Data.Real.Basic
 
@@ -68,6 +69,57 @@ def IsStopping (M : IDPModel V) (s : IDPState V) : Prop :=
 def Reaches (M : IDPModel V) (s t : IDPState V) : Prop :=
   Relation.ReflTransGen M.Step s t
 
+/-- Vertices physically reachable in the realized open graph, without the
+    stopping restriction imposed by the dynamic process. -/
+noncomputable def relaxedReachableVertices (M : IDPModel V) (s : IDPState V) :
+    Finset V := by
+  classical
+  exact Finset.univ.filter fun v => M.openGraph.Reachable s.current v
+
+theorem mem_relaxedReachableVertices_iff (M : IDPModel V) (s : IDPState V)
+    (v : V) :
+    v ∈ M.relaxedReachableVertices s ↔
+      M.openGraph.Reachable s.current v := by
+  classical
+  simp [relaxedReachableVertices]
+
+theorem relaxedReachableVertices_nonempty (M : IDPModel V) (s : IDPState V) :
+    (M.relaxedReachableVertices s).Nonempty := by
+  exact ⟨s.current, (M.mem_relaxedReachableVertices_iff s s.current).2
+    (SimpleGraph.Reachable.refl s.current)⟩
+
+/-- Welfare values in the relaxed physical reachability set. -/
+noncomputable def relaxedReachableWelfareValues
+    (M : IDPModel V) (s : IDPState V) : Finset Real := by
+  classical
+  exact (M.relaxedReachableVertices s).image M.welfare
+
+theorem relaxedReachableWelfareValues_nonempty
+    (M : IDPModel V) (s : IDPState V) :
+    (M.relaxedReachableWelfareValues s).Nonempty := by
+  classical
+  exact (M.relaxedReachableVertices_nonempty s).image M.welfare
+
+/-- Physical reachability benchmark used by the relaxed decomposition. -/
+noncomputable def relaxedOracleValue (M : IDPModel V) (s : IDPState V) : Real :=
+  (M.relaxedReachableWelfareValues s).max'
+    (M.relaxedReachableWelfareValues_nonempty s)
+
+/-- All welfare values in a nonempty finite IDP. -/
+noncomputable def globalWelfareValues
+    (M : IDPModel V) [Nonempty V] : Finset Real := by
+  classical
+  exact Finset.univ.image M.welfare
+
+theorem globalWelfareValues_nonempty (M : IDPModel V) [Nonempty V] :
+    M.globalWelfareValues.Nonempty := by
+  classical
+  exact Finset.univ_nonempty.image M.welfare
+
+/-- Global welfare maximum `r*`. -/
+noncomputable def globalValue (M : IDPModel V) [Nonempty V] : Real :=
+  M.globalWelfareValues.max' M.globalWelfareValues_nonempty
+
 /-- Zero blocking means that every base edge is open. It does not remove the
     independent no-revisit history rule. -/
 def NoBlocking (M : IDPModel V) : Prop :=
@@ -85,6 +137,51 @@ theorem terminal_has_no_step (M : IDPModel V) {s t : IDPState V}
 theorem step_history (M : IDPModel V) {s t : IDPState V}
     (h : M.Step s t) : t.history = insert s.current s.history :=
   h.2.2.2
+
+/-- Every dynamically feasible trajectory is physically reachable in the
+    realized open graph. -/
+theorem reaches_openGraph_reachable (M : IDPModel V) {s t : IDPState V}
+    (h : M.Reaches s t) : M.openGraph.Reachable s.current t.current := by
+  apply (M.openGraph.reachable_iff_reflTransGen s.current t.current).2
+  induction h with
+  | refl => exact Relation.ReflTransGen.refl
+  | tail hreach hstep ih =>
+      exact Relation.ReflTransGen.tail ih hstep.2.1
+
+theorem reaches_welfare_le_relaxedOracle (M : IDPModel V)
+    {s t : IDPState V} (hreach : M.Reaches s t) :
+    M.welfare t.current <= M.relaxedOracleValue s := by
+  classical
+  have hvertex : t.current ∈ M.relaxedReachableVertices s :=
+    (M.mem_relaxedReachableVertices_iff s t.current).2
+      (M.reaches_openGraph_reachable hreach)
+  have hvalue : M.welfare t.current ∈ M.relaxedReachableWelfareValues s := by
+    exact Finset.mem_image.mpr ⟨t.current, hvertex, rfl⟩
+  exact (M.relaxedReachableWelfareValues s).le_max' _ hvalue
+
+theorem relaxedOracleValue_attained (M : IDPModel V) (s : IDPState V) :
+    exists v : V,
+      M.openGraph.Reachable s.current v /\
+        M.welfare v = M.relaxedOracleValue s := by
+  classical
+  have hmax : M.relaxedOracleValue s ∈ M.relaxedReachableWelfareValues s := by
+    exact Finset.max'_mem _ _
+  rcases Finset.mem_image.mp hmax with ⟨v, hv, hvalue⟩
+  exact ⟨v, (M.mem_relaxedReachableVertices_iff s v).1 hv, hvalue⟩
+
+theorem welfare_le_globalValue (M : IDPModel V) [Nonempty V] (v : V) :
+    M.welfare v <= M.globalValue := by
+  classical
+  have hvalue : M.welfare v ∈ M.globalWelfareValues := by
+    exact Finset.mem_image.mpr ⟨v, Finset.mem_univ v, rfl⟩
+  exact M.globalWelfareValues.le_max' _ hvalue
+
+theorem relaxedOracleValue_le_globalValue
+    (M : IDPModel V) [Nonempty V] (s : IDPState V) :
+    M.relaxedOracleValue s <= M.globalValue := by
+  rcases M.relaxedOracleValue_attained s with ⟨v, _hreach, hvalue⟩
+  rw [← hvalue]
+  exact M.welfare_le_globalValue v
 
 theorem step_records_departed_vertex (M : IDPModel V) {s t : IDPState V}
     (h : M.Step s t) : s.current ∈ t.history := by
@@ -215,6 +312,27 @@ theorem oracle_value_attainable (M : IDPModel V) (s : IDPState V) :
   refine ⟨t, hreach, hstop, ?_⟩
   rw [htcurrent]
   exact hvmax
+
+/-- The strategy-aligned oracle cannot exceed the relaxed physical
+    reachability benchmark. -/
+theorem oracleValue_le_relaxedOracleValue (M : IDPModel V) (s : IDPState V) :
+    M.oracleValue s <= M.relaxedOracleValue s := by
+  rcases M.oracle_value_attainable s with ⟨t, hreach, _hstop, hvalue⟩
+  rw [← hvalue]
+  exact M.reaches_welfare_le_relaxedOracle hreach
+
+/-- If the relaxed maximizer is itself an attainable stopping outcome, the
+    relaxed and dynamic oracle values coincide. -/
+theorem oracleValue_eq_relaxedOracleValue_of_attainable
+    (M : IDPModel V) (s : IDPState V)
+    (hterminalComplete : exists t : IDPState V,
+      M.Reaches s t /\ M.IsStopping t /\
+        M.welfare t.current = M.relaxedOracleValue s) :
+    M.oracleValue s = M.relaxedOracleValue s := by
+  rcases hterminalComplete with ⟨t, hreach, hstop, hvalue⟩
+  apply le_antisymm (M.oracleValue_le_relaxedOracleValue s)
+  rw [← hvalue]
+  exact M.stopping_welfare_le_oracle hreach hstop
 
 end IDPModel
 

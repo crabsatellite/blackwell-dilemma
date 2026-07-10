@@ -82,6 +82,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedIDP.lean"
     },
     {
+      "id": "unified_welfare_semantic_kernel",
+      "kind": "machine_gate",
+      "role": "Strategy-aligned welfare decomposition and attainable dynamic-oracle benchmark for the repaired paper theorem.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedWelfare.lean"
+    },
+    {
       "id": "committed_simulation_results",
       "kind": "machine_result_data",
       "role": "Committed JSON outputs backing public computational appendix numbers.",
@@ -116,7 +123,8 @@
             "claim_lineage_baseline_claims=26",
             "claim_lineage_current_claims=26",
             "claim_lineage_preserved_claims=26",
-            "claim_lineage_relation_unchanged=26",
+            "claim_lineage_relation_split_core_and_frontier=1",
+            "claim_lineage_relation_unchanged=25",
             "claim_lineage_manual_status_fields=0"
           ]
         }
@@ -190,6 +198,7 @@
       "category": "kernel_checked_model_semantics",
       "source_cards": [
         "unified_idp_semantic_kernel",
+        "unified_welfare_semantic_kernel",
         "lean_paper_semantic_gate"
       ],
       "locations": [
@@ -202,14 +211,29 @@
             "theorem no_revisit_persists_under_noBlocking",
             "theorem exists_stopping_reachable",
             "theorem stopping_welfare_le_oracle",
-            "theorem oracle_value_attainable"
+            "theorem oracle_value_attainable",
+            "def relaxedOracleValue",
+            "def globalValue",
+            "theorem relaxedOracleValue_le_globalValue",
+            "theorem oracleValue_le_relaxedOracleValue",
+            "theorem oracleValue_eq_relaxedOracleValue_of_attainable"
+          ]
+        },
+        {
+          "id": "unified_welfare_module",
+          "path": "lean4/BlackwellDilemma/UnifiedWelfare.lean",
+          "contains": [
+            "structure UnifiedWelfareSetup",
+            "def UnifiedDecompositionBundle",
+            "theorem unifiedDecompositionBundle_proved"
           ]
         },
         {
           "id": "unified_idp_root_import",
           "path": "lean4/BlackwellDilemma/PaperSemanticGate.lean",
           "contains": [
-            "import BlackwellDilemma.UnifiedIDP"
+            "import BlackwellDilemma.UnifiedIDP",
+            "import BlackwellDilemma.UnifiedWelfare"
           ]
         },
         {
@@ -219,7 +243,13 @@
             "#print axioms BlackwellDilemma.IDPModel.no_revisit_persists_under_noBlocking",
             "#print axioms BlackwellDilemma.IDPModel.exists_stopping_reachable",
             "#print axioms BlackwellDilemma.IDPModel.stopping_welfare_le_oracle",
-            "#print axioms BlackwellDilemma.IDPModel.oracle_value_attainable"
+            "#print axioms BlackwellDilemma.IDPModel.oracle_value_attainable",
+            "#print axioms BlackwellDilemma.IDPModel.reaches_openGraph_reachable",
+            "#print axioms BlackwellDilemma.IDPModel.relaxedOracleValue_le_globalValue",
+            "#print axioms BlackwellDilemma.IDPModel.oracleValue_le_relaxedOracleValue",
+            "#print axioms BlackwellDilemma.IDPModel.oracleValue_eq_relaxedOracleValue_of_attainable",
+            "#print axioms BlackwellDilemma.UnifiedWelfareSetup.unifiedDecompositionBundle_proved",
+            "#print axioms decompositionClaim_proved"
           ]
         }
       ],

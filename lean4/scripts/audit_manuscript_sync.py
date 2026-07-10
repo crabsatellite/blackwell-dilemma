@@ -14,6 +14,8 @@ from pathlib import Path
 LEAN_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = LEAN_ROOT.parent
 INVENTORY_PATH = REPO_ROOT / "paper" / "claim_inventory.json"
+OBLIGATIONS_PATH = REPO_ROOT / "paper" / "publication_obligations.json"
+LEDGER_PATH = LEAN_ROOT / "BlackwellDilemma" / "Ledger.lean"
 CLAIM_PATTERN = re.compile(
     r"\\begin\{(?P<kind>theorem|proposition|lemma|corollary)\}"
     r"(?:\[(?P<title>[^\]]+)\])?\s*"
@@ -54,6 +56,43 @@ def extract_claims(text: str) -> list[dict[str, object]]:
     return claims
 
 
+def sync_derived_bindings(claims: list[dict[str, object]]) -> None:
+    """Refresh data that is mechanically determined by the manuscript."""
+    by_label = {str(claim["label"]): claim for claim in claims}
+
+    obligations_text = OBLIGATIONS_PATH.read_text(encoding="utf-8")
+    obligations = json.loads(obligations_text)
+    obligation_claims = obligations.get("claims", [])
+    if {claim.get("label") for claim in obligation_claims} != set(by_label):
+        fail("publication-obligation-label-roster")
+    for label, claim in by_label.items():
+        pattern = re.compile(
+            rf'("label"\s*:\s*"{re.escape(label)}"\s*,\s*'
+            rf'"statement_sha256"\s*:\s*")[0-9a-f]{{64}}(")'
+        )
+        obligations_text, replacements = pattern.subn(
+            rf'\g<1>{claim["statement_sha256"]}\g<2>',
+            obligations_text,
+            count=1,
+        )
+        if replacements != 1:
+            fail(f"publication-obligation-hash-binding:{label}:{replacements}")
+    OBLIGATIONS_PATH.write_text(obligations_text, encoding="utf-8")
+
+    ledger = LEDGER_PATH.read_text(encoding="utf-8")
+    for label, claim in by_label.items():
+        pattern = re.compile(
+            rf'(label := "{re.escape(label)}"\s*\n'
+            rf'(?:.*\n)*?\s*sourceLine := )\d+',
+        )
+        ledger, replacements = pattern.subn(
+            rf'\g<1>{claim["line"]}', ledger, count=1
+        )
+        if replacements != 1:
+            fail(f"ledger-source-line-binding:{label}:{replacements}")
+    LEDGER_PATH.write_text(ledger, encoding="utf-8")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manuscript", required=True, type=Path)
@@ -83,9 +122,11 @@ def main() -> None:
             json.dumps(inventory, indent=2, ensure_ascii=True) + "\n",
             encoding="utf-8",
         )
+        sync_derived_bindings(actual_claims)
         print(f"manuscript_sha256={actual_hash}")
         print(f"manuscript_claims={len(actual_claims)}")
         print("manuscript_inventory_written=1")
+        print(f"manuscript_derived_bindings_written={len(actual_claims) * 2}")
         return
 
     inventory = json.loads(INVENTORY_PATH.read_text(encoding="utf-8"))

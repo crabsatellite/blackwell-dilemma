@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "6bb8071a8a4f8382856c1cd53fe00aca41a75f670f03aaa42d3b7d2190551581",
+  "manuscript_sha256": "56efc8d726c071f358267f03e09f21727d45b410af7146f9bd9ecda529487462",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 0,
-    "publication_evidence_closed": 0,
-    "empirical_publication_closed": 0,
+    "strict_kernel_closed": 1,
+    "publication_evidence_closed": 1,
+    "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
     "model_assumptions_total": 12,
     "model_assumptions_admissible": 12,
@@ -24,7 +24,7 @@
       "tractability_normalization": 1
     },
     "obligations_total": 75,
-    "obligations_passed": 40,
+    "obligations_passed": 41,
     "obligations_by_type": {
       "external_references": 9,
       "lean_conditional": 9,
@@ -35,12 +35,13 @@
     },
     "passed_by_type": {
       "external_references": 9,
+      "lean_exact": 1,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 9,
-      "lean_exact": 17,
+      "lean_exact": 16,
       "unresolved_semantics": 9
     },
     "mathematical_routes": {
@@ -232,11 +233,11 @@
   "claims": [
     {
       "label": "thm:decomp",
-      "statement_sha256": "057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7",
-      "lean_state": "partial",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
-      "empirical_publication_closed": false,
+      "statement_sha256": "52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
+      "empirical_publication_closed": true,
       "mathematical_route": "model_internal_exact",
       "model_route": "none",
       "model_assumption_ids": [],
@@ -247,13 +248,13 @@
           "id": "repaired_uniqueness_scope",
           "type": "statement_hash",
           "passed": true,
-          "detail": "statement_sha256=057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7"
+          "detail": "statement_sha256=52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303"
         },
         {
           "id": "exact_decomposition_bundle",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is partial; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },

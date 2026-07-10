@@ -9,6 +9,7 @@
 
 import BlackwellDilemma.Ledger
 import BlackwellDilemma.UnifiedIDP
+import BlackwellDilemma.UnifiedWelfare
 
 namespace BlackwellDilemma.PaperSemanticGate
 

@@ -12,6 +12,7 @@
 
 import BlackwellDilemma.Basic
 import BlackwellDilemma.PhysicalIrreducibility
+import BlackwellDilemma.UnifiedWelfare
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
@@ -112,6 +113,21 @@ theorem decompositionIdentityCore_proved : DecompositionIdentityCore := by
   intro Omega _inst setup
   exact setup.gap_welfare_decomposition
 
+/-- The repaired paper theorem keeps the original algebraic decomposition and
+    adds the complete strategy-aligned dynamic-oracle bundle. -/
+def DecompositionClaim : Prop :=
+  DecompositionIdentityCore /\
+    (forall {V : Type} [Fintype V] [DecidableEq V] [Nonempty V]
+      {Omega : Type} [MeasurableSpace Omega]
+      (setup : UnifiedWelfareSetup V Omega),
+      setup.UnifiedDecompositionBundle)
+
+theorem decompositionClaim_proved : DecompositionClaim := by
+  constructor
+  · exact decompositionIdentityCore_proved
+  · intro V _fintype _decidableEq _nonempty Omega _measurableSpace setup
+    exact setup.unifiedDecompositionBundle_proved
+
 def TopologicalLossOrderStatisticsAlgebraCore : Prop :=
   forall n k : Nat, 1 <= k -> k <= n ->
     (n : Real) / (n + 1) - (k : Real) / (k + 1) =
@@ -154,16 +170,16 @@ def claimDecomposition : PaperClaim :=
   { label := "thm:decomp"
     title := "Canonical Welfare Decomposition"
     kind := .theorem
-    sourceLine := 252
+    sourceLine := 262
     route := .local
-    blocker := "Identity is proved; sign, uniqueness, and oracle clauses still need one exact bundled statement."
-    evidence := .partialProof DecompositionIdentityCore decompositionIdentityCore_proved }
+    blocker := "The relaxed identity and strategy-aligned dynamic-oracle bundle are kernel proved."
+    evidence := .proved DecompositionClaim decompositionClaim_proved }
 
 def claimInfoDecay : PaperClaim :=
   { label := "prop:info-decay"
     title := "Informational Decay"
     kind := .proposition
-    sourceLine := 286
+    sourceLine := 309
     route := .mixed
     blocker := "Requires a genuine oracle kernel plus an n-uniform cluster-size bound; constant-zero carriers are excluded."
     evidence := .unformalized }
@@ -172,7 +188,7 @@ def claimTopoCluster : PaperClaim :=
   { label := "prop:topo-cluster"
     title := "Topological Loss - Cluster Size Relation"
     kind := .proposition
-    sourceLine := 295
+    sourceLine := 318
     route := .mixed
     blocker := "The algebraic ratio is proved; the conditional expectation and both asymptotic regimes remain."
     evidence := .partialProof TopoClusterPartialCore
@@ -182,7 +198,7 @@ def claimPhysical : PaperClaim :=
   { label := "prop:physical"
     title := "Physical Irreducibility"
     kind := .proposition
-    sourceLine := 322
+    sourceLine := 345
     route := .local
     blocker := "Restate the expectation inequality, tightness, and strict positive-gap clauses over one exact IDP model."
     evidence := .unformalized }
@@ -191,7 +207,7 @@ def claimWrongness : PaperClaim :=
   { label := "lem:wrongness"
     title := "Wrongness of the Greedy Policy Under Topology-Blind Signals"
     kind := .lemma
-    sourceLine := 355
+    sourceLine := 378
     route := .semanticRepair
     blocker := "Replace the hand-coded scalar reward kernel with a graph, signal, and policy-derived terminal reward."
     evidence := .unformalized }
@@ -200,7 +216,7 @@ def claimConditionalReduction : PaperClaim :=
   { label := "lem:conditional-reduction"
     title := "Conditional Reduction Under State Augmentation"
     kind := .lemma
-    sourceLine := 390
+    sourceLine := 413
     route := .mixed
     blocker := "Needs a genuine Blackwell experiment-ordering theorem on the conditional reachable action set."
     evidence := .unformalized }
@@ -209,7 +225,7 @@ def claimDilemma : PaperClaim :=
   { label := "thm:dilemma"
     title := "Welfare Non-Monotonicity Under Endogenous Feasibility"
     kind := .theorem
-    sourceLine := 405
+    sourceLine := 428
     route := .semanticRepair
     blocker := "Depends on paper-faithful wrongness, conditional reduction, and uniform information decay."
     evidence := .unformalized }
@@ -218,7 +234,7 @@ def claimPhase : PaperClaim :=
   { label := "thm:phase"
     title := "Phase Transition at p_c"
     kind := .theorem
-    sourceLine := 419
+    sourceLine := 442
     route := .externalLibrary
     blocker := "Requires genuine finite-torus supercritical and subcritical percolation theorems, not witness functions."
     evidence := .unformalized }
@@ -227,7 +243,7 @@ def claimTrapPrevalence : PaperClaim :=
   { label := "prop:trap-prevalence"
     title := "Generic Trap Prevalence"
     kind := .proposition
-    sourceLine := 473
+    sourceLine := 496
     route := .local
     blocker := "The finite edge/reward product mass and ranking reversal are proved; still construct this event on Z2 and prove it is contained in the paper's dynamic-value reversal event."
     evidence := .partialProof
@@ -238,7 +254,7 @@ def claimCognitiveThreshold : PaperClaim :=
   { label := "thm:cognitive-threshold"
     title := "Characterization of the Blackwell Regime"
     kind := .theorem
-    sourceLine := 503
+    sourceLine := 526
     route := .semanticRepair
     blocker := "Parts 1-5 need the genuine posterior/policy model; Part 6 has finite-torus supports and a cofinal closed-form depth expression, but still needs a concrete trap-tree embedding and proof that the actual posterior threshold equals or dominates that expression."
     evidence := .partialProof
@@ -249,7 +265,7 @@ def claimThresholdAlpha : PaperClaim :=
   { label := "prop:threshold-alpha"
     title := "Cognitive Threshold Increases with Instrumental Rationality"
     kind := .proposition
-    sourceLine := 550
+    sourceLine := 573
     route := .local
     blocker := "Requires differentiability and sign hypotheses for the actual welfare transition functional."
     evidence := .unformalized }
@@ -258,7 +274,7 @@ def claimSupermodular : PaperClaim :=
   { label := "prop:supermodular"
     title := "Supermodular Complementarity"
     kind := .proposition
-    sourceLine := 575
+    sourceLine := 598
     route := .mixed
     blocker := "Algebraic Topkis infrastructure exists; the actual posterior welfare cross-partial remains to be derived."
     evidence := .unformalized }
@@ -267,7 +283,7 @@ def claimSentimental : PaperClaim :=
   { label := "prop:sentimental"
     title := "Sentimental Immunity"
     kind := .proposition
-    sourceLine := 615
+    sourceLine := 638
     route := .semanticRepair
     blocker := "Current alpha threshold is defined over a hand-coded welfare carrier; rebuild it from the IDP policy."
     evidence := .unformalized }
@@ -276,7 +292,7 @@ def claimPrincipalOptimum : PaperClaim :=
   { label := "prop:principal-optimum"
     title := "Interior Optimal Precision for Heterogeneous Populations"
     kind := .proposition
-    sourceLine := 642
+    sourceLine := 665
     route := .local
     blocker := "Needs continuity, tail behavior, and a genuine heterogeneous aggregate welfare model."
     evidence := .unformalized }
@@ -285,7 +301,7 @@ def claimCanonical : PaperClaim :=
   { label := "prop:canonical"
     title := "Canonical Welfare"
     kind := .proposition
-    sourceLine := 714
+    sourceLine := 737
     route := .semanticRepair
     blocker := "Replace branch-selected scalar formulas with the five-state signal and routing expectation."
     evidence := .unformalized }
@@ -294,7 +310,7 @@ def claimInteriorOptimum : PaperClaim :=
   { label := "prop:interior-optimum"
     title := "Interior Optimum"
     kind := .proposition
-    sourceLine := 774
+    sourceLine := 797
     route := .local
     blocker := "Formalize the paper loss function and prove the minimizer and numerical bound on that function."
     evidence := .unformalized }
@@ -303,7 +319,7 @@ def claimTwoRegimeFiveState : PaperClaim :=
   { label := "prop:two-regime-five-state"
     title := "Two-Regime Structure of the 5-State Instance"
     kind := .proposition
-    sourceLine := 812
+    sourceLine := 835
     route := .local
     blocker := "Bundle all clauses over the paper five-state model; theorem-name aliases do not count as closure."
     evidence := .unformalized }
@@ -312,7 +328,7 @@ def claimThresholdFiveState : PaperClaim :=
   { label := "prop:threshold-five-state"
     title := "Cognitive Sufficiency on the 5-State Instance"
     kind := .proposition
-    sourceLine := 860
+    sourceLine := 883
     route := .semanticRepair
     blocker := "Replace the one-edge routing witness with the stated five-state cognitive agent."
     evidence := .unformalized }
@@ -321,7 +337,7 @@ def claimPMonotonicityFiveState : PaperClaim :=
   { label := "prop:p-monotonicity-five-state"
     title := "p-Monotonicity on the 5-State Instance"
     kind := .proposition
-    sourceLine := 876
+    sourceLine := 899
     route := .local
     blocker := "State the correct p domain and prove monotonicity for the paper threshold, excluding junk-value extensions."
     evidence := .unformalized }
@@ -330,7 +346,7 @@ def claimBayesianImmunity : PaperClaim :=
   { label := "thm:bayesian-immunity"
     title := "Bayesian Immunity"
     kind := .theorem
-    sourceLine := 911
+    sourceLine := 934
     route := .externalLibrary
     blocker := "Requires a formal Blackwell comparison-of-experiments theorem and a genuine Bayesian IDP specialization."
     evidence := .unformalized }
@@ -339,7 +355,7 @@ def claimComplementarity : PaperClaim :=
   { label := "prop:complementarity"
     title := "Information-Knowledge Complementarity"
     kind := .proposition
-    sourceLine := 920
+    sourceLine := 943
     route := .mixed
     blocker := "The arithmetic mixture lemma is insufficient; derive the dominance premise from the paper agent model."
     evidence := .unformalized }
@@ -348,7 +364,7 @@ def claimBayesianNaiveFiveState : PaperClaim :=
   { label := "prop:bayesian-naive-five-state"
     title := "Bayesian-Naive Threshold on the 5-State Instance"
     kind := .proposition
-    sourceLine := 938
+    sourceLine := 961
     route := .semanticRepair
     blocker := "Rebuild reversal and recovery from the stated Bayesian-naive routing rule."
     evidence := .unformalized }
@@ -357,7 +373,7 @@ def claimGeneralTree : PaperClaim :=
   { label := "thm:general-tree"
     title := "Non-Monotonicity on General Graphs"
     kind := .theorem
-    sourceLine := 977
+    sourceLine := 1000
     route := .semanticRepair
     blocker := "Current wrapper uses a manufactured kernel witness; derive the reversal from V_g, reachability, and C2-prime."
     evidence := .unformalized }
@@ -366,7 +382,7 @@ def claimErrorCompounding : PaperClaim :=
   { label := "prop:error-compounding"
     title := "Error Compounding"
     kind := .proposition
-    sourceLine := 1026
+    sourceLine := 1049
     route := .local
     blocker := "The finite Bernoulli model proves Parts 1-4, the two generic depth-bound forms are ordered and cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
     evidence := .partialProof
@@ -377,7 +393,7 @@ def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"
     title := "Phase Transition on Erdos-Renyi Graphs"
     kind := .corollary
-    sourceLine := 1063
+    sourceLine := 1086
     route := .externalLibrary
     blocker := "Requires formal random-graph component-size and survival-probability results."
     evidence := .unformalized }
@@ -386,7 +402,7 @@ def claimPowerLaw : PaperClaim :=
   { label := "cor:power-law"
     title := "Application: Power-Law Networks"
     kind := .corollary
-    sourceLine := 1077
+    sourceLine := 1100
     route := .externalLibrary
     blocker := "Requires a formal configuration-model percolation threshold theorem."
     evidence := .unformalized }
@@ -444,11 +460,11 @@ def CompletePaperKernelOnly : Prop :=
 
 theorem completePaperKernelOnly_notYet : Not CompletePaperKernelOnly := by
   intro hComplete
-  have hMember : claimDecomposition ∈ paperClaims := by
+  have hMember : claimInfoDecay ∈ paperClaims := by
     simp [paperClaims]
-  have hClosed := hComplete claimDecomposition hMember
+  have hClosed := hComplete claimInfoDecay hMember
   exact (by decide :
-    Ne (ClaimState.partialEvidence == ClaimState.closed) true) hClosed
+    Ne (ClaimState.unformalized == ClaimState.closed) true) hClosed
 
 def claimStateName : ClaimState -> String
   | .unformalized => "unformalized"

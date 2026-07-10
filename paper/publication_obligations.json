@@ -9,7 +9,7 @@
   "claims": [
     {
       "label": "thm:decomp",
-      "statement_sha256": "057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7",
+      "statement_sha256": "52986ecc66c79a4fed506a8f02b6b3c71ea6fbc9568006076450df8ab87ec303",
       "obligations": [
         {"id": "repaired_uniqueness_scope", "type": "statement_hash"},
         {"id": "exact_decomposition_bundle", "type": "lean_exact"}

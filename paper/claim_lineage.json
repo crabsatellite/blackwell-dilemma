@@ -19,12 +19,23 @@
       "baseline_kind": "theorem",
       "baseline_title": "Canonical Welfare Decomposition",
       "baseline_statement_sha256": "057ff5a1c211e30330d3981324c213997157383ccb9b935377d5e8a0a2c650f7",
-      "relation": "unchanged",
+      "relation": "split_core_and_frontier",
       "publication_labels": [
         "thm:decomp"
       ],
-      "research_target": "Preserve the checkpointed statement as the active research target until a machine-gated repair or proof supersedes this publication form.",
-      "machine_witnesses": []
+      "research_target": "Retain the checkpointed reachability-oracle decomposition as the relaxed upper-bound target while the publication theorem separately closes the attainable strategy-aligned dynamic-oracle decomposition.",
+      "machine_witnesses": [
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:decomp",
+          "id": "repaired_uniqueness_scope"
+        },
+        {
+          "type": "publication_obligation",
+          "claim_label": "thm:decomp",
+          "id": "exact_decomposition_bundle"
+        }
+      ]
     },
     {
       "baseline_label": "prop:info-decay",

@@ -9,18 +9,18 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=0
-paper_claims_partial=5
+paper_claims_closed=1
+paper_claims_partial=4
 paper_claims_conditional=0
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=21
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
-idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0
-publication_evidence_closed=0
-publication_obligations_passed=40/75
+idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
+publication_evidence_closed=1
+publication_obligations_passed=41/75
 model_assumptions_admissible=12/12
 research_claims_preserved=26/26
-claim_lineage_relations=unchanged:26
+claim_lineage_relations=split_core_and_frontier:1,unchanged:25
 model_assumptions_theory_referenced=8/12
 model_assumption_provenance=benchmark_definition:1,paper_definition:2,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
@@ -31,7 +31,7 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 
 | Label | Kind | State | Route | Title |
 |---|---|---|---|---|
-| `thm:decomp` | theorem | partial | local | Canonical Welfare Decomposition |
+| `thm:decomp` | theorem | closed | local | Canonical Welfare Decomposition |
 | `prop:info-decay` | proposition | unformalized | mixed | Informational Decay |
 | `prop:topo-cluster` | proposition | partial | mixed | Topological Loss---Cluster Size Relation |
 | `prop:physical` | proposition | unformalized | local | Physical Irreducibility |
