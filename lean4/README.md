@@ -9,20 +9,20 @@ Lean proof ledger. A claim is closed only when its `ClaimEvidence` value is
 
 ```text
 paper_claims_total=26
-paper_claims_closed=9
-paper_claims_partial=4
+paper_claims_closed=10
+paper_claims_partial=3
 paper_claims_conditional=2
 paper_claims_refuted_encoding=0
 paper_claims_unformalized=11
 formal_root_imports=BlackwellDilemma.PaperSemanticGate
 idp_semantic_kernel=unified-strategy-space,attainable-oracle,no-revisit-at-p0,strategy-aligned-welfare-decomposition
-publication_evidence_closed=11
-publication_obligations_passed=52/75
-model_assumptions_admissible=14/14
+publication_evidence_closed=12
+publication_obligations_passed=53/75
+model_assumptions_admissible=16/16
 research_claims_preserved=26/26
 claim_lineage_relations=counterexample_delimited:4,split_core_and_frontier:4,strengthened_assumptions:6,unchanged:12
-model_assumptions_theory_referenced=8/14
-model_assumption_provenance=benchmark_definition:2,paper_definition:3,paper_reduced_form:5,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
+model_assumptions_theory_referenced=8/16
+model_assumption_provenance=benchmark_definition:2,paper_definition:4,paper_reduced_form:6,published_model_adaptation:1,standard_theory:2,tractability_normalization:1
 model_assumptions_empirically_anchored=0/9
 real_world_model_evidence_closed=1/26
 mathematical_routes=model_internal_exact:17,reference_conditional:9
@@ -54,7 +54,7 @@ semantic_gap_routes=existing_theory_scope:2,hybrid_model_and_strategy_evidence:5
 | `prop:complementarity` | proposition | conditional | mixed | Information-Knowledge Complementarity |
 | `prop:bayesian-naive-five-state` | proposition | closed | semantic-repair | Bayesian-Naive Threshold on the 5-State Instance |
 | `thm:general-tree` | theorem | closed | semantic-repair | Non-Monotonicity on General Graphs |
-| `prop:error-compounding` | proposition | partial | local | Error Compounding |
+| `prop:error-compounding` | proposition | closed | local | Error Compounding |
 | `cor:er-phase` | corollary | unformalized | external-library | Phase Transition on Erdos--Renyi Graphs |
 | `cor:power-law` | corollary | unformalized | external-library | Application: Power-Law Networks |
 

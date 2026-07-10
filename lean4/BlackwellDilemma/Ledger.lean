@@ -21,12 +21,11 @@ import BlackwellDilemma.UnifiedBayesianImmunity
 import BlackwellDilemma.UnifiedComplementarity
 import BlackwellDilemma.UnifiedBayesianNaiveFiveState
 import BlackwellDilemma.UnifiedGeneralTree
+import BlackwellDilemma.UnifiedErrorCompounding
 import BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent
 import BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports
 import BlackwellDilemma.Infrastructure.KappaStarClosedForm
 import BlackwellDilemma.Infrastructure.SeparatedBlockPlacements
-import BlackwellDilemma.Infrastructure.StandardNormalBridgeProbability
-import BlackwellDilemma.Infrastructure.TrapTreeBernoulliWelfare
 import BlackwellDilemma.Infrastructure.UnboundedInProbability
 import BlackwellDilemma.Infrastructure.VanishingGiantLoss
 
@@ -190,15 +189,6 @@ def TopoClusterPartialCore : Prop :=
 theorem topoClusterPartialCore_proved : TopoClusterPartialCore := by
   exact ⟨topologicalLossOrderStatisticsAlgebraCore_proved,
     BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved⟩
-
-def ErrorCompoundingPartialCore : Prop :=
-  BlackwellDilemma.Infrastructure.ErrorCompoundingKernelBundle /\
-    BlackwellDilemma.Infrastructure.GaussianBridgeProbabilityPrinciple
-
-theorem errorCompoundingPartialCore_proved : ErrorCompoundingPartialCore := by
-  exact
-    ⟨BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved,
-      BlackwellDilemma.Infrastructure.gaussianBridgeProbabilityPrinciple_proved⟩
 
 /-! ## Manuscript inventory
 
@@ -445,10 +435,10 @@ def claimErrorCompounding : PaperClaim :=
     kind := .proposition
     sourceLine := 1111
     route := .local
-    blocker := "The finite Bernoulli model proves Parts 1-4, the two generic depth-bound forms are ordered and cofinal, and the finite-variance Gaussian bridge probability lies in (0, 1/2); still derive the bridge probability from the actual signal policy and prove the posterior estimator's depth-independent threshold assumptions."
-    evidence := .partialProof
-      ErrorCompoundingPartialCore
-      errorCompoundingPartialCore_proved }
+    blocker := "The independent Gaussian comparison channel, finite Bernoulli path welfare, strict exponential gain bound, and sInf cognitive threshold bracket are machine derived; the estimator threshold band remains an explicit model condition."
+    evidence := .proved
+      BlackwellDilemma.ErrorCompounding.ErrorCompoundingClaim
+      BlackwellDilemma.ErrorCompounding.errorCompoundingClaim_proved }
 
 def claimErPhase : PaperClaim :=
   { label := "cor:er-phase"

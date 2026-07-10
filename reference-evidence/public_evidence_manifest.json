@@ -145,6 +145,13 @@
       "local_file": "lean4/BlackwellDilemma/UnifiedGeneralTree.lean"
     },
     {
+      "id": "unified_error_compounding_kernel",
+      "kind": "machine_gate",
+      "role": "Exact depth-d trap-tree route distribution, Gaussian comparison parameter, exponential welfare-gain bound, and sInf cognitive-threshold bracket under the explicit estimator threshold band.",
+      "status": "repo_build_gate",
+      "local_file": "lean4/BlackwellDilemma/UnifiedErrorCompounding.lean"
+    },
+    {
       "id": "five_state_approximation_audit",
       "kind": "machine_computation",
       "role": "Deterministic derivative bracketing and numerical calibration for the rounded five-state minimizer and loss values.",
@@ -637,6 +644,68 @@
       ]
     },
     {
+      "id": "error_compounding_gate",
+      "category": "kernel_checked_conditional_depth_theorem",
+      "source_cards": [
+        "unified_error_compounding_kernel",
+        "lean_paper_semantic_gate"
+      ],
+      "locations": [
+        {
+          "id": "error_compounding_module",
+          "path": "lean4/BlackwellDilemma/UnifiedErrorCompounding.lean",
+          "contains": [
+            "def bridgeProbability",
+            "theorem welfare_formula",
+            "theorem welfare_gain_lt_half_power",
+            "structure ThresholdEstimator",
+            "def cognitiveThreshold",
+            "theorem cognitiveThreshold_bounds",
+            "theorem errorCompoundingClaim_proved"
+          ]
+        },
+        {
+          "id": "error_compounding_ledger_binding",
+          "path": "lean4/BlackwellDilemma/Ledger.lean",
+          "contains": [
+            "BlackwellDilemma.ErrorCompounding.ErrorCompoundingClaim",
+            "BlackwellDilemma.ErrorCompounding.errorCompoundingClaim_proved"
+          ]
+        },
+        {
+          "id": "error_compounding_axiom_audit",
+          "path": "lean4/BlackwellDilemma/AxiomAudit.lean",
+          "contains": [
+            "#print axioms BlackwellDilemma.ErrorCompounding.welfare_gain_lt_half_power",
+            "#print axioms BlackwellDilemma.ErrorCompounding.ThresholdEstimator.cognitiveThreshold_bounds",
+            "#print axioms BlackwellDilemma.ErrorCompounding.errorCompoundingClaim_proved"
+          ]
+        },
+        {
+          "id": "error_compounding_model_assumptions",
+          "path": "paper/model_assumptions.json",
+          "contains": [
+            "\"id\": \"independent_gaussian_reward_noise\"",
+            "\"id\": \"posterior_estimator_threshold_band\""
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "id": "error_compounding_kernel_surface",
+          "type": "python_script",
+          "path": "lean4/scripts/audit_kernel_surface.py",
+          "stdout_contains": [
+            "axiom=0",
+            "sorry=0",
+            "admit=0",
+            "unsafe=0",
+            "native_decide=0"
+          ]
+        }
+      ]
+    },
+    {
       "id": "canonical_gaussian_routing_gate",
       "category": "kernel_checked_constructive_instance",
       "source_cards": [
@@ -766,26 +835,26 @@
           "stdout_contains": [
             "publication_ledger_stale=0",
             "publication_claims_total=26",
-            "publication_strict_kernel_closed=9",
-            "publication_publication_evidence_closed=11",
-            "publication_model_assumptions_total=14",
-            "publication_model_assumptions_admissible=14",
-            "publication_model_assumptions_theory_admissible=14",
+            "publication_strict_kernel_closed=10",
+            "publication_publication_evidence_closed=12",
+            "publication_model_assumptions_total=16",
+            "publication_model_assumptions_admissible=16",
+            "publication_model_assumptions_theory_admissible=16",
             "publication_manual_status_fields=0",
             "publication_model_assumptions_theory_referenced=8",
-            "publication_model_assumptions_theory_reference_not_required=6",
+            "publication_model_assumptions_theory_reference_not_required=8",
             "publication_model_assumptions_empirical_required=9",
             "publication_model_assumptions_empirically_anchored=0",
             "publication_model_assumption_provenance_benchmark_definition=2",
-            "publication_model_assumption_provenance_paper_definition=3",
-            "publication_model_assumption_provenance_paper_reduced_form=5",
+            "publication_model_assumption_provenance_paper_definition=4",
+            "publication_model_assumption_provenance_paper_reduced_form=6",
             "publication_model_assumption_provenance_published_model_adaptation=1",
             "publication_model_assumption_provenance_standard_theory=2",
             "publication_model_assumption_provenance_tractability_normalization=1",
             "publication_obligations_total=75",
-            "publication_obligations_passed=52",
+            "publication_obligations_passed=53",
             "publication_gap_lean_conditional=7",
-            "publication_gap_lean_exact=8",
+            "publication_gap_lean_exact=7",
             "publication_gap_unresolved_semantics=8",
             "publication_mathematical_route_model_internal_exact=17",
             "publication_mathematical_route_reference_conditional=9",
@@ -1318,8 +1387,8 @@
           "timeout_seconds": 240,
           "stdout_contains": [
             "paper_claims_total=26",
-            "paper_claims_closed=9",
-            "paper_claims_partial=4",
+            "paper_claims_closed=10",
+            "paper_claims_partial=3",
             "paper_claims_conditional=2",
             "paper_claims_refuted_encoding=0",
             "paper_claims_unformalized=11",

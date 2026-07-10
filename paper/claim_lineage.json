@@ -419,6 +419,10 @@
           "type": "publication_obligation",
           "claim_label": "prop:error-compounding",
           "id": "exact_depth_probability_and_threshold_bundle"
+        },
+        {
+          "type": "evidence_check",
+          "id": "error_compounding_kernel_surface"
         }
       ]
     },

@@ -92,12 +92,11 @@ allowed_ledger_imports = {
     "BlackwellDilemma.UnifiedComplementarity",
     "BlackwellDilemma.UnifiedBayesianNaiveFiveState",
     "BlackwellDilemma.UnifiedGeneralTree",
+    "BlackwellDilemma.UnifiedErrorCompounding",
     "BlackwellDilemma.Infrastructure.FiniteLocalTrapEvent",
     "BlackwellDilemma.Infrastructure.FiniteTorusLocalSupports",
     "BlackwellDilemma.Infrastructure.KappaStarClosedForm",
     "BlackwellDilemma.Infrastructure.SeparatedBlockPlacements",
-    "BlackwellDilemma.Infrastructure.StandardNormalBridgeProbability",
-    "BlackwellDilemma.Infrastructure.TrapTreeBernoulliWelfare",
     "BlackwellDilemma.Infrastructure.UnboundedInProbability",
     "BlackwellDilemma.Infrastructure.VanishingGiantLoss",
 }

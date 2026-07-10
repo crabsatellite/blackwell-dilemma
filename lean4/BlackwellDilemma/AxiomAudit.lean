@@ -72,7 +72,12 @@ open BlackwellDilemma.PaperSemanticGate
 #print axioms BlackwellDilemma.Infrastructure.trapTreeBernoulliWelfarePrinciple_proved
 #print axioms BlackwellDilemma.Infrastructure.errorCompoundingKernelBundle_proved
 #print axioms BlackwellDilemma.Infrastructure.gaussianBridgeProbabilityPrinciple_proved
-#print axioms errorCompoundingPartialCore_proved
+#print axioms BlackwellDilemma.ErrorCompounding.perfectGreedy_terminalReward
+#print axioms BlackwellDilemma.ErrorCompounding.bridgeProbability_mem_openInterval
+#print axioms BlackwellDilemma.ErrorCompounding.welfare_formula
+#print axioms BlackwellDilemma.ErrorCompounding.welfare_gain_lt_half_power
+#print axioms BlackwellDilemma.ErrorCompounding.ThresholdEstimator.cognitiveThreshold_bounds
+#print axioms BlackwellDilemma.ErrorCompounding.errorCompoundingClaim_proved
 #print axioms BlackwellDilemma.Infrastructure.topoGiantLossEnvelopePrinciple_proved
 #print axioms PaperClaim.isClosed_eq_hasFullProof
 #print axioms paperClaims_count

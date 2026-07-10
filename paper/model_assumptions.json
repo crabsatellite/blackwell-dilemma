@@ -79,6 +79,21 @@
       "empirical_truth_claimed": false
     },
     {
+      "id": "independent_gaussian_reward_noise",
+      "kind": "distributional_assumption",
+      "statement": "Reward-signal errors are independent across vertices and have the common Gaussian variance indexed by beta.",
+      "scope": "Closed-form Gaussian pairwise-routing probabilities, including the depth-d trap tree.",
+      "role": "Makes each trap-versus-bridge signal difference Gaussian with variance twice the individual signal variance and separates choices across distinct tree levels.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "Recompute route probabilities and path-success dependence under correlated or heteroskedastic reward errors."
+      },
+      "provenance": "paper_definition",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
       "id": "greedy_static_reward_policy",
       "kind": "behavioral_postulate",
       "statement": "The greedy agent ranks currently available neighbors by posterior immediate reward rather than continuation value.",
@@ -136,6 +151,21 @@
       "provenance": "paper_reduced_form",
       "theory_evidence": {"mode": "references", "reference_ids": ["camerer_ho_chong2004", "gabaix2014", "jehiel2005"]},
       "empirical_evidence": {"mode": "required_for_real_world_application", "reference_ids": [], "check_ids": []},
+      "empirical_truth_claimed": false
+    },
+    {
+      "id": "posterior_estimator_threshold_band",
+      "kind": "regularity_condition",
+      "statement": "The depth-d continuation estimator has constants 0 < c2 <= c1 independent of depth, accepts a bridge whenever topology-noise variance is at most c2, and rejects it whenever variance exceeds c1; behavior inside the band is unrestricted.",
+      "scope": "Part 5 of the depth-d error-compounding proposition only.",
+      "role": "Defines the reduced-form semantic response required to convert the topology-noise formula into lower and upper cognitive-depth thresholds.",
+      "testability": {
+        "kind": "sensitivity",
+        "criterion": "For any specified posterior estimator, verify depth-uniform acceptance and rejection constants or replace the proposition with estimator-specific thresholds."
+      },
+      "provenance": "paper_reduced_form",
+      "theory_evidence": {"mode": "not_required_for_conditional_theorem", "reference_ids": []},
+      "empirical_evidence": {"mode": "not_claimed", "reference_ids": [], "check_ids": []},
       "empirical_truth_claimed": false
     },
     {

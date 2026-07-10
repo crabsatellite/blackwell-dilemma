@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "manuscript": "blackwell-dilemma-internal/paper/blackwell_dilemma.tex",
-  "manuscript_sha256": "641717d9f4476eb7c3c9fba6b9d5db6ce9e15b8bc2e1238a364f08b123fa9bff",
+  "manuscript_sha256": "1d801c41b51b46411cada316b10f46069a843711b0e75cf77923ae7fe541583d",
   "claims": [
     {
       "line": 262,
@@ -169,7 +169,7 @@
       "kind": "proposition",
       "label": "prop:error-compounding",
       "title": "Error Compounding",
-      "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52"
+      "statement_sha256": "ddc65ca9c2d4145fb55ab3f50c64db6ee32f54d7d3c05de00b9a4768f1860c91"
     },
     {
       "line": 1148,

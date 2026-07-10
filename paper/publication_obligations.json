@@ -213,9 +213,9 @@
     },
     {
       "label": "prop:error-compounding",
-      "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52",
+      "statement_sha256": "ddc65ca9c2d4145fb55ab3f50c64db6ee32f54d7d3c05de00b9a4768f1860c91",
       "obligations": [
-        {"id": "depth_signal_model", "type": "model_assumptions", "ids": ["topology_blind_gaussian_signals", "greedy_static_reward_policy", "irreversible_no_revisit"]},
+        {"id": "depth_signal_model", "type": "model_assumptions", "ids": ["topology_blind_gaussian_signals", "independent_gaussian_reward_noise", "greedy_static_reward_policy", "irreversible_no_revisit", "posterior_estimator_threshold_band"]},
         {"id": "exact_depth_probability_and_threshold_bundle", "type": "lean_exact"}
       ]
     },

@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
   "generated_by": "tools/audit_publication_obligations.py",
-  "manuscript_sha256": "641717d9f4476eb7c3c9fba6b9d5db6ce9e15b8bc2e1238a364f08b123fa9bff",
+  "manuscript_sha256": "1d801c41b51b46411cada316b10f46069a843711b0e75cf77923ae7fe541583d",
   "summary": {
     "claims_total": 26,
-    "strict_kernel_closed": 9,
-    "publication_evidence_closed": 11,
+    "strict_kernel_closed": 10,
+    "publication_evidence_closed": 12,
     "empirical_publication_closed": 1,
     "claims_model_evidence_closed": 1,
-    "model_assumptions_total": 14,
-    "model_assumptions_admissible": 14,
-    "model_assumptions_theory_admissible": 14,
+    "model_assumptions_total": 16,
+    "model_assumptions_admissible": 16,
+    "model_assumptions_theory_admissible": 16,
     "model_assumptions_theory_referenced": 8,
-    "model_assumptions_theory_reference_not_required": 6,
+    "model_assumptions_theory_reference_not_required": 8,
     "model_assumptions_empirical_required": 9,
     "model_assumptions_empirically_anchored": 0,
     "model_assumptions_by_provenance": {
       "benchmark_definition": 2,
-      "paper_definition": 3,
-      "paper_reduced_form": 5,
+      "paper_definition": 4,
+      "paper_reduced_form": 6,
       "published_model_adaptation": 1,
       "standard_theory": 2,
       "tractability_normalization": 1
     },
     "obligations_total": 75,
-    "obligations_passed": 52,
+    "obligations_passed": 53,
     "obligations_by_type": {
       "computational_certificate": 1,
       "external_references": 9,
@@ -38,13 +38,13 @@
       "computational_certificate": 1,
       "external_references": 9,
       "lean_conditional": 2,
-      "lean_exact": 9,
+      "lean_exact": 10,
       "model_assumptions": 25,
       "statement_hash": 6
     },
     "gaps_by_type": {
       "lean_conditional": 7,
-      "lean_exact": 8,
+      "lean_exact": 7,
       "unresolved_semantics": 8
     },
     "mathematical_routes": {
@@ -99,6 +99,18 @@
       "empirical_required": true,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "independent_gaussian_reward_noise",
+      "kind": "distributional_assumption",
+      "provenance": "paper_definition",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
       "empirical_reference_ids": [],
       "empirical_check_ids": []
     },
@@ -159,6 +171,18 @@
       "empirical_required": true,
       "empirically_anchored": false,
       "empirical_evidence_satisfied": false,
+      "empirical_reference_ids": [],
+      "empirical_check_ids": []
+    },
+    {
+      "id": "posterior_estimator_threshold_band",
+      "kind": "regularity_condition",
+      "provenance": "paper_reduced_form",
+      "theory_admissible": true,
+      "theory_reference_ids": [],
+      "empirical_required": false,
+      "empirically_anchored": false,
+      "empirical_evidence_satisfied": true,
       "empirical_reference_ids": [],
       "empirical_check_ids": []
     },
@@ -1167,16 +1191,18 @@
     },
     {
       "label": "prop:error-compounding",
-      "statement_sha256": "a5e8b8feab018e680938407919d014e5099ce344f7b90335026ed42446f13c52",
-      "lean_state": "partial",
-      "strict_kernel_closed": false,
-      "publication_evidence_closed": false,
+      "statement_sha256": "ddc65ca9c2d4145fb55ab3f50c64db6ee32f54d7d3c05de00b9a4768f1860c91",
+      "lean_state": "closed",
+      "strict_kernel_closed": true,
+      "publication_evidence_closed": true,
       "empirical_publication_closed": false,
       "mathematical_route": "model_internal_exact",
       "model_route": "real_strategy_evidence_required",
       "model_assumption_ids": [
         "greedy_static_reward_policy",
+        "independent_gaussian_reward_noise",
         "irreversible_no_revisit",
+        "posterior_estimator_threshold_band",
         "topology_blind_gaussian_signals"
       ],
       "empirical_model_gaps": [
@@ -1190,13 +1216,13 @@
           "id": "depth_signal_model",
           "type": "model_assumptions",
           "passed": true,
-          "detail": "theory-admissible assumption ids=topology_blind_gaussian_signals,greedy_static_reward_policy,irreversible_no_revisit"
+          "detail": "theory-admissible assumption ids=topology_blind_gaussian_signals,independent_gaussian_reward_noise,greedy_static_reward_policy,irreversible_no_revisit,posterior_estimator_threshold_band"
         },
         {
           "id": "exact_depth_probability_and_threshold_bundle",
           "type": "lean_exact",
-          "passed": false,
-          "detail": "Lean state is partial; exact closure requires closed"
+          "passed": true,
+          "detail": "Lean state is closed; exact closure requires closed"
         }
       ]
     },
