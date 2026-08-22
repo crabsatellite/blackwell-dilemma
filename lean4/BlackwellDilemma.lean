@@ -1,3 +1,3 @@
-/- Formal paper claim surface. Historical development modules are not imports. -/
+/- Current 17-page Theory and Decision formal surface. -/
 
-import BlackwellDilemma.PaperSemanticGate
+import BlackwellDilemma.CurrentPaperStatus

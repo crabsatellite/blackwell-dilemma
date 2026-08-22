@@ -72,22 +72,15 @@ jobs:
         working-directory: lean4
         run: timeout 15m lake exe cache get || true
 
-      - name: Build AxiomAudit dependency surface
+      - name: Verify current Theory and Decision formal surface
         working-directory: lean4
-        run: lake build BlackwellDilemma.AxiomAudit
+        run: python verify_release.py
 
       - name: Verify public evidence manifest
         run: |
-          python tools/audit_claim_lineage.py
           python tools/verify_reference_registry.py
-          python tools/audit_citation_inventory.py
-          python tools/audit_publication_obligations.py --check-ledger
-          python tools/verify_public_evidence.py
 
       - name: Verify generated research reports
         run: |
           python tracker.py --check-report
           python verification/render_live_prediction_report.py --check
-
-      - name: Audit documentation surface
-        run: python tools/audit_documentation_surface.py

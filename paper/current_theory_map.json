@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "manuscript": "blackwell_theory_decision.tex",
+  "manuscript_sha256": "f12beded610e8170629f9834d49713693ef39bc3dd250bdb1990534dde3498cf",
+  "objects": [
+    {
+      "kind": "definition",
+      "label": "def:posterior-welfare",
+      "number": 1,
+      "title": "Induced posterior welfare",
+      "statement_sha256": "ecd02e2007f2bb22d3c78f5892025649f0ec1b025923e6b5fb632d8f39e732c9",
+      "binding": "CurrentPosterior.PosteriorDecisionModel"
+    },
+    {
+      "kind": "theorem",
+      "label": "thm:convexity-frontier",
+      "number": 2,
+      "title": "Posterior-convexity frontier",
+      "statement_sha256": "a2844e9d3fd80d58b8396ae22ac4d860e831b56ae7bd421a427ab48370b7b272",
+      "binding": "CurrentPosterior.posteriorConvexityFrontier"
+    },
+    {
+      "kind": "theorem",
+      "label": "thm:two-action-alignment",
+      "number": 3,
+      "title": "Two-action alignment",
+      "statement_sha256": "56a75803e8b5f12f286b0604a8ebb4578463152557ae48f72f235f6901ac70c5",
+      "binding": "CurrentTwoAction.twoActionAlignment"
+    },
+    {
+      "kind": "definition",
+      "label": "def:idp",
+      "number": 5,
+      "title": "Irreversibility Decision Problem",
+      "statement_sha256": "4b646bda8699c9f2e4ddf9e4e2773c24ed03bd314de5906dfa4b572cfc25c496",
+      "binding": "IDPModel"
+    },
+    {
+      "kind": "theorem",
+      "label": "thm:route-reversal",
+      "number": 6,
+      "title": "Route-reversal theorem",
+      "statement_sha256": "7760ae26422ab1dba45e354762da90e24fdc728726f14fa0424e11be089b776f",
+      "binding": "CurrentRouteReversal.routeReversal_strictAntiOn"
+    },
+    {
+      "kind": "theorem",
+      "label": "thm:restoration",
+      "number": 7,
+      "title": "Restoration under feasibility knowledge",
+      "statement_sha256": "74487d48296db229af70abf13456622de5a058377172a3151dfd111916cccf6a",
+      "binding": "CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements"
+    },
+    {
+      "kind": "lemma",
+      "label": "lem:decomposition",
+      "number": 8,
+      "title": "Feasibility and policy decomposition",
+      "statement_sha256": "2a43d1f8887ff78ca1c7ad63806e8e973b1c1de7b92de700cfbdb645b2cd4654",
+      "binding": "UnifiedWelfareSetup.welfare_decomposition"
+    },
+    {
+      "kind": "theorem",
+      "label": "thm:cognitive-threshold",
+      "number": 9,
+      "title": "Cognitive threshold",
+      "statement_sha256": "e9c8083d534959ca40c0f4eef7eed964b89ebf355988f84c58d7c4646a454505",
+      "binding": "CurrentCognition.cognitiveThresholdClaim_proved"
+    },
+    {
+      "kind": "proposition",
+      "label": "prop:complementarity",
+      "number": 10,
+      "title": "Local information--knowledge complementarity",
+      "statement_sha256": "41d1058064d3708145d1a4567e4cacdc1e8bf155e011570ed555d11b9a89671e",
+      "binding": "SupermodularCognition.supermodularCognitionClaim_proved"
+    },
+    {
+      "kind": "proposition",
+      "label": "prop:interior-optimum",
+      "number": 11,
+      "title": "Interior optimal precision",
+      "statement_sha256": "439dda96d6186518debdaf607a0eff3dc316e30685f4c86865dc8dd9c6037f15",
+      "binding": "FiveStateRouting.interiorOptimumClaim_proved"
+    }
+  ]
+}

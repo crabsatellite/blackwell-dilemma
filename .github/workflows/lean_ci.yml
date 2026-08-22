@@ -5,12 +5,16 @@ on:
     branches: [master]
     paths:
       - 'lean4/**'
-      - 'tools/audit_documentation_surface.py'
+      - 'paper/current_theory_map.json'
+      - 'CITATION.cff'
+      - 'LICENSE'
       - '.github/workflows/lean_ci.yml'
   pull_request:
     paths:
       - 'lean4/**'
-      - 'tools/audit_documentation_surface.py'
+      - 'paper/current_theory_map.json'
+      - 'CITATION.cff'
+      - 'LICENSE'
       - '.github/workflows/lean_ci.yml'
   workflow_dispatch:
 
@@ -54,59 +58,5 @@ jobs:
       - name: Get Mathlib cache
         run: timeout 15m lake exe cache get || true
 
-      - name: Build BlackwellDilemma
-        run: lake build BlackwellDilemma
-
-      - name: Build PaperSemanticGate
-        run: lake build BlackwellDilemma.PaperSemanticGate
-
-      - name: Verify no proof-position sorry in source
-        run: |
-          # Match only REAL proof-position `sorry` in Lean 4 syntax:
-          #   `:= sorry` or `:=sorry` (term-mode proof)
-          #   `by sorry` (tactic-mode proof when sorry is the only tactic)
-          #   bare `sorry` on its own line (often inside a `by` block)
-          # Ignore docstring / comment mentions of "sorry" entirely
-          # (these are NOT proof-position so they cannot affect kernel-purity).
-          if grep -rnE ':=[[:space:]]*sorry\b|^[[:space:]]+sorry[[:space:]]*$|\bby[[:space:]]+sorry\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean"; then
-            echo "ERROR: proof-position sorry found in source code"
-            exit 1
-          fi
-          echo "OK: no proof-position sorry"
-
-      - name: Verify no proof-position native_decide in source
-        run: |
-          # native_decide bypasses kernel verification; project discipline
-          # prohibits it in proof position. Match only REAL tactic-position
-          # `native_decide`:
-          #   `:= native_decide` / `:=native_decide` (term-mode)
-          #   `by native_decide` (tactic-mode, sole tactic)
-          #   bare `native_decide` on its own line (inside `by` block)
-          # Ignore docstring / comment / attackHistory mentions of "native_decide"
-          # entirely (these are NOT proof-position so they cannot affect kernel-purity).
-          if grep -rnE ':=[[:space:]]*native_decide\b|^[[:space:]]+native_decide[[:space:]]*$|\bby[[:space:]]+native_decide\b' BlackwellDilemma/ BlackwellDilemma.lean --include="*.lean"; then
-            echo "ERROR: proof-position native_decide found in source code"
-            exit 1
-          fi
-          echo "OK: no proof-position native_decide"
-
-      - name: Build AxiomAudit (kernel-purity surface)
-        run: lake build BlackwellDilemma.AxiomAudit
-
-      - name: Audit source-level kernel surface
-        run: python scripts/audit_kernel_surface.py
-
-      - name: Audit conditional proof surface
-        run: python scripts/audit_conditional_surface.py
-
-      - name: Audit paper-semantic gate
-        run: python scripts/audit_paper_semantic_gate.py
-
-      - name: Audit proof dependencies
-        run: python scripts/audit_axiom_output.py
-
-      - name: Verify generated README status
-        run: python scripts/render_paper_claim_readme.py --check
-
-      - name: Audit documentation surface
-        run: python ../tools/audit_documentation_surface.py
+      - name: Verify current-paper theory map and trust boundary
+        run: python verify_release.py
