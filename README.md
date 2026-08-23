@@ -88,7 +88,8 @@ pinned by `lean4/lake-manifest.json`.
 The manuscript and submission package are maintained in the adjacent internal
 paper project. The public repository stores the exact manuscript SHA-256 and
 normalized statement hashes, so a local release build fails if either side
-drifts.
+drifts. Repository text attributes force formal, contract, and release source
+files to LF so a fresh Windows checkout preserves the pinned byte hashes.
 
 ## License
 

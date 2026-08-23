@@ -1,2 +1,10 @@
 paper/references.bib text eol=lf
 paper/citation_inventory.json text eol=lf
+*.lean text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+*.cff text eol=lf
+*.md text eol=lf
+LICENSE text eol=lf
+lean-toolchain text eol=lf
