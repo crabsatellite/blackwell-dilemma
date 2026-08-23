@@ -17,7 +17,7 @@ import Mathlib.Data.Real.Basic
 
 namespace BlackwellDilemma
 
-universe u
+universe u v
 
 /-- A realized finite IDP. `openGraph` is the percolation realization and is
     required to be a subgraph of `baseGraph`. -/
@@ -28,6 +28,24 @@ structure IDPModel (V : Type u) [Fintype V] [DecidableEq V] where
   terminal : Finset V
   localScore : V -> Real
   welfare : V -> Real
+
+/-- The finite ex-ante carrier in Definition 5 of the current paper.  Each
+    feasibility realization owns one realized `IDPModel`; `weight` is the
+    paper's probability distribution over the finite realization type and
+    `initialVertex` is the common root. -/
+structure FiniteExAnteIDP
+    (V : Type u) [Fintype V] [DecidableEq V]
+    (Omega : Type v) [Fintype Omega] where
+  weight : Omega -> Real
+  weight_nonneg : forall omega, 0 <= weight omega
+  weight_sum_one : Finset.univ.sum weight = 1
+  baseGraph : SimpleGraph V
+  feasibleGraph : Omega -> SimpleGraph V
+  feasible_le_base : forall omega, feasibleGraph omega <= baseGraph
+  terminal : Finset V
+  localScore : V -> Real
+  welfare : V -> Real
+  initialVertex : V
 
 /-- Process state. `history` contains vertices visited before `current`. -/
 structure IDPState (V : Type u) [DecidableEq V] where
@@ -46,6 +64,27 @@ def initial (v0 : V) : IDPState V where
   current_fresh := by simp
 
 end IDPState
+
+namespace FiniteExAnteIDP
+
+variable {V : Type u} [Fintype V] [DecidableEq V]
+variable {Omega : Type v} [Fintype Omega]
+
+/-- The process starts from `(v0, empty)` in every realization. -/
+def initialState (X : FiniteExAnteIDP V Omega) (_omega : Omega) : IDPState V :=
+  IDPState.initial X.initialVertex
+
+/-- Only the feasible subgraph varies with `omega`; the base graph, terminal
+    set, local score, welfare function, and initial vertex are common. -/
+def realized (X : FiniteExAnteIDP V Omega) (omega : Omega) : IDPModel V where
+  baseGraph := X.baseGraph
+  openGraph := X.feasibleGraph omega
+  open_le_base := X.feasible_le_base omega
+  terminal := X.terminal
+  localScore := X.localScore
+  welfare := X.welfare
+
+end FiniteExAnteIDP
 
 namespace IDPModel
 

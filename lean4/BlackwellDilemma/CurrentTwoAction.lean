@@ -388,4 +388,21 @@ theorem twoActionAffineAlignmentOnInteriorDomain
     exact (twoActionAlignmentOnAbsorbingDomain U0 Dv Du C hC hAbsorb hDv).2
       hAligned
 
+/-- An objectively adverse tie-broken boundary switch (`boundaryGap < 0`)
+    cannot have convex induced welfare on the translated posterior carrier. -/
+theorem adverseBoundary_not_convex
+    {F : Type*} [NormedAddCommGroup F] [NormedSpace Real F]
+    [FiniteDimensional Real F]
+    (U0 Dv Du : F →ₗ[Real] Real) (boundaryGap : Real) (C : Set F)
+    (hC : Convex Real C) (hInterior : (0 : F) ∈ interior C)
+    (hAbsorb : AbsorbsDirections C) (hDv : Dv ≠ 0)
+    (hAdverse : boundaryGap < 0) :
+    Not (ConvexOn Real C
+      (twoActionWelfareWithBoundary U0 Dv Du boundaryGap)) := by
+  intro hConvex
+  have hBoundary :=
+    (twoActionAffineAlignmentOnInteriorDomain
+      U0 Dv Du boundaryGap C hC hInterior hAbsorb hDv).1 hConvex |>.1
+  linarith
+
 end BlackwellDilemma.CurrentTwoAction

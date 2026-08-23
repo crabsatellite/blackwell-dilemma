@@ -1,10 +1,12 @@
 /- Current-paper two-route Gaussian reversal on the common precision scale. -/
 
 import BlackwellDilemma.CurrentGaussian
+import BlackwellDilemma.CurrentPosterior
 
 namespace BlackwellDilemma.CurrentRouteReversal
 
 open BlackwellDilemma.CurrentGaussian
+open BlackwellDilemma.CurrentPosterior
 
 noncomputable abbrev precisionScale :=
   BlackwellDilemma.CurrentGaussian.precisionScale
@@ -16,6 +18,13 @@ noncomputable def terminalWelfare
     (routeOneValue routeTwoValue scoreGap beta : Real) : Real :=
   routeOneValue + routeTwoProbability scoreGap beta *
     (routeTwoValue - routeOneValue)
+
+/-- The finite expectation `\bar V_i = E_omega[V_i(omega)]` used by the
+    current route-reversal theorem. -/
+noncomputable def expectedContinuation
+    {Omega : Type*} [Fintype Omega]
+    (weight value : Omega -> Real) : Real :=
+  finiteExpectation weight value
 
 theorem precisionScale_eq_inverse_difference_std
     {beta : Real} (hBeta : 0 < beta) :
@@ -59,5 +68,35 @@ theorem terminalWelfare_formula
       routeOneValue +
         Phi (-scoreGap * precisionScale beta) *
           (routeTwoValue - routeOneValue) := rfl
+
+/-- Paper-faithful finite-realization form of Theorem 6.  The local scores
+    remain separate inputs, the continuation values are literal finite
+    expectations, and the strict precision conclusion is on `(0, infinity)`. -/
+theorem finiteRouteReversal
+    {Omega : Type*} [Fintype Omega]
+    (weight routeOne routeTwo : Omega -> Real)
+    (ellOne ellTwo : Real)
+    (hScore : ellTwo < ellOne)
+    (hContinuation :
+      expectedContinuation weight routeOne <
+        expectedContinuation weight routeTwo) :
+    (forall beta,
+      terminalWelfare
+          (expectedContinuation weight routeOne)
+          (expectedContinuation weight routeTwo)
+          (ellOne - ellTwo) beta =
+        expectedContinuation weight routeOne +
+          Phi (-(ellOne - ellTwo) * precisionScale beta) *
+            (expectedContinuation weight routeTwo -
+              expectedContinuation weight routeOne)) /\
+      StrictAntiOn
+        (terminalWelfare
+          (expectedContinuation weight routeOne)
+          (expectedContinuation weight routeTwo)
+          (ellOne - ellTwo))
+        (Set.Ioi 0) := by
+  have hGap : 0 < ellOne - ellTwo := sub_pos.mpr hScore
+  exact ⟨terminalWelfare_formula _ _ _,
+    routeReversal_strictAntiOn hGap hContinuation⟩
 
 end BlackwellDilemma.CurrentRouteReversal

@@ -28,6 +28,36 @@ noncomputable def kappaStar (m0 mInf : Real) : Real :=
 theorem assimilationWeight_zero : assimilationWeight 0 = 0 := by
   simp [assimilationWeight]
 
+theorem assimilationWeight_continuous : Continuous assimilationWeight := by
+  unfold assimilationWeight
+  exact continuous_const.sub
+    (Real.continuous_const_rpow (by norm_num : (1 / 2 : Real) ≠ 0))
+
+theorem assimilationWeight_mem_unit {kappa : Real} (hKappa : 0 <= kappa) :
+    assimilationWeight kappa ∈ Set.Icc (0 : Real) 1 := by
+  have hPowPos : 0 < (1 / 2 : Real) ^ kappa :=
+    Real.rpow_pos_of_pos (by norm_num) _
+  have hPowLe : (1 / 2 : Real) ^ kappa <= 1 := by
+    have h := (Real.strictAnti_rpow_of_base_lt_one
+      (by norm_num : (0 : Real) < 1 / 2)
+      (by norm_num : (1 / 2 : Real) < 1)).antitone hKappa
+    simpa using h
+  unfold assimilationWeight
+  constructor <;> linarith
+
+theorem assimilationWeight_tendsto_atTop :
+    Tendsto assimilationWeight atTop (nhds 1) := by
+  have hPow : Tendsto (fun kappa : Real => (1 / 2 : Real) ^ kappa)
+      atTop (nhds 0) := by
+    exact tendsto_rpow_atTop_of_base_lt_one (1 / 2 : Real)
+      (by norm_num : (-1 : Real) < 1 / 2)
+      (by norm_num : (1 / 2 : Real) < 1)
+  have hOne : Tendsto (fun _ : Real => (1 : Real)) atTop (nhds 1) :=
+    tendsto_const_nhds
+  change Tendsto (fun kappa : Real => 1 - (1 / 2 : Real) ^ kappa)
+    atTop (nhds 1)
+  simpa only [sub_zero] using hOne.sub hPow
+
 theorem assimilationWeight_strictMono : StrictMono assimilationWeight := by
   intro kappaLow kappaHigh hKappa
   have hPow :
@@ -45,6 +75,19 @@ theorem representedScore_strictMono
   have hWeight := assimilationWeight_strictMono hKappa
   unfold representedScore
   nlinarith
+
+theorem representedScore_continuous (m0 mInf : Real) :
+    Continuous (representedScore m0 mInf) := by
+  unfold representedScore
+  exact continuous_const.add
+    (assimilationWeight_continuous.mul_const (mInf - m0))
+
+theorem representedScore_tendsto_atTop (m0 mInf : Real) :
+    Tendsto (representedScore m0 mInf) atTop (nhds mInf) := by
+  have h := assimilationWeight_tendsto_atTop.mul_const (mInf - m0)
+    |>.const_add m0
+  convert h using 1
+  ring
 
 theorem kappaStar_pos {m0 mInf : Real} (hM0 : m0 < 0) (hMInf : 0 < mInf) :
     0 < kappaStar m0 mInf := by
@@ -87,6 +130,20 @@ theorem kappaStar_isThreshold
     simpa [hRoot] using hStrict hKappa
   · intro kappa hKappa
     simpa [hRoot] using hStrict hKappa
+
+theorem representedScore_eq_zero_iff
+    {m0 mInf kappa : Real} (hM0 : m0 < 0) (hMInf : 0 < mInf) :
+    representedScore m0 mInf kappa = 0 ↔
+      kappa = kappaStar m0 mInf := by
+  have hThreshold := kappaStar_isThreshold hM0 hMInf
+  constructor
+  · intro hZero
+    rcases lt_trichotomy kappa (kappaStar m0 mInf) with hLow | hEq | hHigh
+    · linarith [hThreshold.2.2.1 kappa hLow]
+    · exact hEq
+    · linarith [hThreshold.2.2.2 kappa hHigh]
+  · rintro rfl
+    exact hThreshold.2.1
 
 theorem cognitionWelfare_strictAntiOn_of_score_neg
     {m0 mInf lowReward highReward kappa : Real}

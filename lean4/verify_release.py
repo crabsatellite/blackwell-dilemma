@@ -20,7 +20,7 @@ LIVE_PAPER = (
     / "paper"
     / "blackwell_theory_decision.tex"
 )
-EXPECTED_VERSION = "1.2.1"
+EXPECTED_VERSION = "1.3.0"
 
 
 def run(command: list[str], cwd: Path = LEAN_ROOT) -> str:
@@ -118,6 +118,7 @@ def main() -> int:
             "build",
             "BlackwellDilemma",
             "BlackwellDilemma.CurrentPaperAxiomAudit",
+            "BlackwellDilemma.CurrentSemanticMutationAudit",
         ]
     )
     if "error:" in build_output.lower():
@@ -130,10 +131,11 @@ def main() -> int:
         raise SystemExit("current-paper status output drifted")
 
     run(strict_lean + ["BlackwellDilemma/TheoremMap.lean"])
+    run(strict_lean + ["BlackwellDilemma/CurrentSemanticMutationAudit.lean"])
     axiom_output = run(strict_lean + ["BlackwellDilemma/CurrentPaperAxiomAudit.lean"])
     if re.search(r"depends on axioms:\s*\[[^\]]*BlackwellDilemma", axiom_output, re.DOTALL):
         raise SystemExit("current-paper endpoint depends on a project axiom")
-    if axiom_output.count("depends on axioms:") != 9:
+    if axiom_output.count("depends on axioms:") != 10:
         raise SystemExit("current-paper axiom endpoint count drifted")
 
     audit_command = [sys.executable, "scripts/audit_current_theory_map.py"]
@@ -151,6 +153,7 @@ def main() -> int:
     print(f"blackwell_current_source_files={len(CURRENT_LEAN_FILES)}")
     print("blackwell_current_unfinished=0")
     print("blackwell_current_project_axioms=0")
+    print("blackwell_current_semantic_mutations=9/9")
     print(f"blackwell_current_release_version={EXPECTED_VERSION}")
     print(f"blackwell_live_manuscript_checked={LIVE_PAPER.is_file()}")
     return 0

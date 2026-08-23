@@ -111,6 +111,33 @@ noncomputable def experimentObjectiveValue
 
 end PosteriorDecisionModel
 
+/-- A finite posterior experiment at a named prior.  Unlike the raw value
+    helper, this carrier enforces probability weights, posterior membership,
+    and the Bayes-plausibility barycenter. -/
+structure FinitePosteriorExperiment
+    (Signal : Type v) [Fintype Signal] where
+  prior : Theta -> Real
+  prior_mem : prior ∈ posteriorSet Theta
+  weight : Signal -> Real
+  weight_nonneg : forall signal, 0 <= weight signal
+  weight_sum_one : Finset.univ.sum weight = 1
+  posterior : Signal -> Theta -> Real
+  posterior_mem : forall signal, posterior signal ∈ posteriorSet Theta
+  barycenter : prior = Finset.univ.sum fun signal => weight signal • posterior signal
+
+namespace FinitePosteriorExperiment
+
+variable {Theta : Type u} [Fintype Theta]
+variable {Action : Type w} [Fintype Action] [Nonempty Action]
+variable {Signal : Type v} [Fintype Signal]
+
+noncomputable def objectiveValue
+    (E : FinitePosteriorExperiment Theta Signal)
+    (M : PosteriorDecisionModel Theta Action) : Real :=
+  M.experimentObjectiveValue E.weight E.posterior
+
+end FinitePosteriorExperiment
+
 /-- Posterior representation of a finite Blackwell refinement. `kernel c f`
     is the conditional probability of refined signal `f` given coarse signal
     `c`; `barycenter` is the coordinatewise Bayes/iterated-expectations

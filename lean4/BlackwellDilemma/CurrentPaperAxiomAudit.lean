@@ -2,27 +2,32 @@
 
 import BlackwellDilemma.TheoremMap
 
+-- Definition 1.
+#print axioms BlackwellDilemma.CurrentPaperContracts.posteriorWelfareDefinitionContract
+
 -- Theorem 2.
-#print axioms BlackwellDilemma.CurrentPosterior.posteriorConvexityFrontier
-#print axioms BlackwellDilemma.CurrentPosterior.not_convex_exists_binary_witness
+#print axioms BlackwellDilemma.CurrentPaperContracts.posteriorConvexityFrontierContract
 
 -- Theorem 3.
-#print axioms BlackwellDilemma.CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain
+#print axioms BlackwellDilemma.CurrentPaperContracts.twoActionAlignmentContract
+
+-- Definition 5.
+#print axioms BlackwellDilemma.CurrentPaperContracts.idpDefinitionContract
 
 -- Theorem 6.
-#print axioms BlackwellDilemma.CurrentRouteReversal.routeReversal_strictAntiOn
+#print axioms BlackwellDilemma.CurrentPaperContracts.routeReversalContract
 
 -- Theorem 7.
-#print axioms BlackwellDilemma.CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements
+#print axioms BlackwellDilemma.CurrentRestoration.restorationUnderObservedFiniteFeasibility
 
 -- Lemma 8.
-#print axioms BlackwellDilemma.CurrentPaperLedger.feasibilityPolicyDecompositionClaim_proved
+#print axioms BlackwellDilemma.CurrentPaperContracts.feasibilityPolicyDecompositionContract
 
 -- Theorem 9.
-#print axioms BlackwellDilemma.CurrentCognition.cognitiveThresholdClaim_proved
+#print axioms BlackwellDilemma.CurrentPaperContracts.cognitiveThresholdContract
 
 -- Proposition 10.
-#print axioms BlackwellDilemma.CurrentComplementarity.localComplementarityClaim_proved
+#print axioms BlackwellDilemma.CurrentPaperContracts.localComplementarityContract
 
 -- Proposition 11.
-#print axioms BlackwellDilemma.CurrentFiveState.interiorOptimumClaim_proved
+#print axioms BlackwellDilemma.CurrentPaperContracts.interiorOptimalPrecisionContract

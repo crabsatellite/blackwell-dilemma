@@ -145,14 +145,14 @@ def entryPosteriorWelfare : Entry :=
   { label := "def:posterior-welfare"
     title := "Induced posterior welfare"
     kind := .definition
-    binding := "CurrentPosterior.PosteriorDecisionModel"
+    binding := "CurrentPaperContracts.posteriorWelfareDefinitionContract"
     evidence := .definitional }
 
 def entryConvexityFrontier : Entry :=
   { label := "thm:convexity-frontier"
     title := "Posterior-convexity frontier"
     kind := .theorem
-    binding := "CurrentPosterior.posteriorConvexityFrontier"
+    binding := "CurrentPaperContracts.posteriorConvexityFrontierContract"
     evidence := .proved PosteriorConvexityFrontierClaim
       posteriorConvexityFrontierClaim_proved }
 
@@ -160,7 +160,7 @@ def entryTwoActionAlignment : Entry :=
   { label := "thm:two-action-alignment"
     title := "Two-action alignment"
     kind := .theorem
-    binding := "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain"
+    binding := "CurrentPaperContracts.twoActionAlignmentContract"
     evidence := .proved TwoActionAlignmentClaim
       twoActionAlignmentClaim_proved }
 
@@ -168,28 +168,28 @@ def entryIDP : Entry :=
   { label := "def:idp"
     title := "Irreversibility Decision Problem"
     kind := .definition
-    binding := "IDPModel; IDPState.initial; IDPModel.Step; IDPModel.IsStopping; UnifiedWelfareSetup"
+    binding := "CurrentPaperContracts.idpDefinitionContract"
     evidence := .definitional }
 
 def entryRouteReversal : Entry :=
   { label := "thm:route-reversal"
     title := "Route-reversal theorem"
     kind := .theorem
-    binding := "CurrentRouteReversal.routeReversal_strictAntiOn"
+    binding := "CurrentPaperContracts.routeReversalContract"
     evidence := .proved RouteReversalClaim routeReversalClaim_proved }
 
 def entryRestoration : Entry :=
   { label := "thm:restoration"
     title := "Restoration under feasibility knowledge"
     kind := .theorem
-    binding := "CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements"
+    binding := "CurrentRestoration.restorationUnderObservedFiniteFeasibility"
     evidence := .proved RestorationClaim restorationClaim_proved }
 
 def entryDecomposition : Entry :=
   { label := "lem:decomposition"
     title := "Feasibility and policy decomposition"
     kind := .lemma
-    binding := "UnifiedWelfareSetup.welfare_decomposition"
+    binding := "CurrentPaperContracts.feasibilityPolicyDecompositionContract"
     evidence := .proved FeasibilityPolicyDecompositionClaim
       feasibilityPolicyDecompositionClaim_proved }
 
@@ -197,21 +197,21 @@ def entryCognitiveThreshold : Entry :=
   { label := "thm:cognitive-threshold"
     title := "Cognitive threshold"
     kind := .theorem
-    binding := "CurrentCognition.cognitiveThresholdClaim_proved"
+    binding := "CurrentPaperContracts.cognitiveThresholdContract"
     evidence := .proved CognitiveThresholdClaim cognitiveThresholdClaim_proved }
 
 def entryComplementarity : Entry :=
   { label := "prop:complementarity"
     title := "Local information-knowledge complementarity"
     kind := .proposition
-    binding := "CurrentComplementarity.localComplementarityClaim_proved"
+    binding := "CurrentPaperContracts.localComplementarityContract"
     evidence := .proved ComplementarityClaim complementarityClaim_proved }
 
 def entryInteriorOptimum : Entry :=
   { label := "prop:interior-optimum"
     title := "Interior optimal precision"
     kind := .proposition
-    binding := "CurrentFiveState.interiorOptimumClaim_proved"
+    binding := "CurrentPaperContracts.interiorOptimalPrecisionContract"
     evidence := .proved InteriorOptimumClaim interiorOptimumClaim_proved }
 
 def currentPaperEntries : List Entry := [

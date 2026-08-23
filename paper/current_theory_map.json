@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manuscript": "blackwell_theory_decision.tex",
-  "manuscript_sha256": "22ae6283f8f153a33b4847d08cddb58eed95bc94294213355f46d683aa544302",
+  "manuscript_sha256": "74435c578376b12a79734fab9bd99177d1385177076734e0c329bc4df39fd5f2",
   "objects": [
     {
       "kind": "definition",
@@ -9,7 +9,7 @@
       "number": 1,
       "title": "Induced posterior welfare",
       "statement_sha256": "ecd02e2007f2bb22d3c78f5892025649f0ec1b025923e6b5fb632d8f39e732c9",
-      "binding": "CurrentPosterior.PosteriorDecisionModel"
+      "binding": "CurrentPaperContracts.posteriorWelfareDefinitionContract"
     },
     {
       "kind": "theorem",
@@ -17,15 +17,15 @@
       "number": 2,
       "title": "Posterior-convexity frontier",
       "statement_sha256": "b3ea81e8468c2334df7a510c86dc7a3cfb88a6e1d9359d6a7237f22039ff53df",
-      "binding": "CurrentPosterior.posteriorConvexityFrontier"
+      "binding": "CurrentPaperContracts.posteriorConvexityFrontierContract"
     },
     {
       "kind": "theorem",
       "label": "thm:two-action-alignment",
       "number": 3,
       "title": "Two-action alignment",
-      "statement_sha256": "4fdccb4f447e29ccf574ae2a9f5beb66bc0b868bcefc774706feb0b1586b0131",
-      "binding": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain"
+      "statement_sha256": "06e8cb11aa87e8ba04979a2783ce389df14aa74d9b823dbbb1e2eca5e353ca36",
+      "binding": "CurrentPaperContracts.twoActionAlignmentContract"
     },
     {
       "kind": "definition",
@@ -33,7 +33,7 @@
       "number": 5,
       "title": "Irreversibility Decision Problem",
       "statement_sha256": "3e894f13762c29b75b90c1b22701c5b98ee01b8ee08d58e3c58cc3719768acbb",
-      "binding": "IDPModel"
+      "binding": "CurrentPaperContracts.idpDefinitionContract"
     },
     {
       "kind": "theorem",
@@ -41,7 +41,7 @@
       "number": 6,
       "title": "Route-reversal theorem",
       "statement_sha256": "36700c5f54a9908834548cf08d31d9e6b42dfb4b8a1b2110336d87182674e3e3",
-      "binding": "CurrentRouteReversal.routeReversal_strictAntiOn"
+      "binding": "CurrentPaperContracts.routeReversalContract"
     },
     {
       "kind": "theorem",
@@ -49,7 +49,7 @@
       "number": 7,
       "title": "Restoration under feasibility knowledge",
       "statement_sha256": "74487d48296db229af70abf13456622de5a058377172a3151dfd111916cccf6a",
-      "binding": "CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements"
+      "binding": "CurrentRestoration.restorationUnderObservedFiniteFeasibility"
     },
     {
       "kind": "lemma",
@@ -57,7 +57,7 @@
       "number": 8,
       "title": "Feasibility and policy decomposition",
       "statement_sha256": "2a43d1f8887ff78ca1c7ad63806e8e973b1c1de7b92de700cfbdb645b2cd4654",
-      "binding": "UnifiedWelfareSetup.welfare_decomposition"
+      "binding": "CurrentPaperContracts.feasibilityPolicyDecompositionContract"
     },
     {
       "kind": "theorem",
@@ -65,15 +65,15 @@
       "number": 9,
       "title": "Cognitive threshold",
       "statement_sha256": "e9c8083d534959ca40c0f4eef7eed964b89ebf355988f84c58d7c4646a454505",
-      "binding": "CurrentCognition.cognitiveThresholdClaim_proved"
+      "binding": "CurrentPaperContracts.cognitiveThresholdContract"
     },
     {
       "kind": "proposition",
       "label": "prop:complementarity",
       "number": 10,
       "title": "Local information--knowledge complementarity",
-      "statement_sha256": "5890768100d94eaa806df1ff35f3af02ffb5b91190f7b4eface5f7893a0efc53",
-      "binding": "CurrentComplementarity.localComplementarityClaim_proved"
+      "statement_sha256": "0d93a9ac4602ea3a43c574b218715ffd88aacacfb0898ebb3925e9db60050064",
+      "binding": "CurrentPaperContracts.localComplementarityContract"
     },
     {
       "kind": "proposition",
@@ -81,7 +81,7 @@
       "number": 11,
       "title": "Interior optimal precision",
       "statement_sha256": "b88de54deb3314157d749bfebac4866391caeffc1263ce80b329751e34e2be3a",
-      "binding": "CurrentFiveState.interiorOptimumClaim_proved"
+      "binding": "CurrentPaperContracts.interiorOptimalPrecisionContract"
     }
   ],
   "derivations": [
@@ -143,7 +143,7 @@
     {
       "key": "two-action-alignment",
       "binding": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain",
-      "statement_sha256": "9cda0914cb67c20a4620a32f435122ff2da312eb1ffe56453febc30a4f47ffb4"
+      "statement_sha256": "d6171885a8880f2630b83dfd8797ab91fbd4f384f83e4de8efefb9bb70d369c8"
     },
     {
       "key": "two-action-piecewise",
@@ -228,7 +228,7 @@
     {
       "key": "moderate-region",
       "binding": "CurrentComplementarity.mixedCrossPartial_pos",
-      "statement_sha256": "85071d94d336b1e8854095623ea1ffb2eab3170daf7ccc649425ef4a6eccec2c"
+      "statement_sha256": "962251adb97e3178454b02ce2cd81a1e9c318b2522d313480a13fbcd3fe8f467"
     },
     {
       "key": "cognition-marginal",

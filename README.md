@@ -1,7 +1,7 @@
 # When More Payoff Information Hurts
 
 This repository is the Lean 4 / Mathlib formal companion for the current
-current *Theory and Decision* manuscript, *When More Payoff Information Hurts:
+*Theory and Decision* manuscript, *When More Payoff Information Hurts:
 Objective Alignment under Endogenous Feasibility*.
 
 ## Current formal status
@@ -16,7 +16,7 @@ unfinished=0
 project_axioms=0
 proof_escapes=0
 load_bearing_derivations=37
-current_source_files=15
+current_source_files=18
 ```
 
 The map covers every labeled definition, theorem, proposition, and lemma plus
@@ -34,7 +34,7 @@ all 37 load-bearing displayed derivations in the current manuscript:
 9. local differential information-knowledge complementarity; and
 10. the five-state interior optimum.
 
-The transitive current-paper surface is now exactly 15 project files and 2,742
+The transitive current-paper surface is now exactly 18 project files and 3,421
 source lines. Percolation, lattice, finite-torus, legacy cognition, and old
 multi-regime modules have been removed from the release source; their history
 remains recoverable from Git. The empirical prediction materials under `verification/`, `simulation/`,
@@ -52,6 +52,12 @@ the Lean library.
   proves 10 entries, 10 closed, zero unfinished, and unique labels.
 - [`lean4/BlackwellDilemma/CurrentPaperAxiomAudit.lean`](lean4/BlackwellDilemma/CurrentPaperAxiomAudit.lean)
   prints the dependency surface for every current result.
+- [`lean4/BlackwellDilemma/CurrentPaperContracts.lean`](lean4/BlackwellDilemma/CurrentPaperContracts.lean)
+  exposes the complete paper input carriers, ranges, hypotheses, endpoints,
+  and conclusions as direct declaration types.
+- [`lean4/BlackwellDilemma/CurrentSemanticMutationAudit.lean`](lean4/BlackwellDilemma/CurrentSemanticMutationAudit.lean)
+  requires carrier, inequality-direction, sign, regime, and endpoint mutations
+  to be rejected by the kernel.
 - [`paper/current_theory_map.json`](paper/current_theory_map.json) binds each
   manuscript object and every displayed derivation hash to its compiled Lean
   consumer.
@@ -67,7 +73,8 @@ cd lean4
 python verify_release.py
 ```
 
-The gate builds the current root and axiom audit, checks the complete theorem
+The gate builds the current root, direct input contracts, axiom audit, and
+semantic mutation audit, checks the complete theorem
 and derivation maps under `--trust=0 -DwarningAsError=true`, scans every project
 source file, and rejects `sorry`, `admit`, `unsafe`, `native_decide`, project
 axioms, opaque constants, stale statement hashes, duplicate labels, or any

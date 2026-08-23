@@ -38,16 +38,16 @@ EXPECTED = [
 ]
 
 BINDINGS = {
-    "def:posterior-welfare": "CurrentPosterior.PosteriorDecisionModel",
-    "thm:convexity-frontier": "CurrentPosterior.posteriorConvexityFrontier",
-    "thm:two-action-alignment": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain",
-    "def:idp": "IDPModel",
-    "thm:route-reversal": "CurrentRouteReversal.routeReversal_strictAntiOn",
-    "thm:restoration": "CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements",
-    "lem:decomposition": "UnifiedWelfareSetup.welfare_decomposition",
-    "thm:cognitive-threshold": "CurrentCognition.cognitiveThresholdClaim_proved",
-    "prop:complementarity": "CurrentComplementarity.localComplementarityClaim_proved",
-    "prop:interior-optimum": "CurrentFiveState.interiorOptimumClaim_proved",
+    "def:posterior-welfare": "CurrentPaperContracts.posteriorWelfareDefinitionContract",
+    "thm:convexity-frontier": "CurrentPaperContracts.posteriorConvexityFrontierContract",
+    "thm:two-action-alignment": "CurrentPaperContracts.twoActionAlignmentContract",
+    "def:idp": "CurrentPaperContracts.idpDefinitionContract",
+    "thm:route-reversal": "CurrentPaperContracts.routeReversalContract",
+    "thm:restoration": "CurrentRestoration.restorationUnderObservedFiniteFeasibility",
+    "lem:decomposition": "CurrentPaperContracts.feasibilityPolicyDecompositionContract",
+    "thm:cognitive-threshold": "CurrentPaperContracts.cognitiveThresholdContract",
+    "prop:complementarity": "CurrentPaperContracts.localComplementarityContract",
+    "prop:interior-optimum": "CurrentPaperContracts.interiorOptimalPrecisionContract",
 }
 
 EXPECTED_DERIVATIONS = [
@@ -184,11 +184,25 @@ def main() -> int:
     parser.add_argument("--paper", type=Path, default=DEFAULT_PAPER)
     parser.add_argument("--emit-inventory", action="store_true")
     parser.add_argument("--inventory-only", action="store_true")
+    parser.add_argument("--rebind", action="store_true")
+    parser.add_argument("--acknowledge-correspondence-reviewed", action="store_true")
     args = parser.parse_args()
 
     if args.emit_inventory:
         observed = build_inventory(args.paper.resolve())
         print(json.dumps(observed, ensure_ascii=False, indent=2))
+        return 0
+    if args.rebind:
+        if not args.acknowledge_correspondence_reviewed:
+            raise SystemExit("rebind requires --acknowledge-correspondence-reviewed")
+        observed = build_inventory(args.paper.resolve())
+        INVENTORY.write_text(
+            json.dumps(observed, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        print(f"current_theory_map_rebound={INVENTORY}")
+        print(f"current_theory_map_objects={len(observed['objects'])}")
+        print(f"current_theory_map_derivations={len(observed['derivations'])}")
         return 0
     stored = json.loads(INVENTORY.read_text(encoding="utf-8"))
     observed = stored if args.inventory_only else build_inventory(args.paper.resolve())

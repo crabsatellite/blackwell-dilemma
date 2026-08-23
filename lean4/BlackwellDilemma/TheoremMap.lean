@@ -7,6 +7,7 @@
 -/
 
 import BlackwellDilemma.CurrentPaperLedger
+import BlackwellDilemma.CurrentPaperContracts
 
 open BlackwellDilemma
 
@@ -14,12 +15,16 @@ open BlackwellDilemma
 #check CurrentPosterior.PosteriorDecisionModel
 #check CurrentPosterior.PosteriorDecisionModel.inducedPosteriorWelfare
 #check CurrentPosterior.PosteriorDecisionModel.experimentObjectiveValue
+#check CurrentPosterior.FinitePosteriorExperiment
+#check CurrentPosterior.FinitePosteriorExperiment.objectiveValue
+#check CurrentPaperContracts.posteriorWelfareDefinitionContract
 
 /-! ## Theorem 2: posterior-convexity frontier and binary witness. -/
 #check CurrentPosterior.FiniteBlackwellRefinement
 #check CurrentPosterior.posteriorConvexityFrontier
 #check CurrentPosterior.not_convex_exists_binary_witness
 #check CurrentPaperLedger.posteriorConvexityFrontierClaim_proved
+#check CurrentPaperContracts.posteriorConvexityFrontierContract
 
 /-! ## Theorem 3: nondegenerate two-action alignment on the translated
     relative-interior affine-hull domain. -/
@@ -31,6 +36,7 @@ open BlackwellDilemma
 #check CurrentTwoAction.twoActionAlignmentOnAbsorbingDomain
 #check CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain
 #check CurrentPaperLedger.twoActionAlignmentClaim_proved
+#check CurrentPaperContracts.twoActionAlignmentContract
 
 /-! ## Definition 5: finite irreversibility decision problem. -/
 #check IDPModel
@@ -43,6 +49,8 @@ open BlackwellDilemma
 #check IDPModel.attainableStops_nonempty
 #check IDPModel.oracleValue
 #check UnifiedWelfareSetup
+#check FiniteExAnteIDP
+#check CurrentPaperContracts.idpDefinitionContract
 
 /-! ## Theorem 6: strict Gaussian route reversal. -/
 #check CurrentRouteReversal.routeTwoProbability
@@ -52,6 +60,7 @@ open BlackwellDilemma
 #check CurrentRouteReversal.terminalWelfare_formula
 #check CurrentRouteReversal.routeReversal_strictAntiOn
 #check CurrentPaperLedger.routeReversalClaim_proved
+#check CurrentPaperContracts.routeReversalContract
 
 /-! ## Theorem 7: restoration under feasibility knowledge. -/
 #check CurrentPosterior.PosteriorDecisionModel.inducedPosteriorWelfare_convex_of_aligned
@@ -59,6 +68,8 @@ open BlackwellDilemma
 #check CurrentPosterior.finiteExpectation
 #check CurrentPosterior.finiteExpectation_mono
 #check CurrentPaperLedger.restorationClaim_proved
+#check CurrentRestoration.AttainableTerminal
+#check CurrentRestoration.restorationUnderObservedFiniteFeasibility
 
 /-! ## Lemma 8: feasibility and policy decomposition. -/
 #check UnifiedWelfareSetup.welfare_decomposition
@@ -66,6 +77,7 @@ open BlackwellDilemma
 #check UnifiedWelfareSetup.informational_residual_nonpos
 #check UnifiedWelfareSetup.oracle_welfare_eq_agent_dynamic_topology_component
 #check CurrentPaperLedger.feasibilityPolicyDecompositionClaim_proved
+#check CurrentPaperContracts.feasibilityPolicyDecompositionContract
 
 /-! ## Theorem 9: exact cognitive threshold and strict regimes. -/
 #check CurrentCognition.kappaStar
@@ -78,6 +90,7 @@ open BlackwellDilemma
 #check CurrentCognition.cognitionWelfare_at_kappaStar
 #check CurrentCognition.cognitionWelfare_strictMonoOn_of_score_pos
 #check CurrentCognition.cognitiveThresholdClaim_proved
+#check CurrentPaperContracts.cognitiveThresholdContract
 
 /-! ## Proposition 10: local information-knowledge complementarity. -/
 #check CurrentComplementarity.assimilationDerivative
@@ -89,6 +102,7 @@ open BlackwellDilemma
 #check CurrentComplementarity.mixedCrossPartial_pos
 #check CurrentComplementarity.localComplementarityClaim_proved
 #check CurrentPaperLedger.complementarityClaim_proved
+#check CurrentPaperContracts.localComplementarityContract
 
 /-! ## Proposition 11: five-state interior optimal precision. -/
 #check CurrentFiveState.deltaS
@@ -104,6 +118,7 @@ open BlackwellDilemma
 #check CurrentFiveState.exists_global_interior_minimum
 #check CurrentFiveState.interiorOptimumClaim_proved
 #check CurrentPaperLedger.interiorOptimumClaim_proved
+#check CurrentPaperContracts.interiorOptimalPrecisionContract
 
 /-! ## Load-bearing displayed derivations outside theorem statements. -/
 #check CurrentPosterior.FiniteBlackwellRefinement.barycenter
