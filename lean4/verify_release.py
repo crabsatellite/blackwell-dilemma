@@ -20,7 +20,7 @@ LIVE_PAPER = (
     / "paper"
     / "blackwell_theory_decision.tex"
 )
-EXPECTED_VERSION = "1.3.1"
+EXPECTED_VERSION = "1.3.2"
 
 
 def run(command: list[str], cwd: Path = LEAN_ROOT) -> str:
