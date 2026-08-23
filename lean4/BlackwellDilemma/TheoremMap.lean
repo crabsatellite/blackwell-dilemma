@@ -21,23 +21,33 @@ open BlackwellDilemma
 #check CurrentPosterior.not_convex_exists_binary_witness
 #check CurrentPaperLedger.posteriorConvexityFrontierClaim_proved
 
-/-! ## Theorem 3: two-action alignment on the translated affine hull. -/
+/-! ## Theorem 3: nondegenerate two-action alignment on the translated
+    relative-interior affine-hull domain. -/
 #check CurrentTwoAction.twoActionWelfare
+#check CurrentTwoAction.twoActionWelfareWithBoundary
 #check CurrentTwoAction.PositivelyAligned
+#check CurrentTwoAction.AbsorbsDirections
 #check CurrentTwoAction.twoActionAlignment
+#check CurrentTwoAction.twoActionAlignmentOnAbsorbingDomain
+#check CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain
 #check CurrentPaperLedger.twoActionAlignmentClaim_proved
 
 /-! ## Definition 5: finite irreversibility decision problem. -/
 #check IDPModel
 #check IDPState
+#check IDPState.initial
 #check IDPModel.Step
 #check IDPModel.IsStopping
 #check IDPModel.Reaches
 #check IDPModel.attainableStops
 #check IDPModel.attainableStops_nonempty
+#check IDPModel.oracleValue
+#check UnifiedWelfareSetup
 
 /-! ## Theorem 6: strict Gaussian route reversal. -/
 #check CurrentRouteReversal.routeTwoProbability
+#check CurrentRouteReversal.precisionScale
+#check CurrentRouteReversal.precisionScale_eq_inverse_difference_std
 #check CurrentRouteReversal.terminalWelfare
 #check CurrentRouteReversal.terminalWelfare_formula
 #check CurrentRouteReversal.routeReversal_strictAntiOn
@@ -46,6 +56,8 @@ open BlackwellDilemma
 /-! ## Theorem 7: restoration under feasibility knowledge. -/
 #check CurrentPosterior.PosteriorDecisionModel.inducedPosteriorWelfare_convex_of_aligned
 #check CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements
+#check CurrentPosterior.finiteExpectation
+#check CurrentPosterior.finiteExpectation_mono
 #check CurrentPaperLedger.restorationClaim_proved
 
 /-! ## Lemma 8: feasibility and policy decomposition. -/
@@ -57,22 +69,57 @@ open BlackwellDilemma
 
 /-! ## Theorem 9: exact cognitive threshold and strict regimes. -/
 #check CurrentCognition.kappaStar
+#check CurrentCognition.assimilationWeight
+#check CurrentCognition.representedScore
+#check CurrentCognition.cognitionIndex
+#check CurrentCognition.cognitionWelfare
 #check CurrentCognition.kappaStar_isThreshold
-#check CurrentCognition.welfare_strictAntiOn_of_score_neg
-#check CurrentCognition.welfare_at_kappaStar_independent
-#check CurrentCognition.welfare_strictMonoOn_of_score_pos
+#check CurrentCognition.cognitionWelfare_strictAntiOn_of_score_neg
+#check CurrentCognition.cognitionWelfare_at_kappaStar
+#check CurrentCognition.cognitionWelfare_strictMonoOn_of_score_pos
 #check CurrentCognition.cognitiveThresholdClaim_proved
 
 /-! ## Proposition 10: local information-knowledge complementarity. -/
-#check SupermodularCognition.mixedDerivativeValue
-#check SupermodularCognition.cognitionMarginal_hasDerivAt_beta
-#check SupermodularCognition.mixedDerivativeValue_pos
-#check SupermodularCognition.supermodularCognitionClaim_proved
+#check CurrentComplementarity.assimilationDerivative
+#check CurrentComplementarity.representedScoreDerivative
+#check CurrentComplementarity.precisionScaleDerivative
+#check CurrentComplementarity.cognitionMarginal
+#check CurrentComplementarity.mixedCrossPartial
+#check CurrentComplementarity.cognitionMarginal_hasDerivAt_beta
+#check CurrentComplementarity.mixedCrossPartial_pos
+#check CurrentComplementarity.localComplementarityClaim_proved
 #check CurrentPaperLedger.complementarityClaim_proved
 
 /-! ## Proposition 11: five-state interior optimal precision. -/
-#check FiveStateRouting.routeProbability_sum_one
-#check FiveStateRouting.expectedLoss_formula
-#check FiveStateRouting.uniqueInteriorMinimum
-#check FiveStateRouting.interiorOptimumClaim_proved
+#check CurrentFiveState.deltaS
+#check CurrentFiveState.deltaB
+#check CurrentFiveState.trapProbability
+#check CurrentFiveState.goalProbability
+#check CurrentFiveState.routeProbability
+#check CurrentFiveState.routeProbability_sum_one
+#check CurrentFiveState.expectedLoss_formula
+#check CurrentFiveState.expectedLoss_sub_limit
+#check CurrentFiveState.expectedLoss_zero
+#check CurrentFiveState.expectedLoss_tendsto_atTop
+#check CurrentFiveState.exists_global_interior_minimum
+#check CurrentFiveState.interiorOptimumClaim_proved
 #check CurrentPaperLedger.interiorOptimumClaim_proved
+
+/-! ## Load-bearing displayed derivations outside theorem statements. -/
+#check CurrentPosterior.FiniteBlackwellRefinement.barycenter
+#check CurrentPosterior.FiniteBlackwellRefinement.coarseValue
+#check CurrentPosterior.FiniteBlackwellRefinement.refinedValue
+#check CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex
+#check CurrentPosterior.not_convex_exists_binary_witness
+#check CurrentTwoAction.twoActionWelfareWithBoundary
+#check CurrentRouteReversal.precisionScale_eq_inverse_difference_std
+#check CurrentRouteReversal.terminalWelfare_formula
+#check UnifiedWelfareSetup.welfare_decomposition
+#check CurrentCognition.representedScore_kappaStar
+#check CurrentComplementarity.cognitionWelfare_hasDerivAt_kappa
+#check CurrentComplementarity.cognitionMarginal_hasDerivAt_beta
+#check CurrentFiveState.expectedLoss_formula
+#check CurrentFiveState.expectedLoss_sub_limit
+#check CurrentFiveState.expectedLoss_zero
+#check CurrentFiveState.expectedLoss_tendsto_atTop
+#check CurrentFiveState.exists_global_interior_minimum

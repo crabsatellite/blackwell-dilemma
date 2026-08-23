@@ -40,15 +40,55 @@ EXPECTED = [
 BINDINGS = {
     "def:posterior-welfare": "CurrentPosterior.PosteriorDecisionModel",
     "thm:convexity-frontier": "CurrentPosterior.posteriorConvexityFrontier",
-    "thm:two-action-alignment": "CurrentTwoAction.twoActionAlignment",
+    "thm:two-action-alignment": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain",
     "def:idp": "IDPModel",
     "thm:route-reversal": "CurrentRouteReversal.routeReversal_strictAntiOn",
     "thm:restoration": "CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements",
     "lem:decomposition": "UnifiedWelfareSetup.welfare_decomposition",
     "thm:cognitive-threshold": "CurrentCognition.cognitiveThresholdClaim_proved",
-    "prop:complementarity": "SupermodularCognition.supermodularCognitionClaim_proved",
-    "prop:interior-optimum": "FiveStateRouting.interiorOptimumClaim_proved",
+    "prop:complementarity": "CurrentComplementarity.localComplementarityClaim_proved",
+    "prop:interior-optimum": "CurrentFiveState.interiorOptimumClaim_proved",
 }
+
+EXPECTED_DERIVATIONS = [
+    ("posterior-response", "CurrentPosterior.PosteriorDecisionModel.inducedPosteriorWelfare"),
+    ("experiment-value", "CurrentPosterior.PosteriorDecisionModel.experimentObjectiveValue"),
+    ("refinement-barycenter", "CurrentPosterior.FiniteBlackwellRefinement.barycenter"),
+    ("refinement-values", "CurrentPosterior.FiniteBlackwellRefinement.refinedValue"),
+    ("frontier-order", "CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex"),
+    ("conditional-barycenter", "CurrentPosterior.FiniteBlackwellRefinement.barycenter"),
+    ("conditional-jensen", "CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex"),
+    ("nonconvex-witness", "CurrentPosterior.not_convex_exists_binary_witness"),
+    ("two-action-gaps", "CurrentTwoAction.twoActionWelfareWithBoundary"),
+    ("two-action-boundary", "CurrentTwoAction.AbsorbsDirections"),
+    ("two-action-centered-gaps", "CurrentTwoAction.twoActionWelfareWithBoundary"),
+    ("two-action-alignment", "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain"),
+    ("two-action-piecewise", "CurrentTwoAction.twoActionWelfareWithBoundary"),
+    ("two-action-max", "CurrentTwoAction.twoActionAlignment"),
+    ("gaussian-signal", "CurrentRouteReversal.precisionScale_eq_inverse_difference_std"),
+    ("precision-scale", "CurrentRouteReversal.precisionScale"),
+    ("continuation-value", "CurrentRouteReversal.terminalWelfare"),
+    ("ranking-mismatch", "CurrentRouteReversal.routeReversal_strictAntiOn"),
+    ("route-welfare", "CurrentRouteReversal.terminalWelfare_formula"),
+    ("restoration-order", "CurrentPosterior.finiteExpectation_mono"),
+    ("attainable-maximum", "IDPModel.oracleValue"),
+    ("welfare-decomposition", "UnifiedWelfareSetup.welfare_decomposition"),
+    ("assimilation-weight", "CurrentCognition.assimilationWeight"),
+    ("represented-score", "CurrentCognition.representedScore"),
+    ("cognition-index", "CurrentCognition.cognitionIndex"),
+    ("cognition-welfare", "CurrentCognition.cognitionWelfare"),
+    ("cognition-threshold", "CurrentCognition.kappaStar"),
+    ("mixed-cross-partial", "CurrentComplementarity.mixedCrossPartial"),
+    ("moderate-region", "CurrentComplementarity.mixedCrossPartial_pos"),
+    ("cognition-marginal", "CurrentComplementarity.cognitionWelfare_hasDerivAt_kappa"),
+    ("five-state-rewards", "CurrentFiveState.deltaS"),
+    ("five-state-tree", "CurrentFiveState.routeProbability"),
+    ("five-state-loss", "CurrentFiveState.expectedLoss_formula"),
+    ("five-state-endpoints", "CurrentFiveState.expectedLoss_tendsto_atTop"),
+    ("trap-probability", "CurrentFiveState.trapProbability"),
+    ("distractor-probability", "CurrentFiveState.goalProbability"),
+    ("loss-rearrangement", "CurrentFiveState.expectedLoss_sub_limit"),
+]
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -76,11 +116,7 @@ def paper_objects(source: str) -> list[dict[str, object]]:
     numbered_positions = [(m.start(), i + 1) for i, m in enumerate(all_numbered.finditer(source))]
     for match in pattern.finditer(source):
         label_match = re.search(r"\\label\{([^}]+)\}", match.group(3))
-        if not label_match:
-            continue
-        label = label_match.group(1)
-        if label not in BINDINGS:
-            continue
+        label = label_match.group(1) if label_match else ""
         number = next(n for position, n in numbered_positions if position == match.start())
         statement = re.sub(r"\\label\{[^}]+\}", "", match.group(3), count=1)
         objects.append(
@@ -90,10 +126,45 @@ def paper_objects(source: str) -> list[dict[str, object]]:
                 "number": number,
                 "title": match.group(2) or "",
                 "statement_sha256": sha256_bytes(normalize_tex(statement).encode("utf-8")),
-                "binding": BINDINGS[label],
+                "binding": BINDINGS.get(label, "<unbound>"),
             }
         )
     return objects
+
+
+def paper_derivations(source: str) -> list[dict[str, str]]:
+    marker_pattern = re.compile(
+        r"%\s*FORMAL-BINDING:\s*([^:]+?)\s*::\s*([^\r\n]+)"
+    )
+    display_pattern = re.compile(r"\\\[(.*?)\\\]", re.DOTALL)
+    markers = list(marker_pattern.finditer(source))
+    displays = list(display_pattern.finditer(source))
+    if len(markers) != len(displays):
+        raise SystemExit(
+            f"display/formal-binding count mismatch: displays={len(displays)} "
+            f"bindings={len(markers)}"
+        )
+    result: list[dict[str, str]] = []
+    previous_end = 0
+    for marker, display in zip(markers, displays, strict=True):
+        if not (previous_end <= marker.start() < display.start()):
+            raise SystemExit("formal binding is not immediately ordered before its display")
+        between = source[marker.end():display.start()]
+        if between.strip():
+            raise SystemExit(
+                f"formal binding {marker.group(1).strip()} is not adjacent to its display"
+            )
+        result.append(
+            {
+                "key": marker.group(1).strip(),
+                "binding": marker.group(2).strip(),
+                "statement_sha256": sha256_bytes(
+                    normalize_tex(display.group(1)).encode("utf-8")
+                ),
+            }
+        )
+        previous_end = display.end()
+    return result
 
 
 def build_inventory(paper: Path) -> dict[str, object]:
@@ -104,6 +175,7 @@ def build_inventory(paper: Path) -> dict[str, object]:
         "manuscript": paper.name,
         "manuscript_sha256": sha256_bytes(source_bytes),
         "objects": paper_objects(source),
+        "derivations": paper_derivations(source),
     }
 
 
@@ -114,11 +186,12 @@ def main() -> int:
     parser.add_argument("--inventory-only", action="store_true")
     args = parser.parse_args()
 
-    stored = json.loads(INVENTORY.read_text(encoding="utf-8"))
-    observed = stored if args.inventory_only else build_inventory(args.paper.resolve())
     if args.emit_inventory:
+        observed = build_inventory(args.paper.resolve())
         print(json.dumps(observed, ensure_ascii=False, indent=2))
         return 0
+    stored = json.loads(INVENTORY.read_text(encoding="utf-8"))
+    observed = stored if args.inventory_only else build_inventory(args.paper.resolve())
 
     expected_sequence = [(kind, label, int(marker.split()[-1])) for kind, label, marker in EXPECTED]
     observed_sequence = [
@@ -134,6 +207,15 @@ def main() -> int:
     if stored != observed:
         raise SystemExit("current theory inventory drifted from the live manuscript")
 
+    observed_derivations = [
+        (item["key"], item["binding"]) for item in observed["derivations"]
+    ]
+    if observed_derivations != EXPECTED_DERIVATIONS:
+        raise SystemExit(
+            "load-bearing derivation sequence drifted:\n"
+            f"expected={EXPECTED_DERIVATIONS}\nobserved={observed_derivations}"
+        )
+
     theorem_map = THEOREM_MAP.read_text(encoding="utf-8")
     ledger = LEDGER.read_text(encoding="utf-8")
     for kind, label, marker in EXPECTED:
@@ -144,6 +226,11 @@ def main() -> int:
             raise SystemExit(f"missing theorem-map binding: {label} -> {binding}")
         if f'label := "{label}"' not in ledger:
             raise SystemExit(f"missing proof-ledger entry: {label}")
+    for key, binding in EXPECTED_DERIVATIONS:
+        if binding not in theorem_map:
+            raise SystemExit(
+                f"missing derivation-map binding: {key} -> {binding}"
+            )
 
     root_imports = re.findall(
         r"^import\s+([^\s]+)", ROOT_MODULE.read_text(encoding="utf-8"), re.MULTILINE
@@ -153,6 +240,7 @@ def main() -> int:
 
     print("current_theory_map_gate=passed")
     print(f"current_theory_map_objects={len(observed['objects'])}")
+    print(f"current_theory_map_derivations={len(observed['derivations'])}")
     print(f"current_theory_map_manuscript_sha256={observed['manuscript_sha256']}")
     print(f"current_theory_map_live_paper_checked={not args.inventory_only}")
     print("current_theory_map_unfinished=0")

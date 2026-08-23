@@ -4,17 +4,20 @@ import BlackwellDilemma.CurrentPosterior
 import BlackwellDilemma.CurrentTwoAction
 import BlackwellDilemma.CurrentRouteReversal
 import BlackwellDilemma.CurrentCognition
+import BlackwellDilemma.CurrentComplementarity
+import BlackwellDilemma.CurrentFiveState
 import BlackwellDilemma.UnifiedIDP
 import BlackwellDilemma.UnifiedWelfare
-import BlackwellDilemma.UnifiedSupermodularCognition
-import BlackwellDilemma.UnifiedInterior
 
 namespace BlackwellDilemma.CurrentPaperLedger
 
 open BlackwellDilemma.CurrentPosterior
 open BlackwellDilemma.CurrentTwoAction
 open BlackwellDilemma.CurrentRouteReversal
+open BlackwellDilemma.CurrentGaussian
 open BlackwellDilemma.CurrentCognition
+open BlackwellDilemma.CurrentComplementarity
+open BlackwellDilemma.CurrentFiveState
 
 inductive ObjectKind where
   | definition
@@ -58,43 +61,55 @@ theorem posteriorConvexityFrontierClaim_proved :
   exact posteriorConvexityFrontier Theta g
 
 def TwoActionAlignmentClaim : Prop :=
-  forall (E : Type) [AddCommGroup E] [Module Real E]
-    (U0 Dv Du : E →ₗ[Real] Real), Dv ≠ 0 ->
-    (ConvexOn Real Set.univ (twoActionWelfare U0 Dv Du) <->
-      PositivelyAligned Dv Du)
+  forall (E : Type) [NormedAddCommGroup E] [NormedSpace Real E]
+    [FiniteDimensional Real E]
+    (U0 Dv Du : E →ₗ[Real] Real) (boundaryGap : Real) (C : Set E),
+    Convex Real C -> (0 : E) ∈ interior C -> AbsorbsDirections C -> Dv ≠ 0 ->
+      (ConvexOn Real C
+          (twoActionWelfareWithBoundary U0 Dv Du boundaryGap) <->
+        boundaryGap = 0 /\ PositivelyAligned Dv Du)
 
 theorem twoActionAlignmentClaim_proved : TwoActionAlignmentClaim := by
-  intro E _ _ U0 Dv Du hDv
-  exact twoActionAlignment U0 Dv Du hDv
+  intro E _ _ _ U0 Dv Du boundaryGap C hC hInterior hAbsorb hDv
+  exact twoActionAffineAlignmentOnInteriorDomain
+    U0 Dv Du boundaryGap C hC hInterior hAbsorb hDv
 
 def RouteReversalClaim : Prop :=
-  forall routeOneValue routeTwoValue rewardGap : Real,
-    0 < rewardGap -> routeOneValue < routeTwoValue ->
+  forall routeOneValue routeTwoValue scoreGap : Real,
+    0 < scoreGap -> routeOneValue < routeTwoValue ->
       (forall beta,
-        terminalWelfare routeOneValue routeTwoValue rewardGap beta =
+        terminalWelfare routeOneValue routeTwoValue scoreGap beta =
           routeOneValue +
-            Phi (-rewardGap / Real.sqrt (2 * signalVariance beta)) *
+            Phi (-scoreGap * CurrentRouteReversal.precisionScale beta) *
               (routeTwoValue - routeOneValue)) /\
       StrictAntiOn
-        (terminalWelfare routeOneValue routeTwoValue rewardGap)
+        (terminalWelfare routeOneValue routeTwoValue scoreGap)
         (Set.Ioi 0)
 
 theorem routeReversalClaim_proved : RouteReversalClaim := by
-  intro routeOneValue routeTwoValue rewardGap hGap hContinuation
-  exact ⟨terminalWelfare_formula routeOneValue routeTwoValue rewardGap,
+  intro routeOneValue routeTwoValue scoreGap hGap hContinuation
+  exact ⟨terminalWelfare_formula routeOneValue routeTwoValue scoreGap,
     routeReversal_strictAntiOn hGap hContinuation⟩
 
 def RestorationClaim : Prop :=
-  forall (Theta Action : Type) [Fintype Theta]
+  (forall (Theta Action : Type) [Fintype Theta]
     [Fintype Action] [Nonempty Action]
     (M : PosteriorDecisionModel Theta Action),
     (forall action theta,
       M.subjectivePayoff action theta = M.objectivePayoff action theta) ->
-      RespectsFiniteBlackwellRefinements Theta M.inducedPosteriorWelfare
+      RespectsFiniteBlackwellRefinements Theta M.inducedPosteriorWelfare) /\
+  (forall (Omega : Type) [Fintype Omega]
+    (weight before after : Omega -> Real),
+    (forall omega, 0 <= weight omega) ->
+    (forall omega, before omega <= after omega) ->
+      finiteExpectation weight before <= finiteExpectation weight after)
 
 theorem restorationClaim_proved : RestorationClaim := by
-  intro Theta Action _ _ _ M hAligned
-  exact alignedObjective_respectsFiniteBlackwellRefinements Theta M hAligned
+  constructor
+  · intro Theta Action _ _ _ M hAligned
+    exact alignedObjective_respectsFiniteBlackwellRefinements Theta M hAligned
+  · intro Omega _ weight before after hWeight hPointwise
+    exact finiteExpectation_mono hWeight hPointwise
 
 def FeasibilityPolicyDecompositionClaim : Prop :=
   forall {V : Type} [Fintype V] [DecidableEq V] [Nonempty V]
@@ -115,16 +130,16 @@ theorem feasibilityPolicyDecompositionClaim_proved :
     setup.oracle_welfare_eq_agent_dynamic_topology_component⟩
 
 def ComplementarityClaim : Prop :=
-  BlackwellDilemma.SupermodularCognition.SupermodularCognitionClaim
+  BlackwellDilemma.CurrentComplementarity.LocalComplementarityClaim
 
 theorem complementarityClaim_proved : ComplementarityClaim :=
-  BlackwellDilemma.SupermodularCognition.supermodularCognitionClaim_proved
+  BlackwellDilemma.CurrentComplementarity.localComplementarityClaim_proved
 
 def InteriorOptimumClaim : Prop :=
-  BlackwellDilemma.FiveStateRouting.InteriorOptimumClaim
+  BlackwellDilemma.CurrentFiveState.InteriorOptimumClaim
 
 theorem interiorOptimumClaim_proved : InteriorOptimumClaim :=
-  BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved
+  BlackwellDilemma.CurrentFiveState.interiorOptimumClaim_proved
 
 def entryPosteriorWelfare : Entry :=
   { label := "def:posterior-welfare"
@@ -145,7 +160,7 @@ def entryTwoActionAlignment : Entry :=
   { label := "thm:two-action-alignment"
     title := "Two-action alignment"
     kind := .theorem
-    binding := "CurrentTwoAction.twoActionAlignment"
+    binding := "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain"
     evidence := .proved TwoActionAlignmentClaim
       twoActionAlignmentClaim_proved }
 
@@ -153,7 +168,7 @@ def entryIDP : Entry :=
   { label := "def:idp"
     title := "Irreversibility Decision Problem"
     kind := .definition
-    binding := "IDPModel; IDPState; IDPModel.Step; IDPModel.IsStopping"
+    binding := "IDPModel; IDPState.initial; IDPModel.Step; IDPModel.IsStopping; UnifiedWelfareSetup"
     evidence := .definitional }
 
 def entryRouteReversal : Entry :=
@@ -189,14 +204,14 @@ def entryComplementarity : Entry :=
   { label := "prop:complementarity"
     title := "Local information-knowledge complementarity"
     kind := .proposition
-    binding := "SupermodularCognition.supermodularCognitionClaim_proved"
+    binding := "CurrentComplementarity.localComplementarityClaim_proved"
     evidence := .proved ComplementarityClaim complementarityClaim_proved }
 
 def entryInteriorOptimum : Entry :=
   { label := "prop:interior-optimum"
     title := "Interior optimal precision"
     kind := .proposition
-    binding := "FiveStateRouting.interiorOptimumClaim_proved"
+    binding := "CurrentFiveState.interiorOptimumClaim_proved"
     evidence := .proved InteriorOptimumClaim interiorOptimumClaim_proved }
 
 def currentPaperEntries : List Entry := [

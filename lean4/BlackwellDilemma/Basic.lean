@@ -107,6 +107,40 @@ theorem gap_welfare_decomposition : s.welfare = s.W_topo + s.W_info := by
   rw [integral_sub s.hTerminal_integrable s.hRStarR_integrable]
   ring
 
+theorem gap_physical_irreducibility
+    (hBound : s.terminalReward ≤ᵐ[s.μ] s.rStarR) :
+    ∫ omega, s.terminalReward omega ∂s.μ <=
+      ∫ omega, s.rStarR omega ∂s.μ :=
+  integral_mono_ae s.hTerminal_integrable s.hRStarR_integrable hBound
+
+theorem gap_W_info_nonpos
+    (hBound : s.terminalReward ≤ᵐ[s.μ] s.rStarR) :
+    s.W_info <= 0 := by
+  unfold W_info
+  rw [integral_sub s.hTerminal_integrable s.hRStarR_integrable]
+  linarith [s.gap_physical_irreducibility hBound]
+
+theorem gap_oracle_W_info_zero
+    (hEqual : s.terminalReward =ᵐ[s.μ] s.rStarR) :
+    s.W_info = 0 := by
+  unfold W_info
+  rw [integral_sub s.hTerminal_integrable s.hRStarR_integrable]
+  have hIntegral :
+      ∫ omega, s.terminalReward omega ∂s.μ =
+        ∫ omega, s.rStarR omega ∂s.μ := integral_congr_ae hEqual
+  linarith
+
+theorem gap_welfare_le_W_topo
+    (hBound : s.terminalReward ≤ᵐ[s.μ] s.rStarR) :
+    s.welfare <= s.W_topo := by
+  rw [s.gap_welfare_decomposition]
+  linarith [s.gap_W_info_nonpos hBound]
+
+theorem gap_oracle_welfare_eq_W_topo
+    (hEqual : s.terminalReward =ᵐ[s.μ] s.rStarR) :
+    s.welfare = s.W_topo := by
+  rw [s.gap_welfare_decomposition, s.gap_oracle_W_info_zero hEqual, add_zero]
+
 end WelfareSetup
 
 end BlackwellDilemma

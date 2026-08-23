@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manuscript": "blackwell_theory_decision.tex",
-  "manuscript_sha256": "f12beded610e8170629f9834d49713693ef39bc3dd250bdb1990534dde3498cf",
+  "manuscript_sha256": "7ae32241d19b194b1c6910d6c503dc28be0be41a5c5077bc9613346165e64459",
   "objects": [
     {
       "kind": "definition",
@@ -16,7 +16,7 @@
       "label": "thm:convexity-frontier",
       "number": 2,
       "title": "Posterior-convexity frontier",
-      "statement_sha256": "a2844e9d3fd80d58b8396ae22ac4d860e831b56ae7bd421a427ab48370b7b272",
+      "statement_sha256": "42567e8675e2766c3b8c2bef6a37844ca40d363a86add506ea6cee93c60da11e",
       "binding": "CurrentPosterior.posteriorConvexityFrontier"
     },
     {
@@ -24,15 +24,15 @@
       "label": "thm:two-action-alignment",
       "number": 3,
       "title": "Two-action alignment",
-      "statement_sha256": "56a75803e8b5f12f286b0604a8ebb4578463152557ae48f72f235f6901ac70c5",
-      "binding": "CurrentTwoAction.twoActionAlignment"
+      "statement_sha256": "4fdccb4f447e29ccf574ae2a9f5beb66bc0b868bcefc774706feb0b1586b0131",
+      "binding": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain"
     },
     {
       "kind": "definition",
       "label": "def:idp",
       "number": 5,
       "title": "Irreversibility Decision Problem",
-      "statement_sha256": "4b646bda8699c9f2e4ddf9e4e2773c24ed03bd314de5906dfa4b572cfc25c496",
+      "statement_sha256": "3e894f13762c29b75b90c1b22701c5b98ee01b8ee08d58e3c58cc3719768acbb",
       "binding": "IDPModel"
     },
     {
@@ -40,7 +40,7 @@
       "label": "thm:route-reversal",
       "number": 6,
       "title": "Route-reversal theorem",
-      "statement_sha256": "7760ae26422ab1dba45e354762da90e24fdc728726f14fa0424e11be089b776f",
+      "statement_sha256": "36700c5f54a9908834548cf08d31d9e6b42dfb4b8a1b2110336d87182674e3e3",
       "binding": "CurrentRouteReversal.routeReversal_strictAntiOn"
     },
     {
@@ -72,16 +72,203 @@
       "label": "prop:complementarity",
       "number": 10,
       "title": "Local information--knowledge complementarity",
-      "statement_sha256": "41d1058064d3708145d1a4567e4cacdc1e8bf155e011570ed555d11b9a89671e",
-      "binding": "SupermodularCognition.supermodularCognitionClaim_proved"
+      "statement_sha256": "5890768100d94eaa806df1ff35f3af02ffb5b91190f7b4eface5f7893a0efc53",
+      "binding": "CurrentComplementarity.localComplementarityClaim_proved"
     },
     {
       "kind": "proposition",
       "label": "prop:interior-optimum",
       "number": 11,
       "title": "Interior optimal precision",
-      "statement_sha256": "439dda96d6186518debdaf607a0eff3dc316e30685f4c86865dc8dd9c6037f15",
-      "binding": "FiveStateRouting.interiorOptimumClaim_proved"
+      "statement_sha256": "b88de54deb3314157d749bfebac4866391caeffc1263ce80b329751e34e2be3a",
+      "binding": "CurrentFiveState.interiorOptimumClaim_proved"
+    }
+  ],
+  "derivations": [
+    {
+      "key": "posterior-response",
+      "binding": "CurrentPosterior.PosteriorDecisionModel.inducedPosteriorWelfare",
+      "statement_sha256": "be80dfa7867229c018d98b178c5472b455ad95fef283f1d2a74d143b41e23ef7"
+    },
+    {
+      "key": "experiment-value",
+      "binding": "CurrentPosterior.PosteriorDecisionModel.experimentObjectiveValue",
+      "statement_sha256": "1a56a1cab69449d05de500748653e61892b411b1ebf50f0b6a390a3566b0c033"
+    },
+    {
+      "key": "refinement-barycenter",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.barycenter",
+      "statement_sha256": "b0e83ae0c25f4a62f4db44725f946e891f59c157ce368ea7d8cc65ae7fa7c7ba"
+    },
+    {
+      "key": "refinement-values",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.refinedValue",
+      "statement_sha256": "72a2f6b92dab26541658b148aad8d665303e5b8150adbe410d65cb7dade45d55"
+    },
+    {
+      "key": "frontier-order",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex",
+      "statement_sha256": "aa42d3d1c893fccee952616fbdaff22b2682cad49995ab6670f0b42524affef9"
+    },
+    {
+      "key": "conditional-barycenter",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.barycenter",
+      "statement_sha256": "449df43fc0c120bb5581e7adba6443e71ccbf0b264184d5dd6ac375f69b7aa15"
+    },
+    {
+      "key": "conditional-jensen",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex",
+      "statement_sha256": "ef17a4fb855b33563f9b9daa4519a5bf4121510c1dd9bc08f8656bfd5a01122e"
+    },
+    {
+      "key": "nonconvex-witness",
+      "binding": "CurrentPosterior.not_convex_exists_binary_witness",
+      "statement_sha256": "5ba642c6041d0e26bce6aa60b2ca47a290c7e90446e45b38ef133df6c603008a"
+    },
+    {
+      "key": "two-action-gaps",
+      "binding": "CurrentTwoAction.twoActionWelfareWithBoundary",
+      "statement_sha256": "b58f28325947374bd5105c8c55110d9df08c508dc1d7f67dacd26b9045be270c"
+    },
+    {
+      "key": "two-action-boundary",
+      "binding": "CurrentTwoAction.AbsorbsDirections",
+      "statement_sha256": "ec1c0b539bf9e9209634b525ef6b8a6d104830d6374bf1edd7ec7cc62013b5ca"
+    },
+    {
+      "key": "two-action-centered-gaps",
+      "binding": "CurrentTwoAction.twoActionWelfareWithBoundary",
+      "statement_sha256": "90b5449575074a899beb36580b15bac6386d04c507885da98a007ddc6ca40761"
+    },
+    {
+      "key": "two-action-alignment",
+      "binding": "CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain",
+      "statement_sha256": "9cda0914cb67c20a4620a32f435122ff2da312eb1ffe56453febc30a4f47ffb4"
+    },
+    {
+      "key": "two-action-piecewise",
+      "binding": "CurrentTwoAction.twoActionWelfareWithBoundary",
+      "statement_sha256": "6611deb7965d43d55d01a0c2c5149c3b3e3671bee55d27baabc4e6a0868f3391"
+    },
+    {
+      "key": "two-action-max",
+      "binding": "CurrentTwoAction.twoActionAlignment",
+      "statement_sha256": "8de19f40132f8a3b667f51aaf40f1fe165f15178c7250490e430fbb33a5c09d5"
+    },
+    {
+      "key": "gaussian-signal",
+      "binding": "CurrentRouteReversal.precisionScale_eq_inverse_difference_std",
+      "statement_sha256": "02ebbc0067a4ce222c5dd8e9f735d9cf6f34ba83c53473d6413eb18153a9a9e4"
+    },
+    {
+      "key": "precision-scale",
+      "binding": "CurrentRouteReversal.precisionScale",
+      "statement_sha256": "63efe6f6bab8cbbbff1a5a2a06bce1c173525cf321bb40ee649c04aa32aabde7"
+    },
+    {
+      "key": "continuation-value",
+      "binding": "CurrentRouteReversal.terminalWelfare",
+      "statement_sha256": "3d0535b40ecbdaa4fafd866a481cb4d2f7f10451a198a1de152c91c369ee693c"
+    },
+    {
+      "key": "ranking-mismatch",
+      "binding": "CurrentRouteReversal.routeReversal_strictAntiOn",
+      "statement_sha256": "d87ab3ac33b5e84e7dce1d74402ab14f62c88de5aa7e7c24a2f444741f2d02ab"
+    },
+    {
+      "key": "route-welfare",
+      "binding": "CurrentRouteReversal.terminalWelfare_formula",
+      "statement_sha256": "f14e9782b133f5883a4fe7c6a24236465daa04b8f2af7383cedfde7194f3d8ed"
+    },
+    {
+      "key": "restoration-order",
+      "binding": "CurrentPosterior.finiteExpectation_mono",
+      "statement_sha256": "89ba3f1829a33a62eabeff97d71390278b02253970187b0799a9e75a299937e4"
+    },
+    {
+      "key": "attainable-maximum",
+      "binding": "IDPModel.oracleValue",
+      "statement_sha256": "2f6aa1cd39be807498cae27a8ff38ae825d9aac490baa41ea3ff9f1db9dd1169"
+    },
+    {
+      "key": "welfare-decomposition",
+      "binding": "UnifiedWelfareSetup.welfare_decomposition",
+      "statement_sha256": "2722b911f1eeaf929ba51eb69f5ddbf26551c8c22b33d0eb55fb0c0402de16b9"
+    },
+    {
+      "key": "assimilation-weight",
+      "binding": "CurrentCognition.assimilationWeight",
+      "statement_sha256": "69663b4e84dda935030ba64b2af4ac0b310acf43babf5c78fc37bff6343ac281"
+    },
+    {
+      "key": "represented-score",
+      "binding": "CurrentCognition.representedScore",
+      "statement_sha256": "b696fba246d32f6ec6376d173c5a0c243187949d76d41376e27140ccfd375f25"
+    },
+    {
+      "key": "cognition-index",
+      "binding": "CurrentCognition.cognitionIndex",
+      "statement_sha256": "b04e9ea10395405fc240b0d3702086330cdb1c905b03b7104485fdfdda62781c"
+    },
+    {
+      "key": "cognition-welfare",
+      "binding": "CurrentCognition.cognitionWelfare",
+      "statement_sha256": "0897244fa71df2b75422a1aac70bcac80909fa4c55602cc697d82ea24725a801"
+    },
+    {
+      "key": "cognition-threshold",
+      "binding": "CurrentCognition.kappaStar",
+      "statement_sha256": "e1ca16ef9c5c0b33afed46825ea66dd3074f8a2a573b4c08740fbb0df6e3b3cc"
+    },
+    {
+      "key": "mixed-cross-partial",
+      "binding": "CurrentComplementarity.mixedCrossPartial",
+      "statement_sha256": "fdf84fa2922b131ce502be7fc36d74da11a097c3c086c44c78f2c01593fe5dfd"
+    },
+    {
+      "key": "moderate-region",
+      "binding": "CurrentComplementarity.mixedCrossPartial_pos",
+      "statement_sha256": "85071d94d336b1e8854095623ea1ffb2eab3170daf7ccc649425ef4a6eccec2c"
+    },
+    {
+      "key": "cognition-marginal",
+      "binding": "CurrentComplementarity.cognitionWelfare_hasDerivAt_kappa",
+      "statement_sha256": "dcb0d156d876a00a756437b0aa3f493b4f5da0ac5fef2587bcbc3b511df86611"
+    },
+    {
+      "key": "five-state-rewards",
+      "binding": "CurrentFiveState.deltaS",
+      "statement_sha256": "cd62b5d0fa31dbde43d202d0a67fec9749ae89e1d4c8616578cff72a4a0a2733"
+    },
+    {
+      "key": "five-state-tree",
+      "binding": "CurrentFiveState.routeProbability",
+      "statement_sha256": "8c634d8795147726917240bf2dcdedb3f7a068a20eef8bec2e2f5f35f37e4781"
+    },
+    {
+      "key": "five-state-loss",
+      "binding": "CurrentFiveState.expectedLoss_formula",
+      "statement_sha256": "6458c07fed411a2263faf741d29c82ed7f1de3dd7a5fc08e50956bb13f2633db"
+    },
+    {
+      "key": "five-state-endpoints",
+      "binding": "CurrentFiveState.expectedLoss_tendsto_atTop",
+      "statement_sha256": "1bb242b916ac8447b0395ba25f0a1bac1fe00ddaf5aebc13dcab3b601dc53335"
+    },
+    {
+      "key": "trap-probability",
+      "binding": "CurrentFiveState.trapProbability",
+      "statement_sha256": "6dc1c13889ed6cb2c617367774af13b843b4b3a53d5a90069c766594d5297afe"
+    },
+    {
+      "key": "distractor-probability",
+      "binding": "CurrentFiveState.goalProbability",
+      "statement_sha256": "1fa7898031255fd06f284f33abdec6720a278c6348d96ce1ce9f960f5123970c"
+    },
+    {
+      "key": "loss-rearrangement",
+      "binding": "CurrentFiveState.expectedLoss_sub_limit",
+      "statement_sha256": "2457dbf5ccbf671a02a1f33bca87c8424a0b131bd320b9ce0f152e91c17efab1"
     }
   ]
 }

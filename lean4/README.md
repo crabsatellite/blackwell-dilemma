@@ -8,6 +8,8 @@ current_paper_closed=10
 current_paper_unfinished=0
 current_paper_project_axioms=0
 formal_root_imports=BlackwellDilemma.CurrentPaperStatus
+load_bearing_derivations=37
+current_project_source_files=15
 ```
 
 The current paper surface has no editable closed/open flag. Definitions are
@@ -20,14 +22,14 @@ of the exact proposition stored in `CurrentPaperLedger.lean`.
 |---|---|
 | Definition 1, `def:posterior-welfare` | `CurrentPosterior.PosteriorDecisionModel`, `inducedPosteriorWelfare`, `experimentObjectiveValue` |
 | Theorem 2, `thm:convexity-frontier` | `CurrentPosterior.posteriorConvexityFrontier`, `not_convex_exists_binary_witness` |
-| Theorem 3, `thm:two-action-alignment` | `CurrentTwoAction.twoActionAlignment` |
+| Theorem 3, `thm:two-action-alignment` | `CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain` |
 | Definition 5, `def:idp` | `IDPModel`, `IDPState`, `Step`, `IsStopping`, `attainableStops` |
 | Theorem 6, `thm:route-reversal` | `CurrentRouteReversal.routeReversal_strictAntiOn` |
 | Theorem 7, `thm:restoration` | `CurrentPosterior.alignedObjective_respectsFiniteBlackwellRefinements` |
 | Lemma 8, `lem:decomposition` | `UnifiedWelfareSetup.welfare_decomposition` and sign/oracle endpoints |
 | Theorem 9, `thm:cognitive-threshold` | `CurrentCognition.cognitiveThresholdClaim_proved` |
-| Proposition 10, `prop:complementarity` | `SupermodularCognition.supermodularCognitionClaim_proved` |
-| Proposition 11, `prop:interior-optimum` | `FiveStateRouting.interiorOptimumClaim_proved` |
+| Proposition 10, `prop:complementarity` | `CurrentComplementarity.localComplementarityClaim_proved` |
+| Proposition 11, `prop:interior-optimum` | `CurrentFiveState.interiorOptimumClaim_proved` |
 
 ## Trust boundary
 
@@ -35,12 +37,14 @@ of the exact proposition stored in `CurrentPaperLedger.lean`.
 `propext`, `Classical.choice`, and `Quot.sound`. No `BlackwellDilemma` project
 axiom is consumed by a current-paper endpoint.
 
-The posterior-convexity frontier is derived from a finite conditional posterior
-split with a coordinatewise barycenter identity. The two-action theorem is
-proved on the translated affine-hull direction space, where the subjective and
-objective gaps are linear functionals and the tie rule chooses action 1 at
-zero. The route, cognition, complementarity, decomposition, and five-state
-results reuse only their exact current-paper semantic consumers.
+The posterior-convexity frontier is derived from the same finite conditional
+posterior split and barycenter object stated in the paper. The two-action
+theorem retains the objective boundary intercept and proves that convexity
+forces it to zero before deriving nonnegative proportionality on the translated
+relative-interior domain. Cognition is a deterministic assimilation-weight
+model, not a randomized reveal experiment. Route reversal, differential
+complementarity, decomposition, and the five-state endpoint/interior-minimum
+proof use the exact current-paper carriers.
 
 ## Build and audit
 
@@ -66,10 +70,11 @@ source/hash comparison.
 | `CurrentPosterior.lean` | Definition 1, Theorem 2, and fixed-objective restoration core |
 | `CurrentTwoAction.lean` | Theorem 3 |
 | `UnifiedIDP.lean` / `UnifiedWelfare.lean` | Definition 5 and Lemma 8 |
+| `CurrentGaussian.lean` | shared normal CDF, density, and precision-scale derivations |
 | `CurrentRouteReversal.lean` | Theorem 6 |
 | `CurrentCognition.lean` | Theorem 9 |
-| `UnifiedSupermodularCognition.lean` | Proposition 10 |
-| `UnifiedInterior.lean` | Proposition 11 |
+| `CurrentComplementarity.lean` | Proposition 10 |
+| `CurrentFiveState.lean` | Proposition 11 |
 | `CurrentPaperLedger.lean` | proof-carrying 10-object ledger |
 | `TheoremMap.lean` | publication-facing correspondence map |
 | `CurrentPaperStatus.lean` | 10/10 and zero-unfinished gate |

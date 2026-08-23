@@ -181,6 +181,24 @@ def RespectsFiniteBlackwellRefinements
     forall R : FiniteBlackwellRefinement Theta Coarse Fine,
       R.coarseValue g <= R.refinedValue g
 
+/-- Finite expectation used to aggregate the pointwise fixed-feasibility
+    restoration inequality across feasibility realizations. -/
+noncomputable def finiteExpectation
+    {Omega : Type v} [Fintype Omega]
+    (weight value : Omega -> Real) : Real :=
+  Finset.univ.sum fun omega => weight omega * value omega
+
+theorem finiteExpectation_mono
+    {Omega : Type v} [Fintype Omega]
+    {weight before after : Omega -> Real}
+    (hWeight : forall omega, 0 <= weight omega)
+    (hPointwise : forall omega, before omega <= after omega) :
+    finiteExpectation weight before <= finiteExpectation weight after := by
+  unfold finiteExpectation
+  apply Finset.sum_le_sum
+  intro omega _hOmega
+  exact mul_le_mul_of_nonneg_left (hPointwise omega) (hWeight omega)
+
 /-- Theorem 2 (posterior-convexity frontier): objective welfare respects every
     finite Blackwell refinement if and only if the induced posterior-welfare
     function is convex on the simplex. -/

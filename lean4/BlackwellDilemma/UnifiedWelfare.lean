@@ -6,7 +6,6 @@
 -/
 
 import BlackwellDilemma.Basic
-import BlackwellDilemma.PhysicalIrreducibility
 import BlackwellDilemma.UnifiedIDP
 import Mathlib.Analysis.Calculus.Deriv.Basic
 

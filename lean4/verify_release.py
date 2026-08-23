@@ -11,24 +11,16 @@ from pathlib import Path
 
 LEAN_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = LEAN_ROOT.parent
-CURRENT_LEAN_FILES = [
-    LEAN_ROOT / "BlackwellDilemma.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentPosterior.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentTwoAction.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentRouteReversal.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentCognition.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentPaperLedger.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "TheoremMap.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentPaperStatus.lean",
-    LEAN_ROOT / "BlackwellDilemma" / "CurrentPaperAxiomAudit.lean",
-]
+CURRENT_LEAN_FILES = [LEAN_ROOT / "BlackwellDilemma.lean"] + sorted(
+    (LEAN_ROOT / "BlackwellDilemma").rglob("*.lean")
+)
 LIVE_PAPER = (
     REPO_ROOT.parent
     / "blackwell-dilemma-internal"
     / "paper"
     / "blackwell_theory_decision.tex"
 )
-EXPECTED_VERSION = "1.1.0"
+EXPECTED_VERSION = "1.2.0"
 
 
 def run(command: list[str], cwd: Path = LEAN_ROOT) -> str:
@@ -131,17 +123,14 @@ def main() -> int:
     if "error:" in build_output.lower():
         raise SystemExit("Lean build output contains an error marker")
 
-    status_output = run(
-        ["lake", "env", "lean", "BlackwellDilemma/CurrentPaperStatus.lean"]
-    )
+    strict_lean = ["lake", "env", "lean", "--trust=0", "-DwarningAsError=true"]
+    status_output = run(strict_lean + ["BlackwellDilemma/CurrentPaperStatus.lean"])
     required_status = "current-paper theory map: entries=10 closed=10 unfinished=0"
     if required_status not in status_output:
         raise SystemExit("current-paper status output drifted")
 
-    run(["lake", "env", "lean", "BlackwellDilemma/TheoremMap.lean"])
-    axiom_output = run(
-        ["lake", "env", "lean", "BlackwellDilemma/CurrentPaperAxiomAudit.lean"]
-    )
+    run(strict_lean + ["BlackwellDilemma/TheoremMap.lean"])
+    axiom_output = run(strict_lean + ["BlackwellDilemma/CurrentPaperAxiomAudit.lean"])
     if re.search(r"depends on axioms:\s*\[[^\]]*BlackwellDilemma", axiom_output, re.DOTALL):
         raise SystemExit("current-paper endpoint depends on a project axiom")
     if axiom_output.count("depends on axioms:") != 9:
@@ -153,9 +142,13 @@ def main() -> int:
     correspondence_output = run(audit_command)
     if "current_theory_map_gate=passed" not in correspondence_output:
         raise SystemExit("current theory-map correspondence gate did not pass")
+    if "current_theory_map_derivations=37" not in correspondence_output:
+        raise SystemExit("current derivation-map coverage drifted")
 
     print("blackwell_current_release_gate=passed")
     print("blackwell_current_theory_map=10/10")
+    print("blackwell_current_derivation_map=37/37")
+    print(f"blackwell_current_source_files={len(CURRENT_LEAN_FILES)}")
     print("blackwell_current_unfinished=0")
     print("blackwell_current_project_axioms=0")
     print(f"blackwell_current_release_version={EXPECTED_VERSION}")

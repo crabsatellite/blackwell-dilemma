@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this formal companion, please cite the paper and this software release."
 title: "BlackwellDilemma: Lean 4 formal companion for objective information value under endogenous feasibility"
 type: software
-version: 1.1.0
+version: 1.2.0
 date-released: 2026-08-23
 authors:
   - family-names: Li

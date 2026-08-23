@@ -7,7 +7,7 @@ import BlackwellDilemma.TheoremMap
 #print axioms BlackwellDilemma.CurrentPosterior.not_convex_exists_binary_witness
 
 -- Theorem 3.
-#print axioms BlackwellDilemma.CurrentTwoAction.twoActionAlignment
+#print axioms BlackwellDilemma.CurrentTwoAction.twoActionAffineAlignmentOnInteriorDomain
 
 -- Theorem 6.
 #print axioms BlackwellDilemma.CurrentRouteReversal.routeReversal_strictAntiOn
@@ -22,7 +22,7 @@ import BlackwellDilemma.TheoremMap
 #print axioms BlackwellDilemma.CurrentCognition.cognitiveThresholdClaim_proved
 
 -- Proposition 10.
-#print axioms BlackwellDilemma.SupermodularCognition.supermodularCognitionClaim_proved
+#print axioms BlackwellDilemma.CurrentComplementarity.localComplementarityClaim_proved
 
 -- Proposition 11.
-#print axioms BlackwellDilemma.FiveStateRouting.interiorOptimumClaim_proved
+#print axioms BlackwellDilemma.CurrentFiveState.interiorOptimumClaim_proved
