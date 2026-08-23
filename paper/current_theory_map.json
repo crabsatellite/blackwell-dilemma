@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manuscript": "blackwell_theory_decision.tex",
-  "manuscript_sha256": "2e00b117b01fcfa8a2f5919b8ea5529397f89f3d23f326a3fb2499d59f74ff77",
+  "manuscript_sha256": "fe9392043863bc5a94bbb01c37aed42f87d9820633b37dddf83b07aeffa24e31",
   "objects": [
     {
       "kind": "definition",
@@ -102,7 +102,7 @@
     },
     {
       "key": "refinement-values",
-      "binding": "CurrentPosterior.FiniteBlackwellRefinement.refinedValue",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.valueFormulas",
       "statement_sha256": "72a2f6b92dab26541658b148aad8d665303e5b8150adbe410d65cb7dade45d55"
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "key": "conditional-jensen",
-      "binding": "CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex",
+      "binding": "CurrentPosterior.FiniteBlackwellRefinement.conditionalJensen",
       "statement_sha256": "ef17a4fb855b33563f9b9daa4519a5bf4121510c1dd9bc08f8656bfd5a01122e"
     },
     {
@@ -127,17 +127,17 @@
     },
     {
       "key": "two-action-gaps",
-      "binding": "CurrentTwoAction.twoActionWelfareWithBoundary",
+      "binding": "CurrentTwoAction.finitePayoffGap",
       "statement_sha256": "b58f28325947374bd5105c8c55110d9df08c508dc1d7f67dacd26b9045be270c"
     },
     {
       "key": "two-action-boundary",
-      "binding": "CurrentTwoAction.AbsorbsDirections",
+      "binding": "CurrentTwoAction.subjectiveIndifferenceSet",
       "statement_sha256": "ec1c0b539bf9e9209634b525ef6b8a6d104830d6374bf1edd7ec7cc62013b5ca"
     },
     {
       "key": "two-action-centered-gaps",
-      "binding": "CurrentTwoAction.twoActionWelfareWithBoundary",
+      "binding": "CurrentTwoAction.centeredGapFormulas",
       "statement_sha256": "90b5449575074a899beb36580b15bac6386d04c507885da98a007ddc6ca40761"
     },
     {
@@ -157,7 +157,7 @@
     },
     {
       "key": "gaussian-signal",
-      "binding": "CurrentRouteReversal.precisionScale_eq_inverse_difference_std",
+      "binding": "CurrentGaussian.gaussianScoreExperimentLaw",
       "statement_sha256": "02ebbc0067a4ce222c5dd8e9f735d9cf6f34ba83c53473d6413eb18153a9a9e4"
     },
     {
@@ -167,12 +167,12 @@
     },
     {
       "key": "continuation-value",
-      "binding": "CurrentRouteReversal.terminalWelfare",
+      "binding": "CurrentRouteReversal.expectedContinuation",
       "statement_sha256": "3d0535b40ecbdaa4fafd866a481cb4d2f7f10451a198a1de152c91c369ee693c"
     },
     {
       "key": "ranking-mismatch",
-      "binding": "CurrentRouteReversal.routeReversal_strictAntiOn",
+      "binding": "CurrentRouteReversal.finiteRouteReversal",
       "statement_sha256": "d87ab3ac33b5e84e7dce1d74402ab14f62c88de5aa7e7c24a2f444741f2d02ab"
     },
     {
@@ -182,7 +182,7 @@
     },
     {
       "key": "restoration-order",
-      "binding": "CurrentPosterior.finiteExpectation_mono",
+      "binding": "CurrentRestoration.restorationUnderObservedFiniteFeasibility",
       "statement_sha256": "89ba3f1829a33a62eabeff97d71390278b02253970187b0799a9e75a299937e4"
     },
     {
@@ -237,12 +237,12 @@
     },
     {
       "key": "five-state-rewards",
-      "binding": "CurrentFiveState.deltaS",
+      "binding": "CurrentFiveState.fiveStateRewards",
       "statement_sha256": "cd62b5d0fa31dbde43d202d0a67fec9749ae89e1d4c8616578cff72a4a0a2733"
     },
     {
       "key": "five-state-tree",
-      "binding": "CurrentFiveState.routeProbability",
+      "binding": "CurrentFiveState.fiveStateTopology",
       "statement_sha256": "8c634d8795147726917240bf2dcdedb3f7a068a20eef8bec2e2f5f35f37e4781"
     },
     {
@@ -252,7 +252,7 @@
     },
     {
       "key": "five-state-endpoints",
-      "binding": "CurrentFiveState.expectedLoss_tendsto_atTop",
+      "binding": "CurrentFiveState.expectedLoss_endpoints",
       "statement_sha256": "1bb242b916ac8447b0395ba25f0a1bac1fe00ddaf5aebc13dcab3b601dc53335"
     },
     {
@@ -262,7 +262,7 @@
     },
     {
       "key": "distractor-probability",
-      "binding": "CurrentFiveState.goalProbability",
+      "binding": "CurrentFiveState.distractorProbability",
       "statement_sha256": "1fa7898031255fd06f284f33abdec6720a278c6348d96ce1ce9f960f5123970c"
     },
     {

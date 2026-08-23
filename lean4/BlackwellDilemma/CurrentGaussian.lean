@@ -4,6 +4,7 @@ import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.Probability.Distributions.Gaussian.Real
 import Mathlib.Tactic
 
 namespace BlackwellDilemma.CurrentGaussian
@@ -165,6 +166,73 @@ theorem Phi_lt_one (x : Real) : Phi x < 1 := by
 
 noncomputable def signalVariance (beta : Real) : Real :=
   1 / ((2 : Real) ^ (2 * beta) - 1)
+
+theorem signalVariance_pos {beta : Real} (hBeta : 0 < beta) :
+    0 < signalVariance beta := by
+  have hPow : (1 : Real) < (2 : Real) ^ (2 * beta) :=
+    Real.one_lt_rpow (by norm_num) (by linarith)
+  unfold signalVariance
+  positivity
+
+theorem signalVariance_strictAntiOn :
+    StrictAntiOn signalVariance (Set.Ioi 0) := by
+  intro betaLow hLow betaHigh _hHigh hBeta
+  have hBetaLow : 0 < betaLow := hLow
+  have hDenomLow : 0 < (2 : Real) ^ (2 * betaLow) - 1 := by
+    have hPow : (1 : Real) < (2 : Real) ^ (2 * betaLow) :=
+      Real.one_lt_rpow (by norm_num) (by linarith [hBetaLow])
+    linarith
+  have hPow :
+      (2 : Real) ^ (2 * betaLow) < (2 : Real) ^ (2 * betaHigh) :=
+    Real.rpow_lt_rpow_of_exponent_lt (by norm_num) (by linarith)
+  unfold signalVariance
+  exact one_div_lt_one_div_of_lt hDenomLow (by linarith)
+
+/-- Positive variance carrier for the Gaussian signal experiment. -/
+noncomputable def positiveSignalVariance
+    (beta : Set.Ioi (0 : Real)) : NNReal :=
+  ⟨signalVariance beta.1, (signalVariance_pos beta.2).le⟩
+
+open ProbabilityTheory in
+/-- One coordinate of the manuscript's Gaussian payoff experiment. -/
+noncomputable def gaussianScoreLaw
+    (ell : Real) (beta : Set.Ioi (0 : Real)) : Measure Real :=
+  gaussianReal ell (positiveSignalVariance beta)
+
+open ProbabilityTheory in
+/-- The joint law of the two independent, equal-variance Gaussian scores. -/
+noncomputable def gaussianScoreExperimentLaw
+    (ell : Fin 2 -> Real) (beta : Set.Ioi (0 : Real)) : Measure (Real × Real) :=
+  (gaussianScoreLaw (ell 0) beta).prod (gaussianScoreLaw (ell 1) beta)
+
+open ProbabilityTheory in
+/-- Literal additive-noise garbling of every score coordinate. -/
+def GaussianScoreGarbling
+    (ell : Fin 2 -> Real)
+    (betaLow betaHigh : Set.Ioi (0 : Real)) : Prop :=
+  forall i : Fin 2,
+    gaussianScoreLaw (ell i) betaHigh ∗
+        gaussianReal 0
+          (positiveSignalVariance betaLow - positiveSignalVariance betaHigh) =
+      gaussianScoreLaw (ell i) betaLow
+
+open ProbabilityTheory in
+theorem gaussianScoreGarbling_of_lt
+    (ell : Fin 2 -> Real)
+    {betaLow betaHigh : Set.Ioi (0 : Real)}
+    (hBeta : betaLow.1 < betaHigh.1) :
+    GaussianScoreGarbling ell betaLow betaHigh := by
+  have hVarianceReal :
+      signalVariance betaHigh.1 < signalVariance betaLow.1 :=
+    signalVariance_strictAntiOn betaLow.2 betaHigh.2 hBeta
+  have hVariance :
+      positiveSignalVariance betaHigh <= positiveSignalVariance betaLow := by
+    exact_mod_cast hVarianceReal.le
+  intro i
+  unfold gaussianScoreLaw
+  rw [gaussianReal_conv_gaussianReal]
+  simp only [add_zero]
+  rw [add_tsub_cancel_of_le hVariance]
 
 noncomputable def precisionScale (beta : Real) : Real :=
   Real.sqrt (((2 : Real) ^ (2 * beta) - 1) / 2)

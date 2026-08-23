@@ -48,9 +48,15 @@ theorem restorationUnderObservedFiniteFeasibility
     (decision : (omega : Omega) ->
       PosteriorDecisionModel Theta
         (AttainableTerminal (X.realized omega) (X.initialState omega)))
-    (hAligned : forall omega action theta,
+    (terminalReward : (omega : Omega) ->
+      AttainableTerminal (X.realized omega) (X.initialState omega) ->
+        Theta -> Real)
+    (hSubjectiveTerminal : forall omega action theta,
       (decision omega).subjectivePayoff action theta =
-        (decision omega).objectivePayoff action theta)
+        terminalReward omega action theta)
+    (hObjectiveTerminal : forall omega action theta,
+      (decision omega).objectivePayoff action theta =
+        terminalReward omega action theta)
     (refinement : (omega : Omega) ->
       FiniteBlackwellRefinement Theta Coarse Fine) :
     finiteExpectation X.weight (fun omega =>
@@ -63,6 +69,8 @@ theorem restorationUnderObservedFiniteFeasibility
   intro omega
   exact (refinement omega).value_mono_of_convex
     ((decision omega).inducedPosteriorWelfare_convex_of_aligned
-      (hAligned omega))
+      (fun action theta =>
+        (hSubjectiveTerminal omega action theta).trans
+          (hObjectiveTerminal omega action theta).symm))
 
 end BlackwellDilemma.CurrentRestoration

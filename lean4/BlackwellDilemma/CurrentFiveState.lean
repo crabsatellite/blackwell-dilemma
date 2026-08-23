@@ -1,6 +1,7 @@
 /- Exact current-paper five-state routing model and interior-minimum proof. -/
 
 import BlackwellDilemma.CurrentGaussian
+import BlackwellDilemma.UnifiedIDP
 import Mathlib.Topology.Order.Compact
 
 namespace BlackwellDilemma.CurrentFiveState
@@ -8,17 +9,75 @@ namespace BlackwellDilemma.CurrentFiveState
 open Filter Set Topology
 open BlackwellDilemma.CurrentGaussian
 
+inductive Vertex where
+  | S | A | B | D | G
+  deriving DecidableEq, Fintype
+
+def fiveStateRelation : Vertex -> Vertex -> Prop
+  | .S, .A => True
+  | .S, .B => True
+  | .B, .D => True
+  | .B, .G => True
+  | _, _ => False
+
+def fiveStateGraph : SimpleGraph Vertex :=
+  SimpleGraph.fromRel fiveStateRelation
+
+def fiveStateAdjacency : Vertex -> Vertex -> Prop
+  | .S, .A | .A, .S | .S, .B | .B, .S
+  | .B, .D | .D, .B | .B, .G | .G, .B => True
+  | _, _ => False
+
+theorem fiveState_adj_iff (x y : Vertex) :
+    fiveStateGraph.Adj x y ↔ fiveStateAdjacency x y := by
+  cases x <;> cases y <;>
+    simp [fiveStateGraph, fiveStateRelation, fiveStateAdjacency,
+      SimpleGraph.fromRel_adj]
+
+def fiveStateTerminal : Finset Vertex := { .A, .D, .G }
+
+noncomputable def fiveStateReward : Vertex -> Real
+  | .S => 0
+  | .A => (6 : Real) / 10
+  | .B => (4 : Real) / 10
+  | .D => (1 : Real) / 10
+  | .G => 1
+
+noncomputable def fiveStateIDP : IDPModel Vertex where
+  baseGraph := fiveStateGraph
+  openGraph := fiveStateGraph
+  open_le_base := le_rfl
+  terminal := fiveStateTerminal
+  localScore := fiveStateReward
+  welfare := fiveStateReward
+
+theorem fiveStateRewards :
+    fiveStateReward .S = 0 /\
+    fiveStateReward .A = (6 : Real) / 10 /\
+    fiveStateReward .B = (4 : Real) / 10 /\
+    fiveStateReward .D = (1 : Real) / 10 /\
+    fiveStateReward .G = 1 := by
+  norm_num [fiveStateReward]
+
+theorem fiveStateTopology :
+    (forall x y, fiveStateGraph.Adj x y ↔ fiveStateAdjacency x y) /\
+      fiveStateTerminal = { .A, .D, .G } := by
+  exact ⟨fiveState_adj_iff, rfl⟩
+
 inductive Outcome where
   | trap
   | goal
   | distractor
   deriving DecidableEq, Fintype
 
-noncomputable def deltaS : Real := (1 : Real) / 5
-noncomputable def deltaB : Real := (9 : Real) / 10
+noncomputable def deltaS : Real :=
+  fiveStateReward .A - fiveStateReward .B
 
-theorem deltaS_pos : 0 < deltaS := by norm_num [deltaS]
-theorem deltaB_pos : 0 < deltaB := by norm_num [deltaB]
+noncomputable def deltaB : Real :=
+  fiveStateReward .G - fiveStateReward .D
+
+theorem deltaS_pos : 0 < deltaS := by norm_num [deltaS, fiveStateReward]
+theorem deltaB_pos : 0 < deltaB := by norm_num [deltaB, fiveStateReward]
 
 noncomputable def trapProbability (beta : Real) : Real :=
   Phi (deltaS * precisionScale beta)
@@ -26,15 +85,28 @@ noncomputable def trapProbability (beta : Real) : Real :=
 noncomputable def goalProbability (beta : Real) : Real :=
   Phi (deltaB * precisionScale beta)
 
+noncomputable def distractorProbability (beta : Real) : Real :=
+  1 - goalProbability beta
+
 noncomputable def routeProbability (beta : Real) : Outcome -> Real
   | .trap => trapProbability beta
   | .goal => (1 - trapProbability beta) * goalProbability beta
-  | .distractor => (1 - trapProbability beta) * (1 - goalProbability beta)
+  | .distractor => (1 - trapProbability beta) * distractorProbability beta
+
+def outcomeVertex : Outcome -> Vertex
+  | .trap => .A
+  | .goal => .G
+  | .distractor => .D
 
 noncomputable def terminalLoss : Outcome -> Real
-  | .trap => (4 : Real) / 10
-  | .goal => 0
-  | .distractor => (9 : Real) / 10
+  | outcome => fiveStateReward .G - fiveStateReward (outcomeVertex outcome)
+
+theorem distractorProbability_formula (beta : Real) :
+    distractorProbability beta = 1 - Phi (deltaB * precisionScale beta) := rfl
+
+theorem terminalLoss_eq_reward_gap (outcome : Outcome) :
+    terminalLoss outcome =
+      fiveStateReward .G - fiveStateReward (outcomeVertex outcome) := rfl
 
 noncomputable def expectedLoss (beta : Real) : Real :=
   Finset.univ.sum fun outcome => routeProbability beta outcome * terminalLoss outcome
@@ -55,12 +127,13 @@ theorem routeProbability_nonneg (beta : Real) (outcome : Outcome) :
   rcases trapProbability_mem_unit beta with ⟨hTrap0, hTrap1⟩
   rcases goalProbability_mem_unit beta with ⟨hGoal0, hGoal1⟩
   cases outcome <;>
-    simp [routeProbability, hTrap0, hTrap1, hGoal0, hGoal1, mul_nonneg]
+    simp [routeProbability, distractorProbability,
+      hTrap0, hTrap1, hGoal0, hGoal1, mul_nonneg]
 
 theorem routeProbability_sum_one (beta : Real) :
     Finset.univ.sum (routeProbability beta) = 1 := by
   rw [outcome_univ]
-  simp [routeProbability]
+  simp [routeProbability, distractorProbability]
   ring
 
 theorem expectedLoss_formula (beta : Real) :
@@ -70,7 +143,8 @@ theorem expectedLoss_formula (beta : Real) :
           (1 - goalProbability beta) := by
   unfold expectedLoss
   rw [outcome_univ]
-  simp [routeProbability, terminalLoss]
+  simp [routeProbability, distractorProbability, terminalLoss,
+    outcomeVertex, fiveStateReward]
   ring
 
 theorem expectedLoss_sub_limit (beta : Real) :
@@ -137,6 +211,11 @@ theorem expectedLoss_tendsto_atTop :
   rw [hTarget] at hFormula
   exact hFormula.congr' (Filter.Eventually.of_forall fun beta =>
     (expectedLoss_formula beta).symm)
+
+theorem expectedLoss_endpoints :
+    expectedLoss 0 = (425 : Real) / 1000 /\
+      Tendsto expectedLoss atTop (nhds ((4 : Real) / 10)) :=
+  ⟨expectedLoss_zero, expectedLoss_tendsto_atTop⟩
 
 theorem exists_below_perfect_limit :
     exists beta0 : Real, 0 < beta0 /\ expectedLoss beta0 < (4 : Real) / 10 := by

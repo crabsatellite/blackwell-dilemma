@@ -181,6 +181,36 @@ noncomputable def refinedValue
       Finset.univ.sum (fun fine =>
         R.kernel coarse fine * g (R.finePosterior coarse fine))
 
+/-- The two value displays used together in the manuscript. -/
+theorem valueFormulas
+    (R : FiniteBlackwellRefinement Theta Coarse Fine)
+    (g : (Theta -> Real) -> Real) :
+    R.coarseValue g =
+        Finset.univ.sum (fun coarse =>
+          R.coarseWeight coarse * g (R.coarsePosterior coarse)) /\
+    R.refinedValue g =
+        Finset.univ.sum (fun coarse =>
+          R.coarseWeight coarse *
+            Finset.univ.sum (fun fine =>
+              R.kernel coarse fine * g (R.finePosterior coarse fine))) := by
+  exact ⟨rfl, rfl⟩
+
+/-- The conditional Jensen inequality at one coarse posterior. -/
+theorem conditionalJensen
+    (R : FiniteBlackwellRefinement Theta Coarse Fine)
+    {g : (Theta -> Real) -> Real}
+    (hConvex : ConvexOn Real (posteriorSet Theta) g)
+    (coarse : Coarse) :
+    g (R.coarsePosterior coarse) <=
+      Finset.univ.sum (fun fine =>
+        R.kernel coarse fine * g (R.finePosterior coarse fine)) := by
+  rw [R.barycenter coarse]
+  simpa only [smul_eq_mul] using
+    hConvex.map_sum_le
+      (fun fine _hFine => R.kernel_nonneg coarse fine)
+      (by simpa using R.kernel_sum_one coarse)
+      (fun fine _hFine => R.finePosterior_mem coarse fine)
+
 theorem value_mono_of_convex
     (R : FiniteBlackwellRefinement Theta Coarse Fine)
     {g : (Theta -> Real) -> Real}
@@ -189,13 +219,8 @@ theorem value_mono_of_convex
   unfold coarseValue refinedValue
   apply Finset.sum_le_sum
   intro coarse _hCoarse
-  apply mul_le_mul_of_nonneg_left _ (R.coarseWeight_nonneg coarse)
-  rw [R.barycenter coarse]
-  simpa only [smul_eq_mul] using
-    hConvex.map_sum_le
-      (fun fine _hFine => R.kernel_nonneg coarse fine)
-      (by simpa using R.kernel_sum_one coarse)
-      (fun fine _hFine => R.finePosterior_mem coarse fine)
+  exact mul_le_mul_of_nonneg_left
+    (R.conditionalJensen hConvex coarse) (R.coarseWeight_nonneg coarse)
 
 end FiniteBlackwellRefinement
 

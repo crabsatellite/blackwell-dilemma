@@ -62,15 +62,18 @@ theorem posteriorWelfareDefinitionContract
 /-- Theorem 2, including the strict binary witness when convexity fails. -/
 theorem posteriorConvexityFrontierContract
     (Theta : Type u) [Fintype Theta]
-    (g : (Theta -> Real) -> Real) :
-    (RespectsFiniteBlackwellRefinements Theta g <->
-      ConvexOn Real (posteriorSet Theta) g) /\
-    (Not (ConvexOn Real (posteriorSet Theta) g) ->
+    {Action : Type v} [Fintype Action] [Nonempty Action]
+    (M : PosteriorDecisionModel Theta Action) :
+    (RespectsFiniteBlackwellRefinements Theta M.inducedPosteriorWelfare <->
+      ConvexOn Real (posteriorSet Theta) M.inducedPosteriorWelfare) /\
+    (Not (ConvexOn Real (posteriorSet Theta) M.inducedPosteriorWelfare) ->
       exists mu nu : Theta -> Real, mu ∈ posteriorSet Theta /\
         nu ∈ posteriorSet Theta /\
         exists a b : Real, 0 <= a /\ 0 <= b /\ a + b = 1 /\
-          a * g mu + b * g nu < g (a • mu + b • nu)) := by
-  exact ⟨posteriorConvexityFrontier Theta g,
+          a * M.inducedPosteriorWelfare mu +
+            b * M.inducedPosteriorWelfare nu <
+              M.inducedPosteriorWelfare (a • mu + b • nu)) := by
+  exact ⟨posteriorConvexityFrontier Theta M.inducedPosteriorWelfare,
     fun hNotConvex => not_convex_exists_binary_witness Theta hNotConvex⟩
 
 /-- Theorem 3 on the exact uncentered translated carrier. -/
@@ -132,6 +135,11 @@ theorem routeReversalContract
     (hContinuationRanking :
       expectedContinuation X.weight routeOne <
         expectedContinuation X.weight routeTwo) :
+    (forall betaLow betaHigh : Set.Ioi (0 : Real),
+      betaLow.1 < betaHigh.1 ->
+        GaussianScoreGarbling
+          (fun i : Fin 2 => if i = 0 then ellOne else ellTwo)
+          betaLow betaHigh) /\
     (forall beta,
       terminalWelfare
           (expectedContinuation X.weight routeOne)
@@ -148,8 +156,12 @@ theorem routeReversalContract
         (expectedContinuation X.weight routeTwo)
         (ellOne - ellTwo))
       (Set.Ioi 0) := by
-  exact finiteRouteReversal X.weight routeOne routeTwo ellOne ellTwo
+  have hReversal := finiteRouteReversal X.weight routeOne routeTwo ellOne ellTwo
     hImmediateRanking hContinuationRanking
+  exact ⟨fun betaLow betaHigh hBeta =>
+      gaussianScoreGarbling_of_lt
+        (fun i : Fin 2 => if i = 0 then ellOne else ellTwo) hBeta,
+    hReversal.1, hReversal.2⟩
 
 /-- Lemma 8 with the paper's attainable dynamic oracle. -/
 theorem feasibilityPolicyDecompositionContract
@@ -232,8 +244,18 @@ theorem localComplementarityContract
 /-- Proposition 11 with exact rational parameters, endpoints, one-sided
     infinite-precision limit, and a global minimum on `beta >= 0`. -/
 theorem interiorOptimalPrecisionContract :
+    fiveStateReward .S = 0 /\
+    fiveStateReward .A = (6 : Real) / 10 /\
+    fiveStateReward .B = (4 : Real) / 10 /\
+    fiveStateReward .D = (1 : Real) / 10 /\
+    fiveStateReward .G = 1 /\
+    (forall x y, fiveStateGraph.Adj x y ↔ fiveStateAdjacency x y) /\
+    fiveStateTerminal = { .A, .D, .G } /\
     deltaS = (1 : Real) / 5 /\
     deltaB = (9 : Real) / 10 /\
+    (forall beta,
+      distractorProbability beta =
+        1 - Phi (deltaB * CurrentGaussian.precisionScale beta)) /\
     (forall beta,
       expectedLoss beta =
         (4 / 10 : Real) * Phi (deltaS * CurrentGaussian.precisionScale beta) +
@@ -247,9 +269,15 @@ theorem interiorOptimalPrecisionContract :
       (forall beta : Real, 0 <= beta -> expectedLoss betaStar <= expectedLoss beta) /\
       expectedLoss betaStar < (4 : Real) / 10) /\
     (4 : Real) / 10 < (425 : Real) / 1000 := by
-  refine ⟨rfl, rfl, ?_, expectedLoss_zero,
+  rcases fiveStateRewards with ⟨hS, hA, hB, hD, hG⟩
+  rcases fiveStateTopology with ⟨hTopology, hTerminal⟩
+  refine ⟨hS, hA, hB, hD, hG, hTopology, hTerminal, ?_, ?_,
+    distractorProbability_formula, ?_, expectedLoss_zero,
     expectedLoss_tendsto_atTop, exists_global_interior_minimum, by norm_num⟩
+  · norm_num [deltaS, fiveStateReward]
+  · norm_num [deltaB, fiveStateReward]
   intro beta
-  simpa [trapProbability, goalProbability] using expectedLoss_formula beta
+  simpa [trapProbability, goalProbability, distractorProbability] using
+    expectedLoss_formula beta
 
 end BlackwellDilemma.CurrentPaperContracts

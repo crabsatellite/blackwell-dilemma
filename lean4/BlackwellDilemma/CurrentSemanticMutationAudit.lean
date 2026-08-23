@@ -75,7 +75,7 @@ example {V : Type u} [Fintype V] [DecidableEq V]
           (expectedContinuation X.weight routeOne)
           (expectedContinuation X.weight routeTwo)
           (ellOne - ellTwo)) (Set.Ioi 0) := by
-      exact hRoot.2
+      exact hRoot.2.2
   trivial
 
 /-- Mutation: reverse restoration under observed feasibility. -/
@@ -92,7 +92,10 @@ example {V : Type u} [Fintype V] [DecidableEq V]
     (refinement : (omega : Omega) ->
       FiniteBlackwellRefinement Theta Coarse Fine) : True := by
   have hRoot := restorationUnderObservedFiniteFeasibility
-    X decision hAligned refinement
+    X decision
+      (fun omega action theta =>
+        (decision omega).objectivePayoff action theta)
+      hAligned (by intros; rfl) refinement
   fail_if_success
     have _hMutated :
         finiteExpectation X.weight (fun omega =>

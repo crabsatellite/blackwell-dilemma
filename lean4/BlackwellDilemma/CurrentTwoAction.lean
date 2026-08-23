@@ -21,6 +21,35 @@ universe u
 
 variable {E : Type u} [AddCommGroup E] [Module Real E]
 
+/-- The finite-state expected payoff gap between actions `1` and `0`. -/
+noncomputable def finitePayoffGap
+    {Theta : Type*} [Fintype Theta]
+    (payoff : Fin 2 -> Theta -> Real) (mu : Theta -> Real) : Real :=
+  Finset.univ.sum fun theta =>
+    mu theta * (payoff 1 theta - payoff 0 theta)
+
+/-- The literal subjective indifference set in the manuscript. -/
+def subjectiveIndifferenceSet
+    {Theta : Type*} [Fintype Theta]
+    (subjectivePayoff : Fin 2 -> Theta -> Real) : Set (Theta -> Real) :=
+  {mu | finitePayoffGap subjectivePayoff mu = 0}
+
+/-- Subjective payoff gap on the translated direction carrier. -/
+noncomputable def centeredSubjectiveGap
+    (Dv : E →ₗ[Real] Real) (x : E) : Real := Dv x
+
+/-- Objective payoff gap on the translated direction carrier. -/
+noncomputable def centeredObjectiveGap
+    (Du : E →ₗ[Real] Real) (boundaryGap : Real) (x : E) : Real :=
+  boundaryGap + Du x
+
+/-- The centered payoff-gap formulas after translating the boundary point. -/
+theorem centeredGapFormulas
+    (Dv Du : E →ₗ[Real] Real) (boundaryGap : Real) (x : E) :
+    centeredSubjectiveGap Dv x = Dv x /\
+      centeredObjectiveGap Du boundaryGap x = boundaryGap + Du x := by
+  exact ⟨rfl, rfl⟩
+
 /-- The tie-broken two-action welfare after translating an interior point of
     the subjective indifference hyperplane to the origin. -/
 noncomputable def twoActionWelfare

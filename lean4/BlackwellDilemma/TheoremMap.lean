@@ -56,9 +56,11 @@ open BlackwellDilemma
 #check CurrentRouteReversal.routeTwoProbability
 #check CurrentRouteReversal.precisionScale
 #check CurrentRouteReversal.precisionScale_eq_inverse_difference_std
+#check CurrentRouteReversal.expectedContinuation
 #check CurrentRouteReversal.terminalWelfare
 #check CurrentRouteReversal.terminalWelfare_formula
 #check CurrentRouteReversal.routeReversal_strictAntiOn
+#check CurrentRouteReversal.finiteRouteReversal
 #check CurrentPaperLedger.routeReversalClaim_proved
 #check CurrentPaperContracts.routeReversalContract
 
@@ -124,9 +126,16 @@ open BlackwellDilemma
 #check CurrentPosterior.FiniteBlackwellRefinement.barycenter
 #check CurrentPosterior.FiniteBlackwellRefinement.coarseValue
 #check CurrentPosterior.FiniteBlackwellRefinement.refinedValue
+#check CurrentPosterior.FiniteBlackwellRefinement.valueFormulas
+#check CurrentPosterior.FiniteBlackwellRefinement.conditionalJensen
 #check CurrentPosterior.FiniteBlackwellRefinement.value_mono_of_convex
 #check CurrentPosterior.not_convex_exists_binary_witness
 #check CurrentTwoAction.twoActionWelfareWithBoundary
+#check CurrentTwoAction.finitePayoffGap
+#check CurrentTwoAction.subjectiveIndifferenceSet
+#check CurrentTwoAction.centeredGapFormulas
+#check CurrentGaussian.gaussianScoreExperimentLaw
+#check CurrentGaussian.gaussianScoreGarbling_of_lt
 #check CurrentRouteReversal.precisionScale_eq_inverse_difference_std
 #check CurrentRouteReversal.terminalWelfare_formula
 #check UnifiedWelfareSetup.welfare_decomposition
@@ -134,6 +143,10 @@ open BlackwellDilemma
 #check CurrentComplementarity.cognitionWelfare_hasDerivAt_kappa
 #check CurrentComplementarity.cognitionMarginal_hasDerivAt_beta
 #check CurrentFiveState.expectedLoss_formula
+#check CurrentFiveState.fiveStateRewards
+#check CurrentFiveState.fiveStateTopology
+#check CurrentFiveState.distractorProbability
+#check CurrentFiveState.expectedLoss_endpoints
 #check CurrentFiveState.expectedLoss_sub_limit
 #check CurrentFiveState.expectedLoss_zero
 #check CurrentFiveState.expectedLoss_tendsto_atTop
