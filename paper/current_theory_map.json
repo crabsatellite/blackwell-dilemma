@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manuscript": "blackwell_theory_decision.tex",
-  "manuscript_sha256": "7ae32241d19b194b1c6910d6c503dc28be0be41a5c5077bc9613346165e64459",
+  "manuscript_sha256": "22ae6283f8f153a33b4847d08cddb58eed95bc94294213355f46d683aa544302",
   "objects": [
     {
       "kind": "definition",
@@ -16,7 +16,7 @@
       "label": "thm:convexity-frontier",
       "number": 2,
       "title": "Posterior-convexity frontier",
-      "statement_sha256": "42567e8675e2766c3b8c2bef6a37844ca40d363a86add506ea6cee93c60da11e",
+      "statement_sha256": "b3ea81e8468c2334df7a510c86dc7a3cfb88a6e1d9359d6a7237f22039ff53df",
       "binding": "CurrentPosterior.posteriorConvexityFrontier"
     },
     {
