@@ -20657,6 +20657,122 @@
           "commits_4w": 284
         }
       }
+    },
+    {
+      "date": "2026-09-20",
+      "timestamp": "2026-09-20T06:00:28.460026",
+      "frameworks": {
+        "LangChain": {
+          "repo": "langchain-ai/langchain",
+          "stars": 146699,
+          "forks": 24532,
+          "issues": 537,
+          "watchers": 922,
+          "size": 601488,
+          "pushed": "2026-09-19T23:20:23Z",
+          "commits_52w": 2914,
+          "commits_4w": 153
+        },
+        "AutoGen": {
+          "repo": "microsoft/autogen",
+          "stars": 61066,
+          "forks": 9234,
+          "issues": 1085,
+          "watchers": 529,
+          "size": 148692,
+          "pushed": "2026-04-15T11:59:09Z",
+          "commits_52w": 11,
+          "commits_4w": 0
+        },
+        "Mem0": {
+          "repo": "mem0ai/mem0",
+          "stars": 65675,
+          "forks": 7713,
+          "issues": 758,
+          "watchers": 248,
+          "size": 64969,
+          "pushed": "2026-09-19T01:14:39Z",
+          "commits_52w": 834,
+          "commits_4w": 33
+        },
+        "LlamaIndex": {
+          "repo": "run-llama/llama_index",
+          "stars": 52237,
+          "forks": 8178,
+          "issues": 806,
+          "watchers": 287,
+          "size": 498664,
+          "pushed": "2026-09-19T04:27:01Z",
+          "commits_52w": 852,
+          "commits_4w": 37
+        },
+        "CrewAI": {
+          "repo": "crewAIInc/crewAI",
+          "stars": 58793,
+          "forks": 8516,
+          "issues": 407,
+          "watchers": 397,
+          "size": 293839,
+          "pushed": "2026-09-19T22:38:06Z",
+          "commits_52w": 1187,
+          "commits_4w": 125
+        },
+        "LiteLLM": {
+          "repo": "BerriAI/litellm",
+          "stars": 59186,
+          "forks": 11594,
+          "issues": 5176,
+          "watchers": 234,
+          "size": 1671496,
+          "pushed": "2026-09-20T06:00:08Z",
+          "commits_52w": 30424,
+          "commits_4w": 7257
+        },
+        "DSPy": {
+          "repo": "stanfordnlp/dspy",
+          "stars": 38150,
+          "forks": 3332,
+          "issues": 709,
+          "watchers": 219,
+          "size": 182607,
+          "pushed": "2026-09-18T22:32:06Z",
+          "commits_52w": 497,
+          "commits_4w": 62
+        },
+        "SemanticKernel": {
+          "repo": "microsoft/semantic-kernel",
+          "stars": 28580,
+          "forks": 4775,
+          "issues": 310,
+          "watchers": 306,
+          "size": 107623,
+          "pushed": "2026-09-19T01:54:57Z",
+          "commits_52w": 316,
+          "commits_4w": 20
+        },
+        "Haystack": {
+          "repo": "deepset-ai/haystack",
+          "stars": 26559,
+          "forks": 3153,
+          "issues": 177,
+          "watchers": 164,
+          "size": 315503,
+          "pushed": "2026-09-19T02:18:02Z",
+          "commits_52w": 1957,
+          "commits_4w": 196
+        },
+        "PydanticAI": {
+          "repo": "pydantic/pydantic-ai",
+          "stars": 20063,
+          "forks": 2740,
+          "issues": 927,
+          "watchers": 125,
+          "size": 260755,
+          "pushed": "2026-09-19T15:57:08Z",
+          "commits_52w": 1867,
+          "commits_4w": 284
+        }
+      }
     }
   ]
 }
